@@ -1,0 +1,7 @@
+type: runtime
+image: runtime/node
+
+startup: npm install
+entrypoint: node app.js
+
+http_proxy: 3000
