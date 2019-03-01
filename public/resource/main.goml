@@ -1,0 +1,10 @@
+<goml>
+  <scene>
+    <camera></camera>
+    <mesh geometry="cube">
+      <mesh.components>
+        <Rotate speed="1,1,1" />
+      </mesh.components>
+    </mesh>
+  </scene>
+</goml>
