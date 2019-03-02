@@ -1,51 +1,25 @@
 class Floor{
   constructor(){}
-  Init(){
-    return new Promise(resolve=>{
-      this.vbo = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER,this.vbo);
-      this.vertices = new Float32Array([
-        0.0 , 0.5 , 0.0 ,
-        0.5 , 0.0 , 0.0 ,
-        -0.5 , 0.0 , 0.0 ,
-      ]);
-      gl.bufferData(gl.ARRAY_BUFFER,this.vertices,gl.STATIC_DRAW);
-      gl.bindBuffer(gl.ARRAY_BUFFER,null);
+  async Init(){
+    this.vbo = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER,this.vbo);
+    this.vertices = new Float32Array([
+      -0.5 , 0.5 , 0.0 ,
+      0.5 , 0.5 , 0.0 ,
+      -0.5 , 0.0 , 0.0 ,
+      0.5 , 0.0 , 0.0 ,
+    ]);
+    gl.bufferData(gl.ARRAY_BUFFER,this.vertices,gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER,null);
 
-      this.program = new Program();
-      this.program = gl.createProgram();
-      const fragShader = gl.createShader(gl.FRAGMENT_SHADER);
-      const vertShader = gl.createShader(gl.VERTEX_SHADER);
-
-      const frag = fetch("src/shader/main.frag")
-        .then(response=>response.text())
-        .then(text=>{
-          gl.attachShader(this.program,fragShader);
-          gl.shaderSource(fragShader,text);
-          gl.compileShader(fragShader);
-          fetch("src/shader/main.vert")
-            .then(response=>response.text())
-            .then(text=>{
-              gl.attachShader(this.program,vertShader);
-              gl.shaderSource(vertShader,text);
-              gl.compileShader(vertShader);
-
-              gl.linkProgram(this.program);
-              gl.useProgram(this.program);
-
-              const attr = gl.getAttribLocation(this.program,"position");
-              gl.enableVertexAttribArray(attr);
-              gl.bindBuffer(gl.ARRAY_BUFFER,this.vbo);
-              gl.vertexAttribPointer(attr,3,gl.FLOAT,false,0,0);
-              resolve();
-            })
-        });
-    });
+    this.program = new Program("main.vert","main.frag");
+    await this.program.Init(this.vbo);
   };
   Draw(){
     gl.bindBuffer(gl.ARRAY_BUFFER,this.vbo);
-    gl.useProgram(this.program);
+    this.program.Use();
     gl.drawArrays(gl.TRIANGLES,0,3);
+    gl.drawArrays(gl.TRIANGLES,1,3);
     gl.bindBuffer(gl.ARRAY_BUFFER,null);
   }
 }
