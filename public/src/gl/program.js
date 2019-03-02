@@ -3,7 +3,7 @@ class Program{
     this.vertpath = vertpath;
     this.fragpath= fragpath;
   }
-  async Init(VBO){
+  async Init(Buffer){
     return new Promise(resolve=>{
       this.shaderProgram = gl.createProgram();
       const fragShader = gl.createShader(gl.FRAGMENT_SHADER);
@@ -25,16 +25,16 @@ class Program{
               gl.linkProgram(this.shaderProgram);
               gl.useProgram(this.shaderProgram);
 
-              this.SetUpAttr(VBO);
+              this.SetUpAttr(Buffer);
               resolve();
             })
         });
     });
   }
-  SetUpAttr(VBO){
+  SetUpAttr(Buffer){
     const attr = gl.getAttribLocation(this.shaderProgram,"position");
     gl.enableVertexAttribArray(attr);
-    gl.bindBuffer(gl.ARRAY_BUFFER,VBO);
+    gl.bindBuffer(gl.ARRAY_BUFFER,Buffer.GLBuffer);
     gl.vertexAttribPointer(attr,3,gl.FLOAT,false,0,0);
   }
   Use(){
