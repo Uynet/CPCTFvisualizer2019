@@ -1,9 +1,10 @@
 let gl;
 let world;
 
-//☆Entrypoint☆
+/* ☆Entrypoint☆ */
 (()=>{
   Init();
+  Run();
 })()
 
 function Init(){

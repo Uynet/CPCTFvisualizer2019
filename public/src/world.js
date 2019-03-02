@@ -2,8 +2,10 @@ class World{
   constructor(){
     this.entities = [];
   };
-  Init(){
-    this.Add(new Floor());
+  async Init(){
+    const floor = new Floor();
+    await floor.Init();
+    this.Add(floor);
   }
   Add(entity){
     this.entities.push(entity);
