@@ -1,5 +1,7 @@
 let gl;
+let glVAOExt;//gl拡張コンテキスト
 let world;
+let globalTime = 0;
 
 /* ☆Entrypoint☆ */
 (()=>{
@@ -8,20 +10,28 @@ let world;
 })()
 
 function Init(){
+  gl = CreateGL();
+
+  world = new World();
+  world.Init();
+}
+function CreateGL(){
   const canvas = document.getElementById("canvas");
   canvas.width = 400;
   canvas.height= 400;
   gl = canvas.getContext("webgl");
   if(!gl){throw new Error("webGL is not available for your environment.")}
+  glVAOExt = gl.getExtension('OES_vertex_array_object');
+  if(!glVAOExt){throw new Error("webGL拡張がサポートされてない!")}
 
-  world = new World();
-  world.Init();
+  return gl;
 }
 
 //main loop
 function Run(){
   requestAnimationFrame(Run);
-  world.Draw();
+  world.Update();
+  globalTime++;
 }
 
 

@@ -196,3 +196,21 @@ let length = (v)=>{
 /*for debug*/
 let cl = console.log;
 
+function SquareArray(size){
+ let array =  [
+        -size ,+size , 0.0 ,//左上
+        +size ,+size , 0.0 ,//右上
+        -size ,-size , 0.0 ,//左下
+        +size ,-size , 0.0 ,//右下
+      ];
+  return array
+}
+function SquareUVArray(){
+ let array =  [
+        0.0 , 1.0 ,
+        1.0 , 1.0 ,
+        0.0 , 0.0 ,
+        1.0 , 0.0 ,
+      ];
+  return array
+}

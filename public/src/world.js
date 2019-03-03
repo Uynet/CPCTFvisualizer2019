@@ -10,6 +10,9 @@ class World{
   Add(entity){
     this.entities.push(entity);
   };
+  Update(){
+    this.Draw();
+  }
   Draw(){
     gl.clearColor(0.0,0.0,0.0,1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);

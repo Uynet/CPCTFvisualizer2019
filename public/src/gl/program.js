@@ -34,12 +34,26 @@ class Program{
   Compile(shader){
     gl.compileShader(shader);
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      console.error('An error occurred compiling the shaders: ' + gl.getShaderInfoLog(shader));
+      alert('!コンパイルエラー!\n' +
+        "--------------------------\n"+
+        gl.getShaderInfoLog(shader)+"\n"
+    );
       gl.deleteShader(shader);
     }
   }
+  
+  Uniform1f(name,value){
+    this.Use();
+    let location = gl.getUniformLocation(this.shaderProgram,name);
+    gl.uniform1f(location, value);
+    this.Release();
+  }
+
   Use(){
     gl.useProgram(this.shaderProgram);
+  }
+  Release(){
+    //gl.useProgram(null);
   }
   GetAttr(attribute){
     return gl.getAttribLocation(this.shaderProgram,attribute);

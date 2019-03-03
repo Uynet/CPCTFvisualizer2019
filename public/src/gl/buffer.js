@@ -1,8 +1,11 @@
 class Buffer{
   //array:positiondata
-  constructor(array){
+  constructor(array,attribute,dim){
+    this.attribute = attribute;
     this.GLBuffer = gl.createBuffer();
+    this.VAO = glVAOExt.createVertexArrayOES();
     this.data;
+    this.dim = dim;
     this.SetBuf(array)
   }
   SetBuf(array){
@@ -17,13 +20,19 @@ class Buffer{
   UnBind(){
     gl.bindBuffer(gl.ARRAY_BUFFER,null);
   }
+  BindVAO(){
+    glVAOExt.bindVertexArrayOES(this.VAO);
+  }
+  UnBindVAO(){
+    glVAOExt.bindVertexArrayOES(null);
+  }
   //頂点属性に値をセット
-  SetAttr(program,attribute,dim){
-    const attr = program.GetAttr(attribute);
-    if(attr == -1)console.error("頂点属性"+attribute+"は存在しません");
+  SetAttr(program){
+    const attr = program.GetAttr(this.attribute);
+    if(attr == -1)console.error("頂点属性"+this.attribute+"は存在しません");
     this.Bind();
     gl.enableVertexAttribArray(attr);
-    gl.vertexAttribPointer(attr,dim,gl.FLOAT,false,0,0);
+    gl.vertexAttribPointer(attr,this.dim,gl.FLOAT,false,0,0);
     this.UnBind();
   }
 }
