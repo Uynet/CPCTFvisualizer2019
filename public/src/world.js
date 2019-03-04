@@ -11,6 +11,7 @@ class World{
     this.entities.push(entity);
   };
   Update(){
+    this.entities.forEach(e=>e.Update());
     this.Draw();
   }
   Draw(){
