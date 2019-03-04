@@ -2,6 +2,8 @@ class Program{
   constructor(vertpath,fragpath){
     this.vertpath = vertpath;
     this.fragpath= fragpath;
+    if(vertpath.split(".")[1]!="vert")alert("invalid vshader path:"+vertpath)
+    if(fragpath.split(".")[1]!="frag")alert("invalid fshader path:"+fragpath)
   }
   async Init(VBO){
     return new Promise(resolve=>{
@@ -46,6 +48,13 @@ class Program{
     this.Use();
     let location = gl.getUniformLocation(this.shaderProgram,name);
     gl.uniform1f(location, value);
+    this.Release();
+  }
+  UniformMatrix4fv(name,value){
+    if(value === undefined)alert("value")
+    this.Use();
+    let location = gl.getUniformLocation(this.shaderProgram,name);
+    gl.uniformMatrix4fv(location,false,value);
     this.Release();
   }
 

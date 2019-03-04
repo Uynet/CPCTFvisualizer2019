@@ -115,6 +115,10 @@ const vec2 = (x,y)=>{
   if(y===undefined) return {x:x,y:x}
   else return {x:x,y:y}
 };
+const vec3 = (x,y,z)=>{
+  if(y===undefined) return {x:x,y:x,z:x}
+  else return {x:x,y:y,z:z}
+};
 const vec0 = ()=>{return {x:0,y:0}};//0ベクトルを返す
 const VECX = (vx)=>{return {x:vx,y:0}};//
 const VECY = (vy)=>{return {x:0,y:vy}};//
