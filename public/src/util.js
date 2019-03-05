@@ -1,3 +1,4 @@
+const PI = Math.PI;
 /*meta*/
 Array.prototype.Last = function(){
   if(this.length == 0){
@@ -218,3 +219,25 @@ function SquareUVArray(){
       ];
   return array
 }
+const cross = (v1,v2)=>{
+  return {
+    x : v1.y*v2.z - v1.z*v2.y,
+    y : v1.z*v2.x - v1.x*v2.z,
+    z : v1.x*v2.y - v1.y*v2.x,
+  }
+}
+/*matrix*/
+const GetTransformMatrix = (pos)=>{
+  return [
+    1,0,0,0,
+    0,1,0,0,
+    0,0,1,0,
+    -pos.x,-pos.y,-pos.z,1
+  ];
+}
+const IdMat = [
+  1,0,0,0,
+  0,1,0,0,
+  0,0,1,0,
+  0,0,0,1,
+]
