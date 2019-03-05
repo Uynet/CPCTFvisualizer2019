@@ -128,7 +128,13 @@ const add = (v1,v2)=>{ return {x:v1.x + v2.x ,y:v1.y + v2.y}};//ベクトル加�
 const sub = (v1,v2)=>{ return {x:v1.x - v2.x ,y:v1.y - v2.y}};//ベクトル加算
 const mul = (v1,v2)=>{ return {x:v1.x * v2.x ,y:v1.y * v2.y}};//ベクトル乗算
 const fromPolar =  (arg,vi)=>{return {x:vi*Math.cos(arg),y:vi*Math.sin(arg)}}//極表示のベクトルを直交座標に変換
-const normalize = v=>{ let a = Math.sqrt(v.x * v.x + v.y * v.y); v.x /= a; v.y /= a; return v; }//正規化
+const normalize = v=>{
+  let a = Math.sqrt(v.x * v.x + v.y * v.y + v.z*v.z);
+  v.x /= a;
+  v.y /= a;
+  v.z /= a;
+return v;
+}//正規化
 const scala = (a,v)=>{
   return {
     x:v.x * a,
@@ -140,7 +146,13 @@ const argument = (v)=>{
   if(v.x<0) a += Math.PI;
   return a;
 }
-const dot = (v1,v2)=>{return v1.x*v2.x + v1.y*v2.y};//内積
+const dot = (v1,v2)=>{
+  let d = 
+      v1.x*v2.x
+    + v1.y*v2.y
+    + v1.z*v2.z
+  return d 
+};//内積
 const reflect = (v,n)=>{
   return add(v,scala(-2*dot(v,n),n));
 }
@@ -241,3 +253,10 @@ const IdMat = [
   0,0,1,0,
   0,0,0,1,
 ]
+const multMatrixVec3 = (m1,v1)=>{
+  let v = vec3(0);
+  v.x += m1[0]*v1.x + m1[1]*v1.y + m1[2]*v1.z; 
+  v.y += m1[3]*v1.x + m1[4]*v1.y + m1[5]*v1.z; 
+  v.z += m1[6]*v1.x + m1[7]*v1.y + m1[8]*v1.z; 
+  return v;
+}

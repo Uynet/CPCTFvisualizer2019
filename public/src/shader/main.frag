@@ -10,8 +10,8 @@ void main(){
   vec2 uv = vUV;
   vec2 po = fract(uv*12.+0.5);
   vec3 col;
-  if(po.x<0.1)col=black;
-  else if(po.y<0.1)col=black;
+  if(po.x<0.2)col=black;
+  else if(po.y<0.2)col=black;
   else col = white;
   gl_FragColor = vec4(col,1.);
 }
