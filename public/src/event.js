@@ -1,6 +1,5 @@
 class EventManager{
-  constructor(){}
-  onAddUser(){
+  static onAddUser(){
     cl("addUser");
   }
 }

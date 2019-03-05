@@ -1,6 +1,9 @@
+//格子状の床
 class Floor{
   constructor(pos){
     this.pos = pos;
+    this.buffers;
+    this.program;
   }
   async Init(){
     const vertices = SquareArray(10.0);
@@ -8,7 +11,7 @@ class Floor{
     this.VBO = new Buffer(vertices,"position",3);
     this.UVAttr = new Buffer(uv,"uv",2);
 
-    const buffers = [
+    this.buffers = [
       this.VBO,
       this.UVAttr
     ]
@@ -16,12 +19,10 @@ class Floor{
     this.program = new Program("main.vert","main.frag");
     await this.program.Init(this.VBO);
 
-    this.drawObject = new DrawObject(buffers,this.program);
+    this.drawObject = new DrawObject(this.buffers,this.program);
     this.drawObject.Init(this);
   };
   Update(){
-    this.pos.y = -1;
-    this.pos.z = 0;
   }
   Draw(){
     this.drawObject.Draw();

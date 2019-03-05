@@ -20,12 +20,14 @@ class Buffer{
   UnBind(){
     gl.bindBuffer(gl.ARRAY_BUFFER,null);
   }
+  /*
   BindVAO(){
     glVAOExt.bindVertexArrayOES(this.VAO);
   }
   UnBindVAO(){
     glVAOExt.bindVertexArrayOES(null);
   }
+  */
   //頂点属性に値をセット
   SetAttr(program){
     const attr = program.GetAttr(this.attribute);
