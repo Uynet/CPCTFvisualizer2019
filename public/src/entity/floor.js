@@ -19,6 +19,10 @@ class Floor{
     this.program = new Program("main.vert","main.frag");
     await this.program.Init(this.VBO);
 
+    this.trapTexture = new Texture("000.png"); 
+    await this.trapTexture.Init();
+    cl("po");
+
     this.drawObject = new DrawObject(this.buffers,this.program);
     this.drawObject.Init(this);
   };
