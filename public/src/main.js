@@ -17,8 +17,8 @@ function Init(){
 }
 function CreateGL(){
   const canvas = document.getElementById("canvas");
-  canvas.width = 400;
-  canvas.height= 400;
+  canvas.width = 800;
+  canvas.height= 600;
   gl = canvas.getContext("webgl");
   if(!gl){throw new Error("webGL is not available for your environment.")}
   glVAOExt = gl.getExtension('OES_vertex_array_object');

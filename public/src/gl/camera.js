@@ -15,7 +15,22 @@ class Camera{
     this.viewMat = this.GetViewMatrix();
     this.projMat = this.GetProjMatrix();
   }
-  Update(){}
+  Update(){
+    let a = globalTime * 0.005
+    this.pos.z = Math.cos(a)*10;
+    this.pos.x = Math.sin(a)*10;
+    let c = 0.01;
+      let rotGamma = [
+        Math.cos(c),0,-Math.sin(c),
+        0,1,0,
+        Math.sin(c),0,Math.cos(c),
+      ]
+    let rotCamera = rotGamma
+    //this.forward = multMatrixVec3(rotCamera,this.forward);
+    //this.up = multMatrixVec3(rotCamera,this.up);
+    this.forward.z = Math.cos(a);
+    this.forward.x = Math.sin(a);
+  }
   Draw(){}
   GetViewMatrix(){
     const side = normalize(cross(this.forward,this.up));
