@@ -20,6 +20,11 @@ function CreateGL(){
   canvas.width = 800;
   canvas.height= 600;
   gl = canvas.getContext("webgl");
+
+  //αblending
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
   if(!gl){throw new Error("webGL is not available for your environment.")}
   glVAOExt = gl.getExtension('OES_vertex_array_object');
   if(!glVAOExt){throw new Error("webGL拡張がサポートされてない!")}
