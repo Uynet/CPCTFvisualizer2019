@@ -20,14 +20,16 @@ class DrawObject{
     this.program.Use();
 
     let a = globalTime*0.01;
-    this.transformMat = [
-      1,0,0,0,
-      0,1,0,0,
-      0,0,1,0,
-      -this.parent.pos.x,-this.parent.pos.y,-this.parent.pos.z,1
-    ];
+    this.transformMat = GetTransformMatrix(this.parent.pos);
+
+    this.viewMat = world.mainCamera.GetViewMatrix();
+    this.projMat = world.mainCamera.GetProjMatrix();
+
+
     this.program.Uniform1f("time",globalTime);
     this.program.UniformMatrix4fv("transformMatrix",this.transformMat);
+    this.program.UniformMatrix4fv("projMatrix",this.projMat);
+    this.program.UniformMatrix4fv("viewMatrix",this.viewMat);
 
 
     gl.drawArrays(gl.TRIANGLES,0,3);

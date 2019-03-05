@@ -51,7 +51,7 @@ class Program{
     this.Release();
   }
   UniformMatrix4fv(name,value){
-    if(value === undefined)alert("value")
+    if(value === undefined)alert("invalid value:"+name)
     this.Use();
     let location = gl.getUniformLocation(this.shaderProgram,name);
     gl.uniformMatrix4fv(location,false,value);
