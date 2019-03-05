@@ -1,6 +1,7 @@
 precision mediump float;
 varying vec2 vUV;
 varying float depth;
+uniform sampler2D trap;
 
 #define PI 3.14159265
 
@@ -21,8 +22,11 @@ vec2 polar(vec2 p){
 
 void main(){
   vec2 uv = vUV;
-  vec3 black = vec3(uv.x,uv.y,0.5);
+  vec3 grad = vec3(uv.x*2.,1.0-uv.y*4.,1.0-uv.x*0.9);
+  vec3 black= vec3(0);
+  vec4 texColor = texture2D(trap, uv);
   uv -= 0.5;
+  texColor.xyz = grad*0.9;
   uv = polar(uv);
   //vec3 white = vec3((depth+1.)/2.);
   vec3 white = vec3(0.9);
@@ -35,8 +39,10 @@ void main(){
   );
   //float l = cLength(q);//0.0 - 0.1;
   alpha = 0.0;
-  if(q.x>0.08)alpha = 1.0;
-  if(q.y<0.04)alpha = 1.0;
-  col = black;
+  if(q.x>0.08)alpha = 1.-depth/45.;
+  if(q.y<0.04)alpha = 1.-depth/45.;
+  col = grad;
   gl_FragColor = vec4(col,alpha);
+  if(texColor.w > 00.1)texColor.w = 1.-depth/45.;
+  gl_FragColor = texColor;
 }

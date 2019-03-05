@@ -7,13 +7,15 @@ class World{
     this.mainCamera = new Camera(vec3(0,0,-1));
     this.Add(this.mainCamera);
 
-    const floor =  new Floor(vec3(0,-5,0));
+    const floor =  new Floor(vec3(0,-3,0));
     await floor.Init();
     this.Add(floor);
 
-    const floor2 =  new Floor(vec3(0,5,0));
+    const floor2 =  new Floor(vec3(0,3,0));
     await floor2.Init();
     this.Add(floor2);
+
+
   }
   Add(entity){
     this.entities.push(entity);

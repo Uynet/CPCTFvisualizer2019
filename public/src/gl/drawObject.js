@@ -14,27 +14,27 @@ class DrawObject{
       if(buffer.attribute == "position")this.VBO = buffer;
     })
   }
-  Draw(){
-    this.VBO.Bind();
-    //gl.bindBuffer(gl.ARRAY_BUFFER,this.vbo);
-    this.program.Use();
-
-    let a = globalTime*0.01;
-    this.transformMat = GetTransformMatrix(this.parent.pos);
-
-    this.viewMat = world.mainCamera.GetViewMatrix();
-    this.projMat = world.mainCamera.GetProjMatrix();
-
-
+  SetUniform(){
+    //TODO uniformlistをつくる
+    let tex = this.parent.trapTexture;
     this.program.Uniform1f("time",globalTime);
+    this.program.UniformTexture("trap",tex);
     this.program.UniformMatrix4fv("transformMatrix",this.transformMat);
     this.program.UniformMatrix4fv("projMatrix",this.projMat);
     this.program.UniformMatrix4fv("viewMatrix",this.viewMat);
+  }
+  Draw(){
+    this.VBO.Bind();
+    this.program.Use();
 
+    this.transformMat = GetTransformMatrix(this.parent.pos);
+    this.viewMat = world.mainCamera.GetViewMatrix();
+    this.projMat = world.mainCamera.GetProjMatrix();
+
+    this.SetUniform();
 
     gl.drawArrays(gl.TRIANGLES,0,3);
     gl.drawArrays(gl.TRIANGLES,1,3);
-    //gl.bindBuffer(gl.ARRAY_BUFFER,null);
     this.VBO.UnBind();
   }
 }
