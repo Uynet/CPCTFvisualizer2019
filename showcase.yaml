@@ -3,5 +3,6 @@ image: runtime/node
 
 startup: npm install
 entrypoint: node app.js
+internal: hard
 
 http_proxy: 3000
