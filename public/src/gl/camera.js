@@ -16,10 +16,10 @@ class Camera{
   }
   Update(){
     let a = globalTime * 0.002
-    this.pos.z = Math.cos(a)*19;
-    this.pos.x = Math.sin(a)*19;
-    this.pos.y = -Math.sin(a*0.17)*4.8;
-    this.pos.y = -14;
+    this.pos.z = Math.cos(a)*14;
+    this.pos.x = Math.sin(a)*14;
+    this.pos.y = 0;
+    this.pos.y = -8;
 
     this.pos.x *= 0.5;
     this.pos.y *= 0.5;
@@ -27,7 +27,7 @@ class Camera{
 
     this.forward.z = Math.cos(a);
     this.forward.x = Math.sin(a);
-    this.forward.y = -0.9
+    this.forward.y = -1.2;
   }
   Draw(){/*Nothing to do*/}
   GetViewMatrix(){

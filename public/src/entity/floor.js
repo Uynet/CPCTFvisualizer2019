@@ -16,7 +16,7 @@ class Floor{
       this.UVAttr
     ]
 
-    this.program = new Program("main.vert","main.frag");
+    this.program = new Program("floor.vert","floor.frag");
     await this.program.Init(this.VBO);
 
     this.trapTexture = new Texture("000.png"); 

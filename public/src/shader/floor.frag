@@ -24,25 +24,27 @@ void main(){
   vec2 uv = vUV;
   vec3 grad = vec3(uv.x*2.,1.0-uv.y*4.,1.0-uv.x*0.9);
   vec3 black= vec3(0);
-  vec4 texColor = texture2D(trap, uv);
   uv -= 0.5;
+  vec4 texColor = texture2D(trap, clamp(uv*2.+0.5,vec2(0),vec2(1)));
   texColor.xyz = grad*0.9;
-  uv = polar(uv);
+  //uv = polar(uv);
   //vec3 white = vec3((depth+1.)/2.);
   vec3 white = vec3(0.9);
 
   float alpha = 1.0;
   vec3 col;
   vec2 q = vec2(
-      mod(uv.x,0.1),
-      mod(uv.y,0.5)
+      mod(uv.x,0.03),
+      mod(uv.y,0.03)
   );
-  //float l = cLength(q);//0.0 - 0.1;
-  alpha = 0.0;
-  if(q.x>0.08)alpha = 1.-depth/45.;
-  if(q.y<0.04)alpha = 1.-depth/45.;
+  float l = cLength(q-vec2(0.015));//0.0 - 0.1;
+  float qx = abs(q.x-0.015);
+  float qy = abs(q.y-0.015);
+  alpha =1.-depth/45.;
+  if(l<0.014)alpha -= (1.0-min(1.0,l*60.));
   col = grad;
+  if(texColor.w > 0.01){
+    alpha = 1.-depth/45.;
+  }
   gl_FragColor = vec4(col,alpha);
-  if(texColor.w > 00.1)texColor.w = 1.-depth/45.;
-  gl_FragColor = texColor;
 }
