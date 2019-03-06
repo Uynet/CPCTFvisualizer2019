@@ -18,13 +18,13 @@ class Program{
         .then(text=>{
           gl.attachShader(this.shaderProgram,fragShader);
           gl.shaderSource(fragShader,text);
-          this.Compile(fragShader);
+          this.Compile(fragShader,this.fragpath);
           fetch("src/shader/"+this.vertpath)
           .then(response=>response.text())
             .then(text=>{
               gl.attachShader(this.shaderProgram,vertShader);
               gl.shaderSource(vertShader,text);
-              this.Compile(vertShader);
+              this.Compile(vertShader,this.vertpath);
 
               gl.linkProgram(this.shaderProgram);
               gl.useProgram(this.shaderProgram);
@@ -38,11 +38,11 @@ class Program{
   SetTexture(texture){
     this.textures.push[texture];
   }
-  Compile(shader){
+  Compile(shader,path){
     gl.compileShader(shader);
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
       alert('!コンパイルエラー!\n' +
-        "--------------------------\n"+
+        "at:"+path+"\n"+
         gl.getShaderInfoLog(shader)+"\n"
     );
       gl.deleteShader(shader);
