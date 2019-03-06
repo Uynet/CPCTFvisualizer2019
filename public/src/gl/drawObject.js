@@ -5,6 +5,7 @@ class DrawObject{
     this.VBO;
     this.transformMat = [];
     this.parent;//魂
+    this.Init();
   }
   Init(parent){
     this.parent = parent;
@@ -16,7 +17,7 @@ class DrawObject{
   }
   SetUniform(){
     //TODO uniformlistをつくる
-    let tex = this.parent.trapTexture;
+    let tex = this.program.textures[0];
     this.program.Uniform1f("time",globalTime);
     this.program.UniformTexture("trap",tex);
     this.program.UniformMatrix4fv("transformMatrix",this.transformMat);

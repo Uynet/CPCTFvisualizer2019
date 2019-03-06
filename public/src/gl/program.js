@@ -7,7 +7,7 @@ class Program{
     this.textures = [];
     this.uniforms = [];
   }
-  async Init(VBO){
+  async Init(){
     return new Promise(resolve=>{
       this.shaderProgram = gl.createProgram();
       const fragShader = gl.createShader(gl.FRAGMENT_SHADER);
@@ -35,8 +35,8 @@ class Program{
         });
     });
   }
-  SetTexture(texture){
-    this.textures.push[texture];
+  AddTexture(texture){
+    this.textures.push(texture);
   }
   Compile(shader,path){
     gl.compileShader(shader);
