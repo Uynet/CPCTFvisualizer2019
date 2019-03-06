@@ -75,7 +75,7 @@ class Program{
     gl.useProgram(this.shaderProgram);
   }
   Release(){
-    //gl.useProgram(null);
+   // gl.useProgram(null);
   }
   GetAttr(attribute){
     return gl.getAttribLocation(this.shaderProgram,attribute);
