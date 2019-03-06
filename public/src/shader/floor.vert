@@ -2,6 +2,7 @@ attribute vec3 position;
 attribute vec2 uv;
 varying vec2 vUV;
 varying float depth;
+varying float fTime;
 
 uniform float time;
 uniform mat4 transformMatrix;
@@ -17,6 +18,7 @@ void main(){
   vec4 pos = vec4(position,1);
 
   float b = time*0.01;
+  fTime = time;
   mat4 rot = mat4(
       1. , 0. , 0. , 0. ,
       0, cos(a) , -sin(a) , 0. ,

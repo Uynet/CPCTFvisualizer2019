@@ -3,9 +3,10 @@ class Floor{
   constructor(pos){
     this.pos = pos;
     this.buffers;
-    this.program;
+    this.program = Material.floorProgram;
+    this.Init();
   }
-  async Init(){
+  Init(){
     const vertices = SquareArray(10.0);
     const uv = SquareUVArray();
     this.VBO = new Buffer(vertices,"position",3);
@@ -15,13 +16,6 @@ class Floor{
       this.VBO,
       this.UVAttr
     ]
-
-    this.program = new Program("floor.vert","floor.frag");
-    await this.program.Init(this.VBO);
-
-    this.trapTexture = new Texture("000.png"); 
-    await this.trapTexture.Init();
-    cl("po");
 
     this.drawObject = new DrawObject(this.buffers,this.program);
     this.drawObject.Init(this);
