@@ -9,5 +9,9 @@ class Material{
     await trapTexture.Init();
     this.textures.push(trapTexture);
     this.floorProgram.AddTexture(trapTexture);
+
+    this.userProgram = new Program("user.vert","user.frag");
+    await this.userProgram.Init();
+    this.userProgram.AddTexture(trapTexture);
   }
 }

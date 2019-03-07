@@ -21,6 +21,7 @@ class World{
     this.entities.push(entity);
   };
   Update(){
+    if(globalTime%100 == 90 && globalTime < 1000)Event.onAddUser(Math.random());
     this.entities.forEach(e=>e.Update());
     this.Draw();
   }

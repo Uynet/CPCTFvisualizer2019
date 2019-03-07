@@ -10,9 +10,10 @@ class DrawObject{
   Init(parent){
     this.parent = parent;
     this.buffers.forEach(buffer=>{
+      buffer.SetProgram(this.program);
       buffer.SetAttr(this.program);
-
       if(buffer.attribute == "position")this.VBO = buffer;
+      if(buffer.attribute == "uv")this.UV = buffer;
     })
   }
   SetUniform(){
@@ -25,8 +26,8 @@ class DrawObject{
     this.program.UniformMatrix4fv("viewMatrix",this.viewMat);
   }
   Draw(){
-    this.VBO.Bind();
     this.program.Use();
+    this.VBO.Bind();
 
     this.transformMat = GetTransformMatrix(this.parent.pos);
     this.viewMat = world.mainCamera.GetViewMatrix();
