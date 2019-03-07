@@ -10,6 +10,7 @@
     <script src="src/util.js"></script>
     <script src="src/entity/floor.js"></script>
     <script src="src/entity/user.js"></script>
+    <script src="src/event.js"></script>
     <script src="src/gl/program.js"></script>
     <script src="src/gl/camera.js"></script>
     <script src="src/gl/buffer.js"></script>
@@ -29,8 +30,8 @@
         e.preventDefault();
         socket.emit("emit_from_client",$("#mss").val());
       });
-        socket.on("emit_from_server",data=>{
-          console.log(data);
+        socket.on("emit_from_server",name=>{
+          Event.onAddUser(name);
         })
     });
     </script>

@@ -2,20 +2,26 @@ class Buffer{
   //array:positiondata
   constructor(array,attribute,dim){
     this.attribute = attribute;
-    this.GLBuffer = gl.createBuffer();
-    this.VAO = glVAOExt.createVertexArrayOES();
+    let unko =  gl.createBuffer();
+    this.GLBuffer =unko;
+    //this.VAO = glVAOExt.createVertexArrayOES();
     this.data;
     this.dim = dim;
+    this.array = array;
     this.SetBuf(array)
   }
   SetBuf(array){
-    this.Bind();
+    gl.bindBuffer(gl.ARRAY_BUFFER,this.GLBuffer);
     this.data = new Float32Array(array); 
     gl.bufferData(gl.ARRAY_BUFFER,this.data,gl.STATIC_DRAW);
     this.UnBind();
   }
+  SetProgram(p){
+    this.program = p;
+  }
   Bind(){
     gl.bindBuffer(gl.ARRAY_BUFFER,this.GLBuffer);
+    this.SetAttr(this.program);
   }
   UnBind(){
     gl.bindBuffer(gl.ARRAY_BUFFER,null);
@@ -32,7 +38,7 @@ class Buffer{
   SetAttr(program){
     const attr = program.GetAttr(this.attribute);
     if(attr == -1)console.error("頂点属性"+this.attribute+"は存在しません");
-    this.Bind();
+    gl.bindBuffer(gl.ARRAY_BUFFER,this.GLBuffer);
     gl.enableVertexAttribArray(attr);
     gl.vertexAttribPointer(attr,this.dim,gl.FLOAT,false,0,0);
     this.UnBind();
