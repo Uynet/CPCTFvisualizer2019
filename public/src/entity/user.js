@@ -4,8 +4,13 @@ class User{
     this.name = name;
     this.buffers;
     this.program = Material.userProgram;
-    this.localTime  =0;
+    this.localTime = 0;
+    const self = this;
     this.Init();
+    this.drawObject.AddUniform("time","1f",()=>{return globalTime});
+    this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
+    this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
+    this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});//これでいいのかな..
   }
   Init(){
     let size = Math.random();

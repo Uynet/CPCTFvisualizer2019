@@ -8,10 +8,18 @@ class Material{
     const trapTexture = new Texture("000.png"); 
     await trapTexture.Init();
     this.textures.push(trapTexture);
-    this.floorProgram.AddTexture(trapTexture);
+    //this.AddTexture(trapTexture);
 
     this.userProgram = new Program("user.vert","user.frag");
     await this.userProgram.Init();
-    this.userProgram.AddTexture(trapTexture);
+    //this.userProgram.AddTexture(trapTexture);
+    
+  }
+  //これなかなかにクソ
+  static GetTexture(index){
+    return this.textures[index];
+  }
+  AddTexture(texture){
+    this.textures.push(texture);
   }
 }

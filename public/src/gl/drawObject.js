@@ -6,6 +6,7 @@ class DrawObject{
     this.transformMat = [];
     this.parent;//魂
     this.Init();
+    this.uniformList = [];
   }
   Init(parent){
     this.parent = parent;
@@ -16,27 +17,40 @@ class DrawObject{
       if(buffer.attribute == "uv")this.UV = buffer;
     })
   }
-  SetUniform(){
-    //TODO uniformlistをつくる
-    let tex = this.program.textures[0];
-    this.program.Uniform1f("time",globalTime);
-    this.program.UniformTexture("trap",tex);
-    this.program.UniformMatrix4fv("transformMatrix",this.transformMat);
-    this.program.UniformMatrix4fv("projMatrix",this.projMat);
-    this.program.UniformMatrix4fv("viewMatrix",this.viewMat);
+  SendUniform(){
+    this.uniformList.forEach(e=>{
+      e.SendUniform(this.program);
+    })
+  }
+  AddUniform(name,type,getter){
+    const uniform = new Uniform(name,type,getter);
+    this.uniformList.push(uniform);
   }
   Draw(){
     this.program.Use();
     this.VBO.Bind();
 
     this.transformMat = GetTransformMatrix(this.parent.pos);
-    this.viewMat = world.mainCamera.GetViewMatrix();
-    this.projMat = world.mainCamera.GetProjMatrix();
 
-    this.SetUniform();
+    this.SendUniform();
 
     gl.drawArrays(gl.TRIANGLES,0,3);
     gl.drawArrays(gl.TRIANGLES,1,3);
     this.VBO.UnBind();
+  }
+}
+class Uniform{
+  constructor(name,type,getter){
+    this.name = name;
+    this.type = type;
+    this.getter = getter;
+  }
+  SendUniform(program){
+    switch(this.type){
+      case "1f" : program.Uniform1f(this.name,this.getter()); break;
+      case "mat4" : program.UniformMatrix4fv(this.name,this.getter());break;
+      case "texture" : program.UniformTexture(this.name,this.getter());break;
+      default : cl("うんこもりもり森鴎外");
+    }
   }
 }

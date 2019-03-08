@@ -15,7 +15,7 @@ class Camera{
     this.projMat = this.GetProjMatrix();
   }
   Update(){
-    let a = globalTime * 0.002
+    let a = globalTime * 0.002;
     this.pos.z = Math.cos(a)*14;
     this.pos.x = Math.sin(a)*14;
     this.pos.y = 0;
