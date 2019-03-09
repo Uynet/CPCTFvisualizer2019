@@ -2,6 +2,7 @@ attribute vec3 position;
 attribute vec2 uv;
 varying vec2 vUV;
 varying float depth;
+varying vec3 fPos;
 varying float fTime;
 
 uniform float time;
@@ -16,6 +17,7 @@ void main(){
   vUV = uv;
   float a = PI/2.;
   vec4 pos = vec4(position,1);
+  fPos = gl_Position.xyz;
 
   float b = time*0.01;
   fTime = time;

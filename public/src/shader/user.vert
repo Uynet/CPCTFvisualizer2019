@@ -15,15 +15,15 @@ uniform mat4 billMatrix;
 
 void main(){
   vUV = uv;
-  float a = PI/2.;
   vec4 pos = vec4(position,1);
-
-  float b = time*0.01;
   fTime = time;
   gl_Position = 
     projMatrix *
     viewMatrix * 
     transformMatrix * 
+    //billMatrix*
     pos;
   depth = gl_Position.z;
+  //gl_PointSize = 320./depth;
+  gl_PointSize = 128./depth;
 }
