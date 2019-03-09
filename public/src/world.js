@@ -10,7 +10,7 @@ class World{
 
     Event.onAddUser(Math.random());
 
-    this.Add( new Floor(vec3(0,0,0)));//floor
+    this.Add( new Floor(vec3(0,-3,0)));//floor
     this.Add(new Floor(vec3(0,3,0)));//ceil
 
 

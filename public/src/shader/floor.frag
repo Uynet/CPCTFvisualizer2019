@@ -56,5 +56,6 @@ void main(){
     alpha = 1.-depth/45.-d;
     //col = vec3(0.2,0.0,1.0);
   }
+  if(alpha <0.3)discard;
   gl_FragColor = vec4(col,alpha);
 }
