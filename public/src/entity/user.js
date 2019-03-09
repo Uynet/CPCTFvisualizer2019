@@ -6,12 +6,14 @@ class User{
     this.program = Material.userProgram;
     this.localTime = 0;
     const self = this;
+    this.primitiveType = "POINTS";
+    this.unko = 2;
     this.Init();
     this.drawObject.AddUniform("time","1f",()=>{return globalTime});
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});//これでいいのかな..
-
+    this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture(0)});
     this.drawObject.AddUniform("billMatrix","mat4",()=>{
       const po = 
       LockAt(
@@ -23,15 +25,11 @@ class User{
     });
   }
   Init(){
-    let size = 0.5 + Math.random();
-    const vertices =  [
-        -size ,+size , 0.0 ,//左上
-        +size ,+size , 0.0 ,//右上
-        -size ,-size , 0.0 ,//左下
-        +size ,-size , 0.0 ,//右下
-      ];
+    if(Rand(2)<1)this.unko =16;
+    else this.unko = 4;
+    this.unko = Rand(16);
     const uv = SquareUVArray();
-    this.VBO = new Buffer(vertices,"position",3);
+    this.VBO = new Buffer([0,0,0],"position",3);
     this.UVAttr = new Buffer(uv,"uv",2);
 
     this.buffers = [
@@ -45,8 +43,8 @@ class User{
 
   Update(){
     this.localTime++;
-    this.pos.x = Math.sin(this.localTime*0.01)*8.;
-    this.pos.z = Math.cos(this.localTime*0.01)*8.;
+    this.pos.x = Math.sin(this.localTime*0.004)*this.unko;
+    this.pos.z = Math.cos(this.localTime*0.004)*this.unko;
   }
   Draw(){
     this.drawObject.Draw();

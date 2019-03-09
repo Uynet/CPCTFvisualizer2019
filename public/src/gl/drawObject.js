@@ -5,11 +5,13 @@ class DrawObject{
     this.VBO;
     this.transformMat = [];
     this.parent;//魂
-    this.Init();
+    //this.Init();
     this.uniformList = [];
+    this.primitiveType = "TRIANGLES";
   }
   Init(parent){
     this.parent = parent;
+    this.primitiveType = parent.primitiveType;
     this.buffers.forEach(buffer=>{
       buffer.SetProgram(this.program);
       buffer.SetAttr(this.program);
@@ -34,8 +36,16 @@ class DrawObject{
 
     this.SendUniform();
 
-    gl.drawArrays(gl.TRIANGLES,0,3);
-    gl.drawArrays(gl.TRIANGLES,1,3);
+    switch(this.primitiveType){
+      case "TRIANGLES" :
+        gl.drawArrays(gl.TRIANGLES,0,3);
+        gl.drawArrays(gl.TRIANGLES,1,3);
+        break;
+      case "POINTS" : 
+        gl.drawArrays(gl.POINTS,0,1);
+        break;
+      default : cl(this.primitiveType); 
+    }
     this.VBO.UnBind();
   }
 }

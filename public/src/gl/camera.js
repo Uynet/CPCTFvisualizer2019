@@ -9,7 +9,7 @@ class Camera{
     this.asp = canvas.width/canvas.height;
     this.FOV = Math.PI/2;
     this.near = 0.1;
-    this.far = 45.0;
+    this.far = 60.0;
 
     this.viewMat = this.GetViewMatrix();
     this.projMat = this.GetProjMatrix();
@@ -21,10 +21,12 @@ class Camera{
   Update(){
     if(K.s() ) this.r += 0.1;
     if(K.w() ) this.r -= 0.1;
-    if(K.right() ) this.theta += 0.01;
-    if(K.left()  ) this.theta -= 0.01;
-    if(K.up() ) this.phi -= 0.01;
-    if(K.down() ) this.phi += 0.01;
+    if(K.right() ) this.theta += 0.03;
+    if(K.left()  ) this.theta -= 0.03;
+    if(K.up() ) this.phi += 0.03;
+    if(K.down() ) this.phi -= 0.03;
+    this.phi = Math.max(this.phi,0.01);
+    this.phi = Math.min(this.phi,Math.PI);
 
     this.theta += 0.002;
 

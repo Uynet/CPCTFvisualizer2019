@@ -5,6 +5,7 @@ class Floor{
     this.buffers;
     this.program = Material.floorProgram;
     const self = this;
+    this.primitiveType = "TRIANGLES";
     this.Init();
     //uniform変数名、型、代入する値を返す関数
     this.drawObject.AddUniform("time","1f",()=>{return globalTime});
