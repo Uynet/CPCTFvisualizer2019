@@ -3,37 +3,46 @@ class Camera{
   constructor(pos){
     this.pos = pos;
     //view
-    this.forward= vec3(0,0,-1);
-    this.up= vec3(0,1,0);
+    this.forward = vec3(0,0,-1);
+    this.up = vec3(0,1,0);
 
-    this.asp = 1;
+    this.asp = canvas.width/canvas.height;
     this.FOV = Math.PI/2;
     this.near = 0.1;
     this.far = 45.0;
 
     this.viewMat = this.GetViewMatrix();
     this.projMat = this.GetProjMatrix();
+
+    this.r = 8;
+    this.phi = Math.PI/2.0;
+    this.theta = 0.0;
   }
   Update(){
-    let a = globalTime * 0.002;
-    this.pos.z = Math.cos(a)*14;
-    this.pos.x = Math.sin(a)*14;
-    this.pos.y = 0;
-    this.pos.y = -8;
+    if(K.s() ) this.r += 0.1;
+    if(K.w() ) this.r -= 0.1;
+    if(K.right() ) this.theta += 0.01;
+    if(K.left()  ) this.theta -= 0.01;
+    if(K.up() ) this.phi -= 0.01;
+    if(K.down() ) this.phi += 0.01;
 
-    this.pos.x *= 0.5;
-    this.pos.y *= 0.5;
-    this.pos.z *= 0.5;
+    this.theta += 0.002;
 
-    this.forward.z = Math.cos(a);
-    this.forward.x = Math.sin(a);
-    this.forward.y = -1.2;
+    this.pos.x = this.r * Math.sin(this.phi)*Math.sin(this.theta);
+    this.pos.y = this.r * Math.cos(this.phi);
+    this.pos.z = this.r * Math.sin(this.phi)*Math.cos(this.theta);
+
+
+    this.forward.x = this.pos.x;
+    this.forward.y = this.pos.y;
+    this.forward.z = this.pos.z;
+
   }
   Draw(){/*Nothing to do*/}
   GetViewMatrix(){
     const side = normalize(cross(this.forward,this.up));
     let up = normalize(cross(this.forward, side));
-    let forward = this.forward;
+    let forward = normalize(this.forward);
     let eye = this.pos;
     return [
       side.x, up.x, forward.x, 0,

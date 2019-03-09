@@ -5,7 +5,6 @@ class Program{
     if(vertpath.split(".")[1]!="vert")alert("invalid vshader path:"+vertpath)
     if(fragpath.split(".")[1]!="frag")alert("invalid fshader path:"+fragpath)
     this.textures = [];
-    this.uniforms = [];
   }
   async Init(){
     return new Promise(resolve=>{

@@ -125,7 +125,12 @@ const VECX = (vx)=>{return {x:vx,y:0}};//
 const VECY = (vy)=>{return {x:0,y:vy}};//
 const copy= (v)=>{return {x:v.x,y:v.y}};//値渡し
 const add = (v1,v2)=>{ return {x:v1.x + v2.x ,y:v1.y + v2.y}};//ベクトル加算
-const sub = (v1,v2)=>{ return {x:v1.x - v2.x ,y:v1.y - v2.y}};//ベクトル加算
+const sub = (v1,v2)=>{ return {
+  x:v1.x - v2.x ,
+  y:v1.y - v2.y ,
+  z:v1.z - v2.z
+  }
+};//ベクトル加算
 const mul = (v1,v2)=>{ return {x:v1.x * v2.x ,y:v1.y * v2.y}};//ベクトル乗算
 const fromPolar =  (arg,vi)=>{return {x:vi*Math.cos(arg),y:vi*Math.sin(arg)}}//極表示のベクトルを直交座標に変換
 const normalize = v=>{
@@ -259,4 +264,16 @@ const multMatrixVec3 = (m1,v1)=>{
   v.y += m1[3]*v1.x + m1[4]*v1.y + m1[5]*v1.z; 
   v.z += m1[6]*v1.x + m1[7]*v1.y + m1[8]*v1.z; 
   return v;
+}
+const LockAt = (eye,forward,up)=>{
+  const side = normalize(cross(forward,up));
+  up = normalize(cross(forward, side));
+  forward = normalize(forward);
+  const m = [
+    side.x, up.x, forward.x, 0,
+    side.y, up.y, forward.y, 0,
+    side.z, up.z, forward.z, 0,
+    -dot(eye, side), -dot(eye, up), -dot(eye, forward), 1
+  ];
+  return m;
 }

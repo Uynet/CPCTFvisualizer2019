@@ -11,9 +11,19 @@ class User{
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});//これでいいのかな..
+
+    this.drawObject.AddUniform("billMatrix","mat4",()=>{
+      const po = 
+      LockAt(
+        self.pos,//eye
+        sub(world.mainCamera.pos , self.pos),//for
+        vec3(0,1,0)//up
+      )
+      return po;
+    });
   }
   Init(){
-    let size = Math.random();
+    let size = 0.5 + Math.random();
     const vertices =  [
         -size ,+size , 0.0 ,//左上
         +size ,+size , 0.0 ,//右上

@@ -1,6 +1,7 @@
 let gl;
 let glVAOExt;//gl拡張コンテキスト
 let world;
+let canvas;
 let globalTime = 0;
 
 /* ☆Entrypoint☆ */
@@ -16,7 +17,7 @@ function Init(){
   world.Init();
 }
 function CreateGL(){
-  const canvas = document.getElementById("canvas");
+  canvas = document.getElementById("canvas");
   canvas.width = 800;
   canvas.height= 600;
   gl = canvas.getContext("webgl");
@@ -24,6 +25,7 @@ function CreateGL(){
   //αblending
   gl.enable(gl.BLEND);
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+  gl.enable(gl.DEPTH_TEST);
 
 
   if(!gl){throw new Error("webGL is not available for your environment.")}
