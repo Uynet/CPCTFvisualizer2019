@@ -4,6 +4,7 @@ varying float depth;
 varying float fTime;
 uniform sampler2D trap;
 
+/*
 #define PI 3.14159265
 
 float cLength(vec2 p){
@@ -35,4 +36,41 @@ void main(){
     col = vec3(1,0,0);
   }
   gl_FragColor = vec4(col,alpha);
+}
+*/
+
+
+float median(vec3 p) {
+  float r = p.r;
+  float g = p.g;
+  float b = p.b;
+  return max(min(r, g), min(max(r, g), b));
+}
+
+void main() {
+    //vec2 msdfUnit = gl_PointSize/vec2(textureSize(msdf, 0));
+    vec2 msdfUnit = vec2(16.0);
+    vec2 uv = gl_PointCoord;
+    float texsize = 16.0;
+
+    vec3 sample = texture2D(trap, uv).rgb;
+    vec3 sample_nx = texture2D(trap, uv+vec2(1,0)/texsize).rgb;
+    vec3 sample_ny = texture2D(trap, uv+vec2(0,1)/texsize).rgb;
+
+    float sigDist = median(sample.rgb) - 0.5;
+    float sigDist_nx = median(sample_nx.rgb) - 0.5;
+    float sigDist_ny = median(sample_ny.rgb) - 0.5;
+
+    float dx = sigDist_nx - sigDist;
+    float dy = sigDist_ny - sigDist;
+
+    float fw = abs(dx)+abs(dy); 
+
+    sigDist *= dot(msdfUnit, vec2(0.5/fw));
+    float opacity = clamp(sigDist + 0.5, 0.0, 1.0);
+    vec3 black = vec3(0);
+    vec3 white = vec3(1);
+    vec3 col = mix(white, black, opacity);
+    if(opacity<0.05)discard;
+    gl_FragColor = vec4(col,opacity);
 }
