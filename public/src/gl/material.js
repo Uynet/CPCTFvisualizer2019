@@ -5,10 +5,10 @@ class Material{
     this.floorProgram = new Program("floor.vert","floor.frag");
     await this.floorProgram.Init();
 
-    const trapTexture = new Texture("000.png"); 
+    //const trapTexture = new Texture("000.png"); 
+    const trapTexture = new Texture("resource/Fonts/hira/12413.png"); 
     await trapTexture.Init();
     this.textures.push(trapTexture);
-    //this.AddTexture(trapTexture);
 
     this.userProgram = new Program("user.vert","user.frag");
     await this.userProgram.Init();

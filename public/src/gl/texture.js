@@ -10,7 +10,7 @@ class Texture{
     return new Promise(resolve=>{
       this.onready = false;
       let img = this.img;
-      img.src = "resource/img/"+this.path;
+      img.src = this.path;
       img.onload=()=>{
         gl.activeTexture(gl.TEXTURE0+this.slot);
         this.data = gl.createTexture();
