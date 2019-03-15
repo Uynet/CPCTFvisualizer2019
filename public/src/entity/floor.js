@@ -3,7 +3,7 @@ class Floor{
   constructor(pos){
     this.pos = pos;
     this.buffers;
-    this.program = Material.floorProgram;
+    this.program = Material.GetProgram("floor");
     const self = this;
     this.primitiveType = "TRIANGLES";
     this.Init();
@@ -11,7 +11,7 @@ class Floor{
     this.drawObject.AddUniform("time","1f",()=>{return globalTime});
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
-    this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture(0)});
+    this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture("trap")});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});//これでいいのかな..
   }
   Init(){

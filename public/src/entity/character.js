@@ -1,7 +1,7 @@
-class User{
-  constructor(name){
+class Character{
+  constructor(char){
+    this.char = char;
     this.pos = vec3(0,1,0);
-    this.name = name;
     this.buffers;
     this.program = Material.GetProgram("user");
     this.localTime = 0;
@@ -13,7 +13,7 @@ class User{
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
-    this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture(1)});
+    this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture(this.char)});
     this.drawObject.AddUniform("billMatrix","mat4",()=>{
       const po = 
       LockAt(
@@ -25,9 +25,6 @@ class User{
     });
   }
   Init(){
-    if(Rand(2)<1)this.unko =16;
-    else this.unko = 4;
-    this.unko = Rand(16);
     const uv = SquareUVArray();
     this.VBO = new Buffer([0,0,0],"position",3);
     this.UVAttr = new Buffer(uv,"uv",2);
@@ -43,8 +40,8 @@ class User{
 
   Update(){
     this.localTime++;
-    this.pos.x = Math.sin(this.localTime*0.004)*this.unko;
-    this.pos.z = Math.cos(this.localTime*0.004)*this.unko;
+    this.pos.x = Math.sin(this.localTime*0.004);
+    this.pos.z = Math.cos(this.localTime*0.004);
   }
   Draw(){
     this.drawObject.Draw();

@@ -27,6 +27,9 @@ vec2 rot2(vec2 p,float a){
   q.y = p.x*sin(a)+p.y*cos(a);
   return q;
 }
+void grid(){
+
+}
 
 void main(){
   vec2 uv = vUV;
@@ -63,9 +66,9 @@ void main(){
   if(l<0.0145)alpha -= (1.0-min(1.0,l*(20.0+depth*4.0)))+d;
   col = grad*0.9;
 
-  //alpha = 0.0;
+  alpha = 0.0;
   if(texColor.w > 0.01){
-   // alpha = 1.-depth/100.-d;
+    alpha = 1.-depth/100.-d;
     //col = vec3(0.2,0.0,1.0);
   }
   if(alpha <0.3)discard;
