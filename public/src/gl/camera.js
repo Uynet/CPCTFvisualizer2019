@@ -21,8 +21,8 @@ class Camera{
   Update(){
     if(K.s() ) this.r += 0.1;
     if(K.w() ) this.r -= 0.1;
-    if(K.right() ) this.theta += 0.03;
-    if(K.left()  ) this.theta -= 0.03;
+    if(K.right() ) this.theta -= 0.03;
+    if(K.left()  ) this.theta += 0.03;
     if(K.up() ) this.phi += 0.03;
     if(K.down() ) this.phi -= 0.03;
     this.phi = Math.max(this.phi,0.01);

@@ -44,7 +44,7 @@ class DrawObject{
       case "POINTS" : 
         gl.drawArrays(gl.POINTS,0,1);
         break;
-      default : cl(this.primitiveType); 
+      default : console.warn(this.primitiveType); 
     }
     this.VBO.UnBind();
   }
