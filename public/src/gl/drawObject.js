@@ -32,8 +32,6 @@ class DrawObject{
     this.program.Use();
     this.VBO.Bind();
 
-    this.transformMat = GetTransformMatrix(this.parent.pos);
-
     this.SendUniform();
 
     switch(this.primitiveType){
@@ -46,7 +44,8 @@ class DrawObject{
         break;
       default : console.warn(this.primitiveType); 
     }
-    this.VBO.UnBind();
+    //this.VBO.UnBind();
+    //this.textures.UnBind();
   }
 }
 class Uniform{

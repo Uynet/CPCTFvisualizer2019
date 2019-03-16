@@ -24,6 +24,6 @@ class Texture{
   SetSlot(slot){this.slot = slot;}
   Bind(){gl.bindTexture(gl.TEXTURE_2D,this.data);};
   UnBind(){
-    //gl.bindTexture(gl.TEXTURE_2D, null);
+    gl.bindTexture(gl.TEXTURE_2D, null);
   };
 }

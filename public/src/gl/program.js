@@ -49,12 +49,11 @@ class Program{
   }
   UniformTexture(name,tex){
     if(!tex)alert("invalid texture:"+name);
-    tex.Bind();
     this.Use();
     gl.activeTexture(gl.TEXTURE0+tex.slot);
+    tex.Bind();
     let location = gl.getUniformLocation(this.shaderProgram, name);
     gl.uniform1i(location,tex.slot);
-    tex.UnBind();
     this.Release();
   }
   Uniform1f(name,value){
