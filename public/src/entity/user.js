@@ -13,7 +13,7 @@ class User{
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
-    this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture(1)});
+    this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture("R")});
     this.drawObject.AddUniform("billMatrix","mat4",()=>{
       const po = 
       LockAt(

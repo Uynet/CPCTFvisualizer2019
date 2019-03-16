@@ -124,7 +124,13 @@ const vec0 = ()=>{return {x:0,y:0}};//0ベクトルを返す
 const VECX = (vx)=>{return {x:vx,y:0}};//
 const VECY = (vy)=>{return {x:0,y:vy}};//
 const copy= (v)=>{return {x:v.x,y:v.y}};//値渡し
-const add = (v1,v2)=>{ return {x:v1.x + v2.x ,y:v1.y + v2.y}};//ベクトル加算
+const add = (v1,v2)=>{
+  return {
+    x:v1.x + v2.x ,
+    y:v1.y + v2.y ,
+    z:v1.z + v2.z ,
+  }
+}
 const sub = (v1,v2)=>{ return {
   x:v1.x - v2.x ,
   y:v1.y - v2.y ,

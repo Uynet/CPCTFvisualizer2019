@@ -38,6 +38,10 @@ void main(){
   uv -= 0.5;
   uv = rot2(uv,fPos.y+2.);
   vec4 texColor = texture2D(trap, clamp(uv*1.2+0.5,vec2(0),vec2(1)));
+  /*debug
+  gl_FragColor = texColor;
+  return;
+  */
 
   //vec4 texColor = texture2D(trap, clamp(uv*(depth/4.)+0.5,vec2(0),vec2(1)));
   //vec4 texColor = texture2D(trap, clamp(uv*(tan(depth*0.1))+0.5,vec2(0),vec2(1)));

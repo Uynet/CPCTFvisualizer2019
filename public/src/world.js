@@ -8,19 +8,16 @@ class World{
     this.mainCamera = new Camera(vec3(0,0,-1));
     this.Add(this.mainCamera);
 
-    cl("po")
+    this.Add(new TextBox("HelloWorld",vec3(-3,0,1)));
     this.Add(new Floor(vec3(0,-3,0)));//floor
     this.Add(new Floor(vec3(0,3,0)));//ceil
+
   }
   Add(entity){
     this.entities.push(entity);
   };
   Update(){
     //if(globalTime%20 == 19 && globalTime < 150)Event.onAddUser(Math.random());
-    if(globalTime == 140) this.Add(new Character("U"));
-    if(globalTime == 180) this.Add(new Character("N"));
-    if(globalTime == 190) this.Add(new Character("K"));
-    if(globalTime == 200) this.Add(new Character("O"));
     this.entities.forEach(e=>e.Update());
     this.Draw();
   }

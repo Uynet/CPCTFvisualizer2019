@@ -4,6 +4,7 @@ varying vec2 vUV;
 varying float depth;
 varying float fTime;
 
+//uniform float pointsize;
 uniform float time;
 uniform mat4 transformMatrix;
 uniform mat4 projMatrix;
@@ -25,5 +26,5 @@ void main(){
     pos;
   depth = gl_Position.z;
   //gl_PointSize = 320./depth;
-  gl_PointSize = 128./depth;
+  gl_PointSize = 128.0/depth;
 }
