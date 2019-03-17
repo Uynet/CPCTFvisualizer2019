@@ -9,7 +9,9 @@ class TextBox{
       this.characters.push(c);
     }
   }
-  Update(){}
+  Update(){
+    this.pos.x += 0.1;
+  }
   Draw(){
     this.characters.forEach(e=>{
       e.Draw();

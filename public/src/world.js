@@ -14,6 +14,10 @@ class World{
 
   }
   Add(entity){
+    if(this.entities.length>30){
+      console.warn("too many users")
+      return;
+    }
     this.entities.push(entity);
   };
   Update(){

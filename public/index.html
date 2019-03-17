@@ -13,6 +13,7 @@
     <script src="src/entity/character.js"></script>
     <script src="src/entity/textbox.js"></script>
     <script src="src/event.js"></script>
+    <script src="src/socket.js"></script>
     <script src="src/gl/program.js"></script>
     <script src="src/gl/camera.js"></script>
     <script src="src/gl/buffer.js"></script>
@@ -28,14 +29,10 @@
 
     <script>
       $(function(){
-      var socket = io.connect();
       $("#myForm").submit(function(e){
         e.preventDefault();
-        socket.emit("emit_from_client",$("#mss").val());
+        websocket.Emit("addUserDebug",$("#mss").val());
       });
-        socket.on("emit_from_server",name=>{
-          Event.onAddUser(name);
-        })
     });
     </script>
     <h1>[*´ｰ`*]</h1>
