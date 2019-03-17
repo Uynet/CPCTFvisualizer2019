@@ -7,7 +7,7 @@ class Camera{
     this.up = vec3(0,1,0);
 
     this.asp = canvas.width/canvas.height;
-    this.FOV = Math.PI/2;
+    this.FOV = Math.PI*1/2.5;
     this.near = 0.1;
     this.far = 60.0;
 

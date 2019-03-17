@@ -1,13 +1,16 @@
 class User{
   constructor(name){
     this.pos = vec3(0,1,0);
+    this.unko = Rand(16);
+    this.localTime = 0;
+    this.pos.x = Math.sin(this.localTime*0.004)*this.unko;
+    this.pos.z = Math.cos(this.localTime*0.004)*this.unko;
     this.name = name;
+    this.textbox = new TextBox(name,this.pos);
     this.buffers;
     this.program = Material.GetProgram("user");
-    this.localTime = 0;
     const self = this;
     this.primitiveType = "POINTS";
-    this.unko = 2;
     this.Init();
     this.drawObject.AddUniform("time","1f",()=>{return globalTime});
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
@@ -25,9 +28,6 @@ class User{
     });
   }
   Init(){
-    if(Rand(2)<1)this.unko =16;
-    else this.unko = 4;
-    this.unko = Rand(16);
     const uv = SquareUVArray();
     this.VBO = new Buffer([0,0,0],"position",3);
     this.UVAttr = new Buffer(uv,"uv",2);
@@ -48,5 +48,6 @@ class User{
   }
   Draw(){
     this.drawObject.Draw();
+    this.textbox.Draw();
   };
 }

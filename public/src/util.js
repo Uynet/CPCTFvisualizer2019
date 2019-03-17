@@ -123,7 +123,7 @@ const vec3 = (x,y,z)=>{
 const vec0 = ()=>{return {x:0,y:0}};//0ベクトルを返す
 const VECX = (vx)=>{return {x:vx,y:0}};//
 const VECY = (vy)=>{return {x:0,y:vy}};//
-const copy= (v)=>{return {x:v.x,y:v.y}};//値渡し
+const copy= (v)=>{return {x:v.x,y:v.y,z:v.z}};//値渡し
 const add = (v1,v2)=>{
   return {
     x:v1.x + v2.x ,

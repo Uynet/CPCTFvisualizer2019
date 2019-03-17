@@ -1,4 +1,5 @@
 let gl;
+let websocket;
 let glVAOExt;//gl拡張コンテキスト
 let world;
 let canvas;
@@ -12,6 +13,8 @@ let globalTime = 0;
 
 function Init(){
   gl = CreateGL();
+  websocket = new Socket();
+  websocket.listen();
 
   world = new World();
   world.Init();
