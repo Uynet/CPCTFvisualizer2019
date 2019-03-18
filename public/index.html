@@ -1,11 +1,13 @@
 <html>
   <head><meta charset = "utf-8">
   <title>[*´ｰ`*]</title>
-  <canvas id= "canvas" style="visibility: visible"></canvas>
+
+  <div id ="unko"></div>
+    <canvas id= "canvas" style="visibility: visible"></canvas>
+
   <head>
   <body>
-    <!-- SRCFILES-->
-    <!--script src="src/socket.io.js"></script-->
+    <link rel="stylesheet" type="text/css" href="css/index.css">
     <script src="/socket.io/socket.io.js"></script>
     <script src="src/util.js"></script>
     <script src="src/entity/floor.js"></script>
@@ -35,11 +37,12 @@
       });
     });
     </script>
-    <h1>[*´ｰ`*]</h1>
-    ぽ
-    <form id="myForm" method="post" action="addUser">
-      <input id="mss" type="text" name="name">
-      <input type="submit" value="addUser">
-    </form>
+    <div class="render" style = "visibility : hidden">
+      [*´ｰ`*]
+      <form id="myForm" method="post" action="addUser">
+        <input id="mss" type="text" name="name">
+        <input type="submit" value="addUser">
+      </form>
+    </div>
   </body>
 </html>

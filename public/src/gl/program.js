@@ -50,8 +50,10 @@ class Program{
   UniformTexture(name,tex){
     if(!tex)alert("invalid texture:"+name);
     this.Use();
+    /*
     gl.activeTexture(gl.TEXTURE0+tex.slot);
-    tex.Bind();
+    for(let i = 0 ;i < 100 ;i++) tex.Bind();
+    */
     let location = gl.getUniformLocation(this.shaderProgram, name);
     gl.uniform1i(location,tex.slot);
     this.Release();

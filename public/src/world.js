@@ -26,7 +26,7 @@ class World{
     this.Draw();
   }
   Draw(){
-    gl.clearColor(0.99,0.98,0.99,1.0);
+    gl.clearColor(0.99,0.98,0.99,0.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     this.entities.forEach(e=>e.Draw());
     gl.flush();

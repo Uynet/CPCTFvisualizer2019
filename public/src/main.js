@@ -4,6 +4,7 @@ let glVAOExt;//gl拡張コンテキスト
 let world;
 let canvas;
 let globalTime = 0;
+let isPause = false;
 
 /* ☆Entrypoint☆ */
 (()=>{
@@ -38,11 +39,28 @@ function CreateGL(){
   return gl;
 }
 
+function Pause(){
+  if(K.right()){
+    if(K.left()){
+      isPause = false;
+    }
+  }
+}
 //main loop
 function Run(){
   requestAnimationFrame(Run);
-  world.Update();
-  globalTime++;
+  if(!isPause){
+    world.Update();
+    globalTime++;
+    if(K.s()){
+      if(K.w()){
+        cl("unko")
+        isPause = true;
+      }
+    }
+  }else{
+    Pause();
+  }
 }
 
 
