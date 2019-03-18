@@ -29,12 +29,12 @@ class Material{
     let char,path;
     for(let i = 0;i<ALPHABETS_UPPER.length;i++){
       char = ALPHABETS_UPPER[i];
-      path = "resource/Fonts/"+(i+65)+".png",
+      path = "resource/Fonts/alphabets/"+(i+65)+".png",
       this.promises.push(this.CreateTexture(char,path));
     }
     for(let i = 0;i<alphabets_lower.length;i++){
       char = alphabets_lower[i];
-      path = "resource/Fonts/"+(i+97)+".png",
+      path = "resource/Fonts/alphabets/"+(i+97)+".png",
       this.promises.push(this.CreateTexture(char,path));
     }
     await Promise.all(this.promises);
