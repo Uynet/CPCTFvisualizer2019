@@ -1,18 +1,19 @@
 class Buffer{
   //array:positiondata
-  constructor(array,attribute,dim){
+  constructor(array,attribute,dim,type){
     this.attribute = attribute;
     let unko =  gl.createBuffer();
-    this.GLBuffer =unko;
+    this.GLBuffer = unko;
     //this.VAO = glVAOExt.createVertexArrayOES();
     this.data;
     this.dim = dim;
     this.array = array;
-    this.SetBuf(array)
+    this.type = type;
+    this.SetBuffer(array)
   }
-  SetBuf(array){
+  SetBuffer(array){
     gl.bindBuffer(gl.ARRAY_BUFFER,this.GLBuffer);
-    this.data = new Float32Array(array); 
+    this.data = new Float32Array(array);
     gl.bufferData(gl.ARRAY_BUFFER,this.data,gl.STATIC_DRAW);
     this.UnBind();
   }
@@ -24,7 +25,7 @@ class Buffer{
     this.SetAttr(this.program);
   }
   UnBind(){
-    gl.bindBuffer(gl.ARRAY_BUFFER,null);
+    //gl.bindBuffer(gl.ARRAY_BUFFER,null);
   }
   /*
   BindVAO(){
