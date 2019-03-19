@@ -36,12 +36,8 @@ void main(){
   vec3 grad = vec3(uv.x*2.,1.0-uv.y*4.,1.0-uv.x*0.9);
   vec3 black= vec3(0);
   uv -= 0.5;
-  uv = rot2(uv,fPos.y+2.);
+  //uv = rot2(uv,fPos.y+2.);
   vec4 texColor = texture2D(trap, clamp(uv*1.2+0.5,vec2(0),vec2(1)));
-  /*debug
-  gl_FragColor = texColor;
-  return;
-  */
   //vec4 texColor = texture2D(trap, clamp(uv*(depth/4.)+0.5,vec2(0),vec2(1)));
   //vec4 texColor = texture2D(trap, clamp(uv*(tan(depth*0.1))+0.5,vec2(0),vec2(1)));
   texColor.xyz = grad*0.9;

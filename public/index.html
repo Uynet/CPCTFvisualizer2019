@@ -4,7 +4,17 @@
 
   <div id ="unko"></div>
     <canvas id= "canvas" style="visibility: visible"></canvas>
+    <canvas id="hiddenCanvas" style="visibility:hidden;" height="1024px" width="1024px"></canvas>
 
+    <style type="text/css">
+        @font-face {
+            font-family:"SAO";
+            src:url("./resource/Fonts/Ronde-B_square.otf") format("opentype");
+        }
+        canvas {
+            font-family: "SAO";
+        }
+    </style>
   <head>
   <body>
     <link rel="stylesheet" type="text/css" href="css/index.css">
@@ -24,6 +34,7 @@
     <script src="src/gl/drawObject.js"></script>
     <script src="src/gl/texture.js"></script>
     <script src="src/gl/material.js"></script>
+    <script src="src/contextFetcher.js"></script>
     <script src="src/world.js"></script>
     <script src="src/input.js"></script>
     <script src="src/main.js"></script>

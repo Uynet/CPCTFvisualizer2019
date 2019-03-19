@@ -2,47 +2,48 @@ let currentID = 0;
 class TextBox{
   constructor(text,pos){
     this.pos = pos;
-    this.characters = [];
-    let len = text.length;
-    for(let i = 0;i<len;i++){
-      const pos_offset = add(pos,vec3(0.2*i,0,0));//文字を右にずらす
-      let c = new Character(text[i],pos_offset);
-      this.characters.push(c);
-    }
-    //this.AddDOM();
+    this.text = text
+    this.buffers;
+    this.program = Material.GetProgram("text");
+    this.localTime = 0;
+    this.primitiveType = "ELEMTNTS";
+    this.onReady = false;
+    this.Init();
   }
-  AddDOM(){
-    //domにテキストを追加
-    this.content = document.createTextNode(text); 
-    this.div = document.createElement("div");
-    this.div.className = "main";
-    const currentDiv = document.getElementById("unko");
-    this.div.style.left = canvas.width/2;
-    this.div.style.top = canvas.height/2;
-    this.div.id = "main" + currentID;
-    currentID ++ ;
-   this.div.appendChild(this.content);
-    //currentDiv.appendChild(this.div);
-    document.body.insertBefore(this.div, currentDiv); 
-  }
-  SetPosToViewSpace(pos){
-    /*
-    const ret = vec4(pos.x,pos.y,pos.z,1);
-    ret = mulMat4(GetTransformMatrix(this.pos),ret);
-    ret = mulMat4(world.mainCamera.GetViewMatrix(),ret);
-    ret = mulMat4(world.mainCamera.GetProjMatrix(),ret);
-    retrun ret;
-    */
-  }
+  async Init(){
+    this.textTexture = await Material.CreateTextureByString(this.text);
+
+    const vertices = SquareArray(1.0);
+    const uv = SquareUVArray();
+
+    this.buffers = [
+      this.VBO = new Buffer(vertices,"position",3),
+      this.UVAttr = new Buffer(uv,"uv",2),
+    ]
+
+    this.drawObject = new DrawObject(this.buffers,this.program);
+    const index = [0,1,2,1,2,3];
+    this.drawObject.SetIBO(index);
+    this.drawObject.Init(this);
+
+    const self = this;
+    this.drawObject.AddUniform("time","1f",()=>{return globalTime});
+    this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
+    this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
+    this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
+    this.drawObject.AddUniform("trap","texture",()=>{return self.textTexture});
+    this.onReady = true;
+  };
   Update(){
-    this.pos.x += 3.5;
     //this.div.style.left = this.pos.x;
     //this.div.style.top = this.pos.y;
   }
   Draw(){
+   if(this.onReady) this.drawObject.Draw();
+    /*
     this.characters.forEach(e=>{
       e.Draw();
     });
-     
+    */
   };
 }

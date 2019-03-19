@@ -8,10 +8,10 @@ class World{
     this.mainCamera = new Camera(vec3(0,0,-1));
     this.Add(this.mainCamera);
 
-    this.Add(new TextBox("HelloWorld",vec3(-3,0,1)));
     this.Add(new Floor(vec3(0,-3,0)));//floor
     this.Add(new Floor(vec3(0,3,0)));//ceil
-    this.Add(new Ring(vec3(0)));
+    //this.Add(new Ring(vec3(0)));
+    this.Add(new TextBox("Canvasでテクスチャ生成した",vec3(-0,0,1)));
 
   }
   Add(entity){
