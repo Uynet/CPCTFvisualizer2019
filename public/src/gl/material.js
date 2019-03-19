@@ -42,6 +42,7 @@ class Material{
       [
         this.CreateProgram("user","user.vert","user.frag"),
         this.CreateProgram("floor","floor.vert","floor.frag"),
+        this.CreateProgram("ring","ring.vert","ring.frag"),
         this.CreateProgram("character","character.vert","character.frag"),
         this.CreateTexture("trap","resource/img/000.png"), 
       ]

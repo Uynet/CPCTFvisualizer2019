@@ -15,7 +15,7 @@ const fetcher = new class{
     setInterval(() => {
       //this.getProblemInfo();
       this.getUserInfo();
-    }, 1000*10);
+    }, 1000*100);
   }
   getUserInfo(){
     //const url = 'https://cpctf.site/api/1.0/users';

@@ -3,9 +3,10 @@ class DrawObject{
     this.buffers = buffers;
     this.program = program;
     this.VBO;
+    this.index;
+    this.IBO;
     this.transformMat = [];
     this.parent;//魂
-    //this.Init();
     this.uniformList = [];
     this.primitiveType = "TRIANGLES";
   }
@@ -18,6 +19,10 @@ class DrawObject{
       if(buffer.attribute == "position")this.VBO = buffer;
       if(buffer.attribute == "uv")this.UV = buffer;
     })
+  }
+  SetIBO(indexArray){
+    this.index = indexArray;
+    this.IBO  = new ElementBuffer(indexArray);
   }
   SendUniform(){
     this.uniformList.forEach(e=>{
@@ -35,6 +40,9 @@ class DrawObject{
     this.SendUniform();
 
     switch(this.primitiveType){
+      case "ELEMTNTS" :
+        gl.drawElements(gl.TRIANGLES,this.index.length,gl.UNSIGNED_SHORT,0);
+        break;
       case "TRIANGLES" :
         gl.drawArrays(gl.TRIANGLES,0,3);
         gl.drawArrays(gl.TRIANGLES,1,3);
@@ -45,7 +53,6 @@ class DrawObject{
       default : console.warn(this.primitiveType); 
     }
     //this.VBO.UnBind();
-    //this.textures.UnBind();
   }
 }
 class Uniform{
