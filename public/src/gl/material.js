@@ -37,6 +37,7 @@ class Material{
       path = "resource/Fonts/alphabets/"+(i+97)+".png",
       this.promises.push(this.CreateTexture(char,path));
     }
+    //this.promises.push(this.CreateTextureByString("Sword ART ONLINE"));
     await Promise.all(this.promises);
     await Promise.all(
       [
@@ -44,6 +45,7 @@ class Material{
         this.CreateProgram("floor","floor.vert","floor.frag"),
         this.CreateProgram("ring","ring.vert","ring.frag"),
         this.CreateProgram("character","character.vert","character.frag"),
+        this.CreateProgram("text","text.vert","text.frag"),
         this.CreateTexture("trap","resource/img/000.png"), 
       ]
     )
@@ -68,6 +70,14 @@ class Material{
     await tex.Init();
     this.PushTexture(char,tex);
     return;
+  }
+  static async CreateTextureByString(str){
+    const cf = new ContextFetcher(str, 'Courier New');
+    const path = cf.fetch();
+    const tex = new Texture(path); 
+    await tex.Init();
+    //this.PushTexture(char,tex);
+    return tex;// this._createTextureByImage(img, textureIndex);
   }
   static PushProgram(name,program){
     this.programs[name] = program;

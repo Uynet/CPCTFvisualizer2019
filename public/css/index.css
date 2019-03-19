@@ -1,28 +1,6 @@
-@font-face {
-	font-family: 'SAO';
-  src: url("../resource/Fonts/Ronde-B_square.otf");
-  src: url("../resource/Fonts/SAOUI-Regular.otf");
-}
 #canvas{
   z-index:0;
   position:absolute;
   top:0px;
   left:0px;
-}
-.main{
-  z-index:2;
-  font-size: 30px;
-	font-family: "SAO";
-}
-#unko{
-  z-index:1;
-  font-size: 30px;
-	font-family: "SAO";
-}
-.render {  
-  position:absolute;
-  top:10px;
-  left:0px;
-  font-size: 100px;
-	font-family: "SAO";
 }
