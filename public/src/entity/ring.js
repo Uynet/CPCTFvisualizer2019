@@ -15,8 +15,31 @@ class Ring{
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
   }
   Init(){
-    const vertices = SquareArray(1.0);//★頂点データ
-    const index = [0,1,2,1,2,3];      //★index
+    function ring(radius, width, segments) {
+      const pos = [];
+      const idx = [];
+
+      for (let i = 0; i < segments; i++) {
+        const rad = Math.PI * 2 / segments * i;
+        const x = radius * Math.cos(rad);
+        const y = radius * Math.sin(rad);
+        pos.push(x, y, -width / 2);
+        pos.push(x, y, width / 2);
+      }
+      for (let i = 0; i < segments; i++) {
+        const a = 2 * i;
+        const b = 2 * i + 1;
+        const c = (2 * i + 2) % (2 * segments);
+        const d = (2 * i + 3) % (2 * segments);
+        idx.push(a, b, d);
+        idx.push(a, d, c);
+      }
+      return [pos, idx];
+    }
+    const [vertices, index] = ring(1.0, 0.3, 32);
+
+    // const vertices = SquareArray(1.0);//★頂点データ
+    // const index = [0,1,2,1,2,3];      //★index
     //const uv = SquareUVArray();
 
     this.buffers = [
