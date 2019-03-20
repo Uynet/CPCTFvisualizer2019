@@ -41,6 +41,7 @@ class DrawObject{
 
     switch(this.primitiveType){
       case "ELEMTNTS" :
+        this.IBO.Bind();
         gl.drawElements(gl.TRIANGLES,this.index.length,gl.UNSIGNED_SHORT,0);
         break;
       case "TRIANGLES" :
