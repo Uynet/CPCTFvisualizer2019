@@ -11,8 +11,7 @@ class World{
     this.Add(new Floor(vec3(0,-3,0)));//floor
     this.Add(new Floor(vec3(0,3,0)));//ceil
     this.Add(new Ring(vec3(0), 3, 0.3, 64));
-    this.Add(new Ring(vec3(0), 9, 0.3, 128));
-    this.Add(new TextBox("Canvasでテクスチャ生成した",vec3(-0,0,1)));
+    this.Add(new Ring(vec3(0), 24, 0.3, 128));
 
   }
   Add(entity){
@@ -28,7 +27,7 @@ class World{
     this.Draw();
   }
   Draw(){
-    gl.clearColor(0.99,0.98,0.99,0.0);
+    gl.clearColor(0.97,0.97,0.99,1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     this.entities.forEach(e=>e.Draw());
     gl.flush();
