@@ -1,7 +1,10 @@
 //輪っか
 class Ring{
-  constructor(pos){
+  constructor(pos, radius, width, segments = 32){
     this.pos = pos;
+    this.radius = radius;
+    this.width = width;
+    this.segments = segments;
     this.buffers;
     this.program = Material.GetProgram("ring");
     const self = this;
@@ -22,9 +25,9 @@ class Ring{
       for (let i = 0; i < segments; i++) {
         const rad = Math.PI * 2 / segments * i;
         const x = radius * Math.cos(rad);
-        const y = radius * Math.sin(rad);
-        pos.push(x, y, -width / 2);
-        pos.push(x, y, width / 2);
+        const z = radius * Math.sin(rad);
+        pos.push(x, -width / 2, z);
+        pos.push(x, width / 2, z);
       }
       for (let i = 0; i < segments; i++) {
         const a = 2 * i;
@@ -36,7 +39,7 @@ class Ring{
       }
       return [pos, idx];
     }
-    const [vertices, index] = ring(1.0, 0.3, 32);
+    const [vertices, index] = ring(this.radius, this.width, this.segments);
 
     // const vertices = SquareArray(1.0);//★頂点データ
     // const index = [0,1,2,1,2,3];      //★index
