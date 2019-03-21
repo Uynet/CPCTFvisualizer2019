@@ -9,13 +9,22 @@ const fs = require("fs");
 const request = require("request");
 app.use(express.static("public"));
 
+
 const fetcher = new class{
   listen(){
-    this.getUserInfo();
-    setInterval(() => {
-      //this.getProblemInfo();
+    //この辺やばい
+    //デバッグ用なので後で消す
+    const po = ()=>{
       this.getUserInfo();
-    }, 1000*100);
+    }
+    function* gen(){
+      let cnt = 0;
+      while(cnt++<1)po();
+    }
+    const ite = gen();
+    setInterval(() => {
+      ite.next();
+    }, 1000*5);
   }
   getUserInfo(){
     //const url = 'https://cpctf.site/api/1.0/users';

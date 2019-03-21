@@ -1,12 +1,12 @@
 class User{
-  constructor(name){
+  constructor(userdata){
     this.pos = vec3(0,1,0);
     this.unko = Rand(16);
-    this.localTime = 0;
+    this.localTime = 0 + Rand(16000);
     this.pos.x = Math.sin(this.localTime*0.004)*this.unko;
     this.pos.z = Math.cos(this.localTime*0.004)*this.unko;
-    this.name = name;
-    this.textbox = new TextBox(name,this.pos);
+    this.name = userdata.name;
+    this.textbox = new TextBox(this.name,this.pos);
     this.buffers;
     this.program = Material.GetProgram("user");
     const self = this;
@@ -16,7 +16,7 @@ class User{
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
-    this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture("R")});
+    this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture("trap")});
     this.drawObject.AddUniform("billMatrix","mat4",()=>{
       const po = 
       LockAt(
