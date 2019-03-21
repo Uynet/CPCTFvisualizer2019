@@ -1,18 +1,15 @@
 class ContextFetcher {
-  constructor(str, font){
+  constructor(str){
     this.str = str;
     this.canvas = document.getElementById("hiddenCanvas");
     this.ctx = this.canvas.getContext('2d');
-    if(typeof font !== "undefined") this.ctx.font = "7em " + font;
     this.init();
   }
-
   init(){
     this.ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
     this.ctx.textAlign = 'center';
     this.ctx.textBaseline = 'middle';
   }
-
   fetch(){
     const W = this.canvas.width;
     const H = this.canvas.height;
