@@ -46,9 +46,24 @@ function Pause(){
     }
   }
 }
+function Clock(){
+  //CPCTF終了19:30?
+  let today = new Date();
+  today.setHours(19,30,0,0);
+  let limit = today.getTime();
+  let now = new Date().getTime();
+  let ms= limit-now;
+  let hh = String(Math.floor(ms / 3600000) + 100).substring(1);
+  let mm = String(Math.floor((ms - hh * 3600000)/60000)+ 100).substring(1);
+  let ss = String(Math.floor((ms - hh * 3600000 - mm * 60000)/1000)+ 100).substring(1);
+  let sss= String(ms%1000+1000);
+  let text =  ""+hh+":"+mm+":"+ss + ":" + sss.substring(1,3);
+  document.getElementById("main").innerHTML = text;
+}
 //main loop
 function Run(){
   requestAnimationFrame(Run);
+  Clock();
   if(!isPause){
     world.Update();
     globalTime++;
