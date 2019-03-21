@@ -15,7 +15,7 @@ float atan2(vec2 p){
     return p.x == 0.0 ? sign(p.y)*PI/2. : atan(p.y, p.x);
 }
 float func(float x){
-  if(abs(sin(x*3.0))<0.10)return 200.0;
+  if(abs(sin(x*3.0))<0.90)return 200.0;
   else return 0.2;
 
 }
@@ -26,7 +26,7 @@ void main(){
   float a = time * 0.00;// * pos.z * 0.1 * pos.y;
   float f = 20.0;
   float t = atan2(pos.xz)/2.0;
-  float p = time/1200.0+t;
+  float p = time/100.0+t;
   float amp = func(p);
   amp *= exp(amp);
   amp *= 0.02;

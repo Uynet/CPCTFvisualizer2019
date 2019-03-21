@@ -53,8 +53,8 @@ class DrawObject{
         break;
       case "LINES" : 
         this.IBO.Bind();
-        //gl.drawElements(gl.LINE_LOOP,this.index.length,gl.UNSIGNED_SHORT,0);
-        gl.drawElements(gl.LINE_STRIP,this.index.length,gl.UNSIGNED_SHORT,0);
+        gl.drawElements(gl.LINE_LOOP,this.index.length,gl.UNSIGNED_SHORT,0);
+        //gl.drawElements(gl.LINE_STRIP,this.index.length,gl.UNSIGNED_SHORT,0);
         break;
       default : alert(this.primitiveType); 
     }
