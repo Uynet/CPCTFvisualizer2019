@@ -2,19 +2,32 @@
   <head><meta charset = "utf-8">
   <title>[*´ｰ`*]</title>
 
-  <div id ="unko"></div>
-    <canvas id= "canvas" style="visibility: visible"></canvas>
-    <canvas id="hiddenCanvas" style="visibility:hidden;" height="1024px" width="1024px"></canvas>
-
-    <style type="text/css">
-        @font-face {
-            font-family:"SAO";
-            src:url("./resource/Fonts/Ronde-B_square.otf") format("opentype");
+  <style type="text/css">
+@font-face {
+  font-family:"Ronde";
+  src:url("./resource/Fonts/Ronde-B_square.otf") format("opentype");
+  font-family:"SAO";
+  src:url("./resource/Fonts/SAOUI-Regular.otf") format("opentype");
+}
+        #main {
+          position:absolute;
+          top:16px;
+          left:306px;
+          z-index:1;
+          font-size: 40px;
+          font-family: "SAO";
         }
         canvas {
-            font-family: "SAO";
+          style="visibility: visible"
+          z-index:0;
+          font-family: "SAO";
+          font-size: 40px;
         }
-    </style>
+  </style>
+  <div id ="main">[TimeLimit]</div>
+  <canvas id="canvas"></canvas>
+  <canvas id="hiddenCanvas" style="visibility:hidden;" height="1024px" width="1024px"></canvas>
+
   <head>
   <body>
     <link rel="stylesheet" type="text/css" href="css/index.css">
@@ -51,7 +64,6 @@
     });
     </script>
     <div class="render" style = "visibility : hidden">
-      [*´ｰ`*]
       <form id="myForm" method="post" action="addUser">
         <input id="mss" type="text" name="name">
         <input type="submit" value="addUser">
