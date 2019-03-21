@@ -5,8 +5,12 @@ class User{
     this.localTime = 0 + Rand(16000);
     this.pos.x = Math.sin(this.localTime*0.004)*this.unko;
     this.pos.z = Math.cos(this.localTime*0.004)*this.unko;
+    let p = copy(this.pos);
+    //p.y = this.pos.y + 40;
     this.name = userdata.name;
-    this.textbox = new TextBox(this.name,this.pos);
+    this.score= userdata.score+"";
+    this.scoreText = new TextBox(this.score,p);
+    this.nameText = new TextBox(this.name,this.pos);
     this.buffers;
     this.program = Material.GetProgram("user");
     const self = this;
@@ -45,9 +49,15 @@ class User{
     this.localTime++;
     this.pos.x = Math.sin(this.localTime*0.004)*this.unko;
     this.pos.z = Math.cos(this.localTime*0.004)*this.unko;
+
+    let pos = copy(this.pos);
+    this.nameText.SetPos(pos);
+    pos.y -= 0.7;
+    this.scoreText.SetPos(pos);
   }
   Draw(){
     this.drawObject.Draw();
-    this.textbox.Draw();
+    this.nameText.Draw();
+    this.scoreText.Draw();
   };
 }

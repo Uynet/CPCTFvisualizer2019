@@ -34,6 +34,9 @@ class TextBox{
     this.drawObject.AddUniform("trap","texture",()=>{return self.textTexture});
     this.onReady = true;
   };
+  SetPos(pos){
+    this.pos = copy(pos);
+  }
   Update(){
     //this.div.style.left = this.pos.x;
     //this.div.style.top = this.pos.y;

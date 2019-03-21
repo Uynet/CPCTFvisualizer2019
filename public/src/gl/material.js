@@ -1,18 +1,14 @@
 //テクスチャスロットの割当の為に存在している
 let currentSlot = 0;
-let rock = false;
 const assignSlot = (texture)=>{
-  if(!rock){
-    rock = true;
-    if(currentSlot > gl.getParameter(gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS)){cl("over slot");return;}
-    texture.SetSlot(currentSlot);
-    gl.activeTexture(gl.TEXTURE0+currentSlot);
-    //cl("SLOT"+currentSlot+":"+texture.path);
-    currentSlot += 1;
-    rock = false;
-  }else{
-    cl("unko")
+  if(currentSlot > gl.getParameter(gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS)){
+    cl("over slot");
+    return;
   }
+  texture.SetSlot(currentSlot);
+  gl.activeTexture(gl.TEXTURE0+currentSlot);
+  cl("SLOT"+currentSlot+":"+texture.path);
+  currentSlot += 1;
 }
 
 //program及びtextureを管理する静的クラス
@@ -23,21 +19,12 @@ class Material{
     this.programs = [];
     this.promises = [];//promise list
 
-    const ALPHABETS_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const alphabets_lower = "abcdefghijklmnopqrstuvwxyz";
-    //this.CreateCharacterTextures(ALPHABETS_UPPER);
     let char,path;
-    for(let i = 0;i<ALPHABETS_UPPER.length;i++){
-      char = ALPHABETS_UPPER[i];
-      path = "resource/Fonts/alphabets/"+(i+65)+".png",
+    for(let i = 0;i<10;i++){
+      char = i+"";
+      path = "resource/Fonts/numbers/"+i+".png",
       this.promises.push(this.CreateTexture(char,path));
     }
-    for(let i = 0;i<alphabets_lower.length;i++){
-      char = alphabets_lower[i];
-      path = "resource/Fonts/alphabets/"+(i+97)+".png",
-      this.promises.push(this.CreateTexture(char,path));
-    }
-    //this.promises.push(this.CreateTextureByString("Sword ART ONLINE"));
     await Promise.all(this.promises);
     await Promise.all(
       [
@@ -72,7 +59,7 @@ class Material{
     return;
   }
   static async CreateTextureByString(str){
-    const cf = new ContextFetcher(str, 'Courier New');
+    const cf = new ContextFetcher(str);
     const path = cf.fetch();
     const tex = new Texture(path); 
     await tex.Init();
