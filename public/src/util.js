@@ -284,3 +284,54 @@ const LockAt = (eye,forward,up)=>{
   ];
   return m;
 }
+const ico = ()=>{
+ let index = [
+    7,8,0,
+    0,8,1,
+    8,9,1,
+    1,9,2,
+    9,5,2,
+
+    2,5,3,
+    5,6,3,
+    3,6,4,
+    6,7,4,
+    4,7,0,
+
+    10,4,0,
+    10,3,4,
+    10,2,3,
+    10,1,2,
+    10,0,1,
+
+    11,5,9,
+    11,9,8,
+    11,8,7,
+    11,7,6,
+    11,6,5,
+  ];
+  let PI = Math.PI;
+  let t  = 2*PI/5;
+  let e = 0.8;
+  let r = e/Math.sqrt(2*(1-Math.cos(t)));
+  let h = Math.sqrt(e*e-r*r);
+  let se = e * Math.sqrt(3)/4;
+  let vertices = [
+    //pentagon1
+    r*Math.cos(0*t),  -se, r*Math.sin(0*t),
+    r*Math.cos(1*t),  -se, r*Math.sin(1*t),
+    r*Math.cos(2*t),  -se, r*Math.sin(2*t),
+    r*Math.cos(3*t),  -se, r*Math.sin(3*t),
+    r*Math.cos(4*t),  -se, r*Math.sin(4*t),
+    //pentagon2
+    r*Math.cos(0*t+PI),se, r*Math.sin(0*t+PI),
+    r*Math.cos(1*t+PI),se, r*Math.sin(1*t+PI),
+    r*Math.cos(2*t+PI),se, r*Math.sin(2*t+PI),
+    r*Math.cos(3*t+PI),se, r*Math.sin(3*t+PI),
+    r*Math.cos(4*t+PI),se, r*Math.sin(4*t+PI),
+ 
+    0,  -(se+h),0, 
+    0,  +(se+h),  0, 
+  ];
+  return [vertices,index];
+}

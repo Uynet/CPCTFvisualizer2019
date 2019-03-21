@@ -40,7 +40,7 @@ class DrawObject{
     this.SendUniform();
 
     switch(this.primitiveType){
-      case "ELEMTNTS" :
+      case "ELEMENTS" :
         this.IBO.Bind();
         gl.drawElements(gl.TRIANGLES,this.index.length,gl.UNSIGNED_SHORT,0);
         break;
@@ -51,7 +51,12 @@ class DrawObject{
       case "POINTS" : 
         gl.drawArrays(gl.POINTS,0,1);
         break;
-      default : console.warn(this.primitiveType); 
+      case "LINES" : 
+        this.IBO.Bind();
+        //gl.drawElements(gl.LINE_LOOP,this.index.length,gl.UNSIGNED_SHORT,0);
+        gl.drawElements(gl.LINE_STRIP,this.index.length,gl.UNSIGNED_SHORT,0);
+        break;
+      default : alert(this.primitiveType); 
     }
     //this.VBO.UnBind();
   }

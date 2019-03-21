@@ -1,31 +1,31 @@
-//格子状の床
-class Floor{
+class Ico{
   constructor(pos){
     this.pos = pos;
     this.buffers;
-    this.program = Material.GetProgram("floor");
+    this.program = Material.GetProgram("ico");
     const self = this;
-    //this.primitiveType = "TRIANGLES";
     this.primitiveType = "ELEMENTS";
+    this.primitiveType = "LINES";
     this.Init();
     //uniform変数名、型、代入する値を返す関数
     this.drawObject.AddUniform("time","1f",()=>{return globalTime});
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture("trap")});
-    this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});//これでいいのかな..
+    this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
+    cl(gl.getParameter(gl.LINE_WIDTH));
+    cl(gl.getParameter(gl.ALIASED_LINE_WIDTH_RANGE));
   }
   Init(){
-    const vertices = SquareArray(10.0);
-    const uv = SquareUVArray();
+    const [vertices, index] = ico();
+
 
     this.buffers = [
       this.VBO = new Buffer(vertices,"position",3),
-      this.UVAttr = new Buffer(uv,"uv",2),
+      //this.UVAttr = new Buffer(uv,"uv",2),
     ]
 
     this.drawObject = new DrawObject(this.buffers,this.program);
-    const index = [0,1,2,1,2,3];
     this.drawObject.SetIBO(index);
     this.drawObject.Init(this);
   };
