@@ -5,16 +5,18 @@ uniform float time;
 uniform mat4 transformMatrix;
 uniform mat4 projMatrix;
 uniform mat4 viewMatrix;
+varying float depth;
+varying vec3 pos;
 
 #define PI 3.1415965
 
 
 void main(){
-  vec4 pos = vec4(position,1);
-  time;
+  pos = position;
   gl_Position = 
     projMatrix *
     viewMatrix * 
     transformMatrix * 
-    pos;
+    vec4(position,1);
+  depth = gl_Position.z;
 }

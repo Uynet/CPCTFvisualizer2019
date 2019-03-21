@@ -12,6 +12,7 @@ class World{
     this.Add(new Floor(vec3(0,3,0)));//ceil
     this.Add(new Ring(vec3(0), 3, 0.3, 64));
     this.Add(new Ring(vec3(0), 24, 0.3, 128));
+    this.Add(new TextBox("CPCTF",vec3(0)));
 
   }
   Add(entity){
