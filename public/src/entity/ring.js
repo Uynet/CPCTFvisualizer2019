@@ -8,7 +8,7 @@ class Ring{
     this.buffers;
     this.program = Material.GetProgram("ring");
     const self = this;
-    this.primitiveType = "ELEMTNTS";
+    this.primitiveType = "ELEMENTS";
     this.Init();
     //uniform変数名、型、代入する値を返す関数
     this.drawObject.AddUniform("time","1f",()=>{return globalTime});

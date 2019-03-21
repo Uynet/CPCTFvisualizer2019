@@ -2,12 +2,13 @@
 let currentSlot = 0;
 const assignSlot = (texture)=>{
   if(currentSlot > gl.getParameter(gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS)){
+    currentSlot = 0;
     cl("over slot");
-    return;
+    //return;
   }
   texture.SetSlot(currentSlot);
   gl.activeTexture(gl.TEXTURE0+currentSlot);
-  cl("SLOT"+currentSlot+":"+texture.path);
+  //cl("SLOT"+currentSlot+":"+texture.path);
   currentSlot += 1;
 }
 
@@ -31,6 +32,7 @@ class Material{
         this.CreateProgram("user","user.vert","user.frag"),
         this.CreateProgram("floor","floor.vert","floor.frag"),
         this.CreateProgram("ring","ring.vert","ring.frag"),
+        this.CreateProgram("ico","ico.vert","ico.frag"),
         this.CreateProgram("character","character.vert","character.frag"),
         this.CreateProgram("text","text.vert","text.frag"),
         this.CreateTexture("trap","resource/img/000.png"), 

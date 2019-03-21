@@ -10,16 +10,13 @@ class World{
 
     this.Add(new Floor(vec3(0,-3,0)));//floor
     this.Add(new Floor(vec3(0,3,0)));//ceil
+    this.Add(new Ico(vec3(0)));//正二十面体
     this.Add(new Ring(vec3(0), 3, 0.3, 64));
     this.Add(new Ring(vec3(0), 24, 0.3, 128));
     this.Add(new TextBox("CPCTF",vec3(0,1,0)));
 
   }
   Add(entity){
-    if(this.entities.length>30){
-      console.warn("too many users")
-      return;
-    }
     this.entities.push(entity);
   };
   Update(){
@@ -28,7 +25,7 @@ class World{
     this.Draw();
   }
   Draw(){
-    gl.clearColor(0.98,0.970,1.00,1.0);
+    gl.clearColor(0.999,0.98,1.00,1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     this.entities.forEach(e=>e.Draw());
     gl.flush();

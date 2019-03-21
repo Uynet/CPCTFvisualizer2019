@@ -19,12 +19,16 @@ const fetcher = new class{
     }
     function* gen(){
       let cnt = 0;
-      while(cnt++<1)po();
+      while(cnt++<1){
+        po();
+        yield;
+      }
+      return;
     }
     const ite = gen();
     setInterval(() => {
       ite.next();
-    }, 1000*5);
+    }, 1000*3);
   }
   getUserInfo(){
     //多分新しく追加されたユーザーを取得するAPI?
