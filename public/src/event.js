@@ -1,5 +1,5 @@
 class Event{
-  static onAddUser(name){
-    world.Add(new User(name)); 
+  static onAddUser(userdata){
+    world.Add(new User(userdata)); 
   }
 }
