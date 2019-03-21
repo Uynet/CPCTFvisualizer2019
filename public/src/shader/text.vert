@@ -15,22 +15,21 @@ uniform mat4 viewMatrix;
 
 void main(){
   vUV = uv;
-  float a = PI/2.;
+  float a = time*0.004;
   vec4 pos = vec4(position,1);
   fPos = gl_Position.xyz;
-
-  float b = time*0.01;
   fTime = time;
   mat4 rot = mat4(
-      1. , 0. , 0. , 0. ,
-      0, cos(a) , -sin(a) , 0. ,
-      0, sin(a) , cos(a) , 0. ,
+      cos(a), 0 , -sin(a) , 0. ,
+      0. , 1. , 0. , 0. ,
+      sin(a),0 , cos(a) , 0. ,
       0. , 0. , 0. , 1. 
-  );
+    );
   gl_Position = 
     projMatrix *
     viewMatrix * 
     transformMatrix * 
+    rot * 
     pos;
   depth = gl_Position.z;
 }
