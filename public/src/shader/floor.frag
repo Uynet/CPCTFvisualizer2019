@@ -29,13 +29,16 @@ vec2 rot2(vec2 p,float a){
   q.y = p.x*sin(a)+p.y*cos(a);
   return q;
 }
-vec3 gradient(float x){
+vec3 gradient(vec2 uv){
   //[[0.731 1.098 0.192] [0.358 0.968 0.657] [1.077 0.360 0.328] [0.965 2.265 0.837]]
+  /*
   vec3 f= vec3(
       0.731 + 0.358*(cos(x*1.077+0.960*PI2+fTime/77.0)),
       1.098 + 1.000*(cos(x*0.368+2.265*PI2)),
       -0.292 + 0.658*(cos(x*0.328+0.837*PI2))
   );
+  */
+  vec3 f = vec3(uv.x*2.0,1.0-uv.y*4.0,1.0-uv.x*0.9)*0.9;
   return f;
 }
 
@@ -53,9 +56,15 @@ void main(){
   //vec4 texColor = texture2D(trap, clamp(uv*(tan(depth*0.1))+0.5,vec2(0),vec2(1)));
   uv = rot2(uv,-2.5);
   vec2 puv = polar(uv);
-  vec3 grad = gradient(puv.y);
+  vec3 grad = gradient(uv+0.5);
+  grad.y = 0.03 * pow(
+      (cos(puv.y-PI)+1.0),4.0
+      );
+  float po=depth/100.;
+  grad = mix(grad,vec3(1),po);
   gl_FragColor = vec4(grad,1.0);
   return;
+  /*
   texColor.xyz = grad*0.9;
   //vec3 white = vec3((depth+1.)/2.);
   vec3 white = vec3(0.9);
@@ -86,6 +95,6 @@ void main(){
     alpha = 1.0;
     //col = vec3(0.2,0.0,1.0);
   }
-  if(alpha <0.3)discard;
   gl_FragColor = vec4(col,alpha);
+  */
 }
