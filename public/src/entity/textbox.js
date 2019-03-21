@@ -5,9 +5,8 @@ class TextBox{
     this.text = text
     this.buffers;
     this.program = Material.GetProgram("text");
-    this.localTime = 0;
-    this.primitiveType = "ELEMTNTS";
     this.onReady = false;
+    this.primitiveType = "TRIANGLES";
     this.Init();
   }
   async Init(){
@@ -27,15 +26,22 @@ class TextBox{
     this.drawObject.Init(this);
 
     const self = this;
-    this.drawObject.AddUniform("time","1f",()=>{return globalTime});
+    this.drawObject.AddUniform("time","1f",()=>{return self.getLocalTime()});
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
     this.drawObject.AddUniform("trap","texture",()=>{return self.textTexture});
     this.onReady = true;
   };
+  getLocalTime(){
+    if(this.parent!==undefined)return this.parent.localTime;
+    else return globalTime;
+  }
   SetPos(pos){
     this.pos = copy(pos);
+  }
+  SetParent(parent){
+    this.parent = parent;
   }
   Update(){
     //this.div.style.left = this.pos.x;

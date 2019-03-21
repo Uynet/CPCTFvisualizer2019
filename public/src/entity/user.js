@@ -1,7 +1,7 @@
 class User{
   constructor(userdata){
     this.pos = vec3(0,1,0);
-    this.unko = Rand(16);
+    this.unko = Math.random()*16+1;
     this.localTime = 0 + Rand(16000);
     this.pos.x = Math.sin(this.localTime*0.004)*this.unko;
     this.pos.z = Math.cos(this.localTime*0.004)*this.unko;
@@ -11,6 +11,9 @@ class User{
     this.score= userdata.score+"";
     this.scoreText = new TextBox(this.score,p);
     this.nameText = new TextBox(this.name,this.pos);
+    this.scoreText.SetParent(this);
+    this.nameText.SetParent(this);
+
     this.buffers;
     this.program = Material.GetProgram("user");
     const self = this;
@@ -21,6 +24,7 @@ class User{
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
     this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture("trap")});
+    /*
     this.drawObject.AddUniform("billMatrix","mat4",()=>{
       const po = 
       LockAt(
@@ -30,6 +34,7 @@ class User{
       )
       return po;
     });
+    */
   }
   Init(){
     const uv = SquareUVArray();
@@ -54,6 +59,8 @@ class User{
     this.nameText.SetPos(pos);
     pos.y -= 0.7;
     this.scoreText.SetPos(pos);
+    this.nameText.Update();
+    this.scoreText.Update();
   }
   Draw(){
     this.drawObject.Draw();

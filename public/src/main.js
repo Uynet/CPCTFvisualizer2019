@@ -49,7 +49,8 @@ function Pause(){
 function Clock(){
   //CPCTF終了19:30?
   let today = new Date();
-  today.setHours(19,30,0,0);
+  //today.setHours(19,30,0,0);
+  today.setHours(23,59,59,59);
   let limit = today.getTime();
   let now = new Date().getTime();
   let ms= limit-now;
@@ -57,7 +58,9 @@ function Clock(){
   let mm = String(Math.floor((ms - hh * 3600000)/60000)+ 100).substring(1);
   let ss = String(Math.floor((ms - hh * 3600000 - mm * 60000)/1000)+ 100).substring(1);
   let sss= String(ms%1000+1000);
-  let text =  ""+hh+":"+mm+":"+ss + ":" + sss.substring(1,3);
+  let text =  "["
+    +hh+":"+mm+":"+ss + ":" + sss.substring(1,3)
+   +"]";
   document.getElementById("main").innerHTML = text;
 }
 //main loop

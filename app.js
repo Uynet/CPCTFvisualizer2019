@@ -27,6 +27,7 @@ const fetcher = new class{
     }, 1000*5);
   }
   getUserInfo(){
+    //多分新しく追加されたユーザーを取得するAPI?
     //const url = 'https://cpctf.site/api/1.0/users';
     const url = "http://localhost:3000/api/users"
     request(url, (error, response, body) => {
