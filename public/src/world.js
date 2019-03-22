@@ -5,7 +5,7 @@ class World{
   };
   async Init(){
     await Material.Init();
-    this.mainCamera = new Camera(vec3(0,0,-1));
+    this.mainCamera = new Camera();
     this.Add(this.mainCamera);
 
     this.Add(new Floor(vec3(0,-3,0)));//floor

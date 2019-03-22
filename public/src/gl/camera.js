@@ -1,7 +1,7 @@
 //this may be static
 class Camera{
-  constructor(pos){
-    this.pos = pos;
+  constructor(){
+    this.pos = vec3(0);
     //view
     this.forward = vec3(0,0,-1);
     this.up = vec3(0,1,0);
@@ -16,7 +16,7 @@ class Camera{
 
     this.r = 8;
     this.phi = Math.PI/2.0;
-    this.theta = 0.0;
+    this.theta = Math.PI;
   }
   Update(){
     if(K.s() ) this.r += 0.1;
@@ -38,6 +38,8 @@ class Camera{
     this.forward.x = this.pos.x;
     this.forward.y = this.pos.y;
     this.forward.z = this.pos.z;
+    this.forward = normalize(this.forward);
+    this.up = vec3(0,1,0);
 
   }
   Draw(){/*Nothing to do*/}
@@ -46,6 +48,7 @@ class Camera{
     let up = normalize(cross(this.forward, side));
     let forward = normalize(this.forward);
     let eye = this.pos;
+    //return GetTransformMatrix(this.pos);  
     return [
       side.x, up.x, forward.x, 0,
       side.y, up.y, forward.y, 0,
@@ -64,7 +67,7 @@ class Camera{
       1 / (asp * t),0,0,0,
       0,1/t,0,0,
       0,0,(near+far) / (near-far), -1,
-      0,0,2*near*far/(near-far),0.001
+      0,0,2*near*far/(near-far),0
     ];
   }
 }

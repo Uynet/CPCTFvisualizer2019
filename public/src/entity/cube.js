@@ -20,31 +20,44 @@ class Cube{
   }
   Init(){
     function ring(radius, width, segments) {
-      const pos = [];
-      const idx = [];
+      let pos = [];
+      let idx = [];
+      pos = [
+        0,0,0,//0
+        1,0,0,//1
+        0,1,0,//2
+        1,1,0,//3
+        0,0,1,//4
+        1,0,1,//5
+        0,1,1,//6
+        1,1,1,//7
+      ];
+      for(let i=0;i<pos.length;i++)pos[i]-=0.5;
+      idx=[
+        0,1,2, 1,2,3,
+        4,5,6, 5,6,7,
+        0,1,4, 1,4,5,
+        2,3,6, 3,6,7,
+        0,2,4, 2,4,6,
+        1,3,5, 3,5,7,
+      ]
 
-      for (let i = 0; i < segments; i++) {
-        const rad = Math.PI * 2 / segments * i;
-        const x = radius * Math.cos(rad);
-        const z = radius * Math.sin(rad);
-        pos.push(x, -width / 2, z);
-        pos.push(x, width / 2, z);
-      }
-      for (let i = 0; i < segments; i++) {
-        const a = 2 * i;
-        const b = 2 * i + 1;
-        const c = (2 * i + 2) % (2 * segments);
-        const d = (2 * i + 3) % (2 * segments);
-        idx.push(a, b, d);
-        idx.push(a, d, c);
-      }
       return [pos, idx];
     }
     const [vertices, index] = ring(this.radius, this.width, this.segments);
 
     // const vertices = SquareArray(1.0);//★頂点データ
     // const index = [0,1,2,1,2,3];      //★index
-    //const uv = SquareUVArray();
+    const uv = [ 
+      /*
+      0,0 ,1,0 , 0,1, 1,1 ,
+      0,0 ,1,0 , 0,1, 1,1 ,
+      0,0 ,1,0 ,
+      0,1, 1,1 ,
+      0,0 ,1,0 ,
+      0,1, 1,1 ,
+      */
+    ]
 
     this.buffers = [
       this.VBO = new Buffer(vertices,"position",3),
