@@ -1,6 +1,6 @@
 attribute vec3 position;
-//attribute vec2 uv;
-//varying vec2 vUV;
+attribute vec2 uv;
+varying vec2 vUV;
 uniform float time;
 uniform mat4 transformMatrix;
 uniform mat4 projMatrix;
@@ -22,6 +22,7 @@ varying vec3 pos;
 
 void main(){
   pos = position;
+  vUV = pos.xy+0.5;//uv;
 
   
   // float a = time * 0.00;// * pos.z * 0.1 * pos.y;

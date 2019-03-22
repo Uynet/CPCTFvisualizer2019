@@ -57,11 +57,12 @@ function Clock(){
   let hh = String(Math.floor(ms / 3600000) + 100).substring(1);
   let mm = String(Math.floor((ms - hh * 3600000)/60000)+ 100).substring(1);
   let ss = String(Math.floor((ms - hh * 3600000 - mm * 60000)/1000)+ 100).substring(1);
-  let sss= String(ms%1000+1000);
+  let sss= String(ms%1000+1000).substring(1,3);
   let text =  "["
-    +hh+":"+mm+":"+ss + ":" + sss.substring(1,3)
+    +hh+":"+mm+":"+ss + ":" + sss
    +"]";
   document.getElementById("main").innerHTML = text;
+  //document.getElementById("main").style.color = "#ff0000";
 }
 //main loop
 function Run(){

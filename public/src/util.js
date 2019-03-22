@@ -146,17 +146,6 @@ const normalize = v=>{
   v.y /= a;
   v.z /= a;
 return v;
-}//正規化
-const scala = (a,v)=>{
-  return {
-    x:v.x * a,
-    y:v.y * a,
-  }
-}
-const argument = (v)=>{
-  let a = Math.atan(v.y/v.x);
-  if(v.x<0) a += Math.PI;
-  return a;
 }
 const dot = (v1,v2)=>{
   let d = 
@@ -256,7 +245,7 @@ const GetTransformMatrix = (pos)=>{
     1,0,0,0,
     0,1,0,0,
     0,0,1,0,
-    -pos.x,-pos.y,-pos.z,1
+    pos.x,pos.y,pos.z,1
   ];
 }
 const IdMat = [
