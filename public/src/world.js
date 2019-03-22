@@ -15,6 +15,8 @@ class World{
     this.Add(new Ring(vec3(0), 24, 0.3, 128));
     this.Add(new TextBox("CPCTF",vec3(0,1,0)));
 
+    this.Add(new Cube(vec3(0, 0, 0)));
+
   }
   Add(entity){
     this.entities.push(entity);

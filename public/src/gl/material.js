@@ -32,6 +32,7 @@ class Material{
         this.CreateProgram("user","user.vert","user.frag"),
         this.CreateProgram("floor","floor.vert","floor.frag"),
         this.CreateProgram("ring","ring.vert","ring.frag"),
+        this.CreateProgram("cube","cube.vert","cube.frag"),
         this.CreateProgram("ico","ico.vert","ico.frag"),
         this.CreateProgram("character","character.vert","character.frag"),
         this.CreateProgram("text","text.vert","text.frag"),
