@@ -4,3 +4,4 @@ package-lock.json
 memo.md
 .eslint.rc
 .gitignore
+public/resource/Fonts/*
