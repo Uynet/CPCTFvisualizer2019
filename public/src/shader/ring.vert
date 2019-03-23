@@ -15,7 +15,7 @@ float atan2(vec2 p){
     return p.x == 0.0 ? sign(p.y)*PI/2. : atan(p.y, p.x);
 }
 float func(float x){
-  if(abs(sin(x*3.0))<0.90)return 200.0;
+  if(abs(sin(x*3.0))<0.20)return 200.0;
   else return 0.2;
 
 }

@@ -1,6 +1,7 @@
 class Ico{
-  constructor(pos){
+  constructor(pos,size){
     this.pos = pos;
+    this.size= size;
     this.buffers;
     this.program = Material.GetProgram("ico");
     const self = this;
@@ -8,6 +9,7 @@ class Ico{
     this.primitiveType = "LINES";
     this.Init();
     //uniform変数名、型、代入する値を返す関数
+    this.drawObject.AddUniform("size","1f",()=>{return self.size});
     this.drawObject.AddUniform("time","1f",()=>{return globalTime});
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});

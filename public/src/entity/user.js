@@ -1,20 +1,23 @@
 class User{
   constructor(userdata){
+    this.type = "user";
     this.pos = vec3(0,1,0);
-    this.unko = Math.random()*16+1;
+    this.r = Math.random()*16+1;
     this.localTime = 0 + Rand(16000);
-    this.pos.x = Math.sin(this.localTime*0.004)*this.unko;
-    this.pos.z = Math.cos(this.localTime*0.004)*this.unko;
     let p = copy(this.pos);
-    //p.y = this.pos.y + 40;
     this.name = userdata.name;
     this.score= userdata.score+"";
     this.scoreText = new TextBox(this.score,p);
-    this.nameText = new TextBox(this.name,this.pos);
+    this.nameText = new TextBox(this.name,p);
     this.scoreText.SetParent(this);
     this.nameText.SetParent(this);
-
     this.cube = new Cube(p);
+
+    this.children = [];
+    this.children.push(this.socreText);
+    this.children.push(this.nameText);
+    this.children.push(this.cube);
+
 
     this.buffers;
     this.program = Material.GetProgram("user");
@@ -50,13 +53,22 @@ class User{
 
     this.drawObject = new DrawObject(this.buffers,this.program);
     this.drawObject.Init(this);
+    this.phi = Rand(3)
+    this.theta = Rand(3)
   }
 
+  GetScore(score){
+    this.cube.SetSize(Math.sqrt(this.score)/40.0);
+  }
   Update(){
     this.localTime++;
-    let speed = 0.008 - this.cube.size*0.001;
-    this.pos.x = Math.sin(this.localTime*speed)*this.unko;
-    this.pos.z = Math.cos(this.localTime*speed)*this.unko;
+    let speed = 0.005/this.cube.size;
+    this.phi += speed*0.36 * Math.sin(this.r);
+    this.theta += speed * Math.sin(this.r);
+    //適当に飛び回っとく
+    this.pos.x = this.r * Math.sin(this.phi)*Math.sin(this.theta);
+    this.pos.y = this.r * Math.cos(this.phi);
+    this.pos.z = this.r * Math.sin(this.phi)*Math.cos(this.theta);
 
     let pos = copy(this.pos);
     this.cube.SetPos(pos);
@@ -65,9 +77,10 @@ class User{
     this.nameText.SetPos(pos);
     pos.y -= 0.7;
     this.scoreText.SetPos(pos);
+
+    this.cube.Update();
     this.nameText.Update();
     this.scoreText.Update();
-    this.cube.Update();
   }
   Draw(){
     this.drawObject.Draw();

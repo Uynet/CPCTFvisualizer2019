@@ -1,9 +1,9 @@
 //立方体
 //とりあえずringをだしている
 class Cube{
-  constructor(pos, size = 1, width = 0.3, segments = 32){
+  constructor(pos){
     this.pos = pos;
-    this.size= Math.random()*5;
+    this.size= 0.75;
     this.buffers;
     this.program = Material.GetProgram("cube");
     const self = this;
@@ -16,6 +16,10 @@ class Cube{
     this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture("trap")});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
     this.drawObject.AddUniform("size","1f",()=>{return self.size});
+  }
+  SetSize(size){
+    this.size= 0.25;
+    //this.size = size
   }
   SetPos(pos){
     this.pos = copy(pos);
