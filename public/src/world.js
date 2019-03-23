@@ -1,6 +1,7 @@
 class World{
   constructor(){
     this.entities = [];
+    this.userList = [];
     this.mainCamera;
   };
   async Init(){
@@ -8,18 +9,24 @@ class World{
     this.mainCamera = new Camera();
     this.Add(this.mainCamera);
 
-    this.Add(new Floor(vec3(0,-3,0)));//floor
-    this.Add(new Floor(vec3(0,3,0)));//ceil
-    this.Add(new Ico(vec3(0)));//正二十面体
+    this.Add(new Floor(vec3(0,-6,0)));//floor
+    this.Add(new Floor(vec3(0,6,0)));//ceil
+    this.Add(new Ico(vec3(0),36));//正二十面体
+    this.Add(new Ico(vec3(0),2));//正二十面体
+    this.Add(new Ico(vec3(0),52));//正二十面体
+    this.Add(new Ring(vec3(0,-24,0), 3, 0.3, 16));
+    this.Add(new Ring(vec3(0,+24,0), 3, 0.3, 16));
     this.Add(new Ring(vec3(0), 3, 0.3, 64));
+    this.Add(new Ring(vec3(0,4,0), 18, 0.3, 64));
+    this.Add(new Ring(vec3(0,-4,0), 18, 0.3, 64));
     this.Add(new Ring(vec3(0), 24, 0.3, 128));
-    this.Add(new TextBox("CPCTF",vec3(0,1,0)));
+    this.Add(new TextBox("CPCTF",vec3(0,0,0)));
 
     for(let i=0;i<10;i++){
       const u = {
         name : "Test"+i,
         id : i,
-        score: Dice(4000),
+        score: 100,
       }
       this.Add(new User(u));
     }
@@ -27,10 +34,26 @@ class World{
   }
   Add(entity){
     this.entities.push(entity);
+    switch(entity.type){
+      case  "user" : this.userList.push(entity); break;
+      default : break;
+    }
   };
   Update(){
-    //if(globalTime%20 == 19 && globalTime < 150)Event.onAddUser(Math.random());
     this.entities.forEach(e=>e.Update());
+    let l = this.userList.length;
+    if(globalTime%200 == 199){
+      this.mainCamera.SetFocus(this.userList[Dice(l)]);
+      //50パーくらいの確率で得点ゲット
+      this.userList.forEach(
+        e=>{
+          if(Dice(10)<2){
+            let score = Dice(100);
+            e.GetScore(score);
+          }
+        }
+      );
+    }
     this.Draw();
   }
   Draw(){

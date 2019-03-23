@@ -57,8 +57,8 @@ function Clock(){
   let mm = String(Math.floor((ms - hh * 3600000)/60000)+ 100).substring(1);
   let ss = String(Math.floor((ms - hh * 3600000 - mm * 60000)/1000)+ 100).substring(1);
   let sss= String(ms%1000+1000).substring(1,3);
-  //if(sss>95)ss=ss[0]+"-";
-  //if(sss>97)ss=ss[0]+"_";
+  if(sss>95)ss=ss[0]+"i";
+  if(sss>97)ss=ss[0]+"l";
   if(ms<0){
     document.getElementById("main").style.color = "#fd107a";
     hh = mm = ss = sss = "00";

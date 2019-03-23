@@ -5,6 +5,7 @@ uniform float time;
 uniform mat4 transformMatrix;
 uniform mat4 projMatrix;
 uniform mat4 viewMatrix;
+uniform float size;
 varying float depth;
 varying vec3 pos;
 varying vec3 posuv;
@@ -26,7 +27,7 @@ float func(float x){
 void main(){
   pos = position;
   posuv = pos;
-  pos *= 36.0;
+  pos *= size;
   radius = length(pos);
   fTime = time;
   gl_Position = 

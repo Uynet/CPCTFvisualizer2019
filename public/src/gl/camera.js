@@ -17,30 +17,47 @@ class Camera{
     this.r = 8;
     this.phi = Math.PI/2.0;
     this.theta = Math.PI;
+
+    this.focusedUser;
   }
-  Update(){
-    if(K.s() ) this.r += 0.1;
-    if(K.w() ) this.r -= 0.1;
+  //あるuserを追跡
+  SetFocus(user){
+    cl("focut:"+user.name);
+    this.focusedUser = user;
+  }
+  FocusOn(){
+    this.pos = copy(this.focusedUser.pos);
+    let v = normalize(copy(this.pos));
+    let s = this.focusedUser.cube.size;
+    s *= 3.0+Math.sin(globalTime*0.01)*0.5;
+
+    this.pos.x += v.x*s;
+    this.pos.y += v.y*s;
+    this.pos.z += v.z*s;
+  }
+  Input(){
+    if(K.s() ) this.r *= 1.05;
+    if(K.w() ) this.r *= 0.95;
     if(K.right() ) this.theta -= 0.03;
     if(K.left()  ) this.theta += 0.03;
     if(K.up() ) this.phi += 0.03;
     if(K.down() ) this.phi -= 0.03;
-    this.phi = Math.max(this.phi,0.01);
+  }
+  Update(){
+    this.Input();
+    this.phi = Math.max(this.phi,0.0001);
     this.phi = Math.min(this.phi,Math.PI);
-
     this.theta += 0.002;
-
     this.pos.x = this.r * Math.sin(this.phi)*Math.sin(this.theta);
     this.pos.y = this.r * Math.cos(this.phi);
     this.pos.z = this.r * Math.sin(this.phi)*Math.cos(this.theta);
-
+    if(this.focusedUser!==undefined)this.FocusOn();
 
     this.forward.x = this.pos.x;
     this.forward.y = this.pos.y;
     this.forward.z = this.pos.z;
     this.forward = normalize(this.forward);
     this.up = vec3(0,1,0);
-
   }
   Draw(){/*Nothing to do*/}
   GetViewMatrix(){
