@@ -13,8 +13,6 @@ class Ico{
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture("trap")});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
-    cl(gl.getParameter(gl.LINE_WIDTH));
-    cl(gl.getParameter(gl.ALIASED_LINE_WIDTH_RANGE));
   }
   Init(){
     const [vertices, index] = ico();

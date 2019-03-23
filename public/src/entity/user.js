@@ -14,6 +14,8 @@ class User{
     this.scoreText.SetParent(this);
     this.nameText.SetParent(this);
 
+    this.cube = new Cube(p);
+
     this.buffers;
     this.program = Material.GetProgram("user");
     const self = this;
@@ -52,19 +54,25 @@ class User{
 
   Update(){
     this.localTime++;
-    this.pos.x = Math.sin(this.localTime*0.004)*this.unko;
-    this.pos.z = Math.cos(this.localTime*0.004)*this.unko;
+    let speed = 0.008 - this.cube.size*0.001;
+    this.pos.x = Math.sin(this.localTime*speed)*this.unko;
+    this.pos.z = Math.cos(this.localTime*speed)*this.unko;
 
     let pos = copy(this.pos);
+    this.cube.SetPos(pos);
+    pos.y -= this.cube.size*0.5;
+    pos.y -= 0.7
     this.nameText.SetPos(pos);
     pos.y -= 0.7;
     this.scoreText.SetPos(pos);
     this.nameText.Update();
     this.scoreText.Update();
+    this.cube.Update();
   }
   Draw(){
     this.drawObject.Draw();
     this.nameText.Draw();
     this.scoreText.Draw();
+    this.cube.Draw();
   };
 }

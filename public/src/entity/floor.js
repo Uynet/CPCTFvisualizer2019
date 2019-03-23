@@ -1,6 +1,7 @@
 //格子状の床
-class Floor{
+class Floor{// extends Entity{
   constructor(pos){
+    //super();
     this.pos = pos;
     this.buffers;
     this.program = Material.GetProgram("floor");
@@ -12,8 +13,8 @@ class Floor{
     this.drawObject.AddUniform("time","1f",()=>{return globalTime});
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
+    this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
     this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture("trap")});
-    this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});//これでいいのかな..
   }
   Init(){
     const vertices = SquareArray(10.0);

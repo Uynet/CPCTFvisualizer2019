@@ -72,7 +72,7 @@ class Uniform{
       case "1f" : program.Uniform1f(this.name,this.getter()); break;
       case "mat4" : program.UniformMatrix4fv(this.name,this.getter());break;
       case "texture" : program.UniformTexture(this.name,this.getter());break;
-      default : cl("うんこもりもり森鴎外");
+      default : cl("うんこもりもり森鴎外:"+this.type);
     }
   }
 }
