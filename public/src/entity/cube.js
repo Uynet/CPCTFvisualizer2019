@@ -1,11 +1,9 @@
 //立方体
 //とりあえずringをだしている
 class Cube{
-  constructor(pos, radius = 1, width = 0.3, segments = 32){
+  constructor(pos, size = 1, width = 0.3, segments = 32){
     this.pos = pos;
-    this.radius = radius;
-    this.width = width;
-    this.segments = segments;
+    this.size= Math.random()*5;
     this.buffers;
     this.program = Material.GetProgram("cube");
     const self = this;
@@ -17,6 +15,10 @@ class Cube{
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture("trap")});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
+    this.drawObject.AddUniform("size","1f",()=>{return self.size});
+  }
+  SetPos(pos){
+    this.pos = copy(pos);
   }
   Init(){
     function ring(radius, width, segments) {
@@ -32,7 +34,9 @@ class Cube{
         0,1,1,//6
         1,1,1,//7
       ];
-      for(let i=0;i<pos.length;i++)pos[i]-=0.5;
+      for(let i=0;i<pos.length;i++){
+        pos[i]-=0.5;
+      }
       idx=[
         0,1,2, 1,2,3,
         4,5,6, 5,6,7,
