@@ -6,6 +6,10 @@ let canvas;
 let globalTime = 0;
 let isPause = false;
 
+let frame = [
+  "[*ˊ-ˋ*]",
+  "(*ˊ-ˋ*)",
+];
 /* ☆Entrypoint☆ */
 (()=>{
   Init();
@@ -68,10 +72,20 @@ function Clock(){
    +"]";
   document.getElementById("main").innerHTML = text;
 }
+function TitileAnimation(){
+  let title = document.getElementById("title");
+  let t = 8;
+  if(globalTime%t==0){
+    let s = (globalTime/t)%frame.length;
+    title.innerHTML = frame[s];
+  }
+}
+
 //main loop
 function Run(){
   requestAnimationFrame(Run);
   Clock();
+  TitileAnimation();
   if(!isPause){
     world.Update();
     globalTime++;

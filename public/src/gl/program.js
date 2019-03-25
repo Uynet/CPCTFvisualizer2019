@@ -4,7 +4,6 @@ class Program{
     this.fragpath= fragpath;
     if(vertpath.split(".")[1]!="vert")alert("invalid vshader path:"+vertpath)
     if(fragpath.split(".")[1]!="frag")alert("invalid fshader path:"+fragpath)
-    this.textures = [];
   }
   async Init(){
     return new Promise(resolve=>{
@@ -34,9 +33,6 @@ class Program{
         });
     });
   }
-  AddTexture(texture){
-    this.textures.push(texture);
-  }
   Compile(shader,path){
     gl.compileShader(shader);
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
@@ -50,10 +46,8 @@ class Program{
   UniformTexture(name,tex){
     if(!tex)alert("invalid texture:"+name);
     this.Use();
-    /*
     gl.activeTexture(gl.TEXTURE0+tex.slot);
-    for(let i = 0 ;i < 100 ;i++) tex.Bind();
-    */
+    tex.Bind();
     let location = gl.getUniformLocation(this.shaderProgram, name);
     gl.uniform1i(location,tex.slot);
     this.Release();
