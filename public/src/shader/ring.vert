@@ -32,17 +32,19 @@ void main(){
   amp *= 0.02;
 
   pos.y += amp*sin(t*f-time*0.10);
+  /*
     mat4 rot = mat4(
       1. , 0. , 0. , 0. ,
       0, cos(a) , -sin(a) , 0. ,
       0, sin(a) , cos(a) , 0. ,
       0. , 0. , 0. , 1. 
-    );
+  );
+  */
   gl_Position = 
     projMatrix *
     viewMatrix * 
     transformMatrix * 
-    rot*
+    //rot*
     vec4(pos,1);
     
 

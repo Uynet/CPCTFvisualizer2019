@@ -62,6 +62,8 @@ void main(){
       );
   float po=depth/100.;
   grad = mix(grad,vec3(1),po);
+  vec3 gray = vec3((grad.x + grad.y + grad.z)/3.0);
+  //grad = mix(gray,grad,(pow(sin(fTime*0.03),8.0)));
   gl_FragColor = vec4(grad,1.0);
   return;
   /*

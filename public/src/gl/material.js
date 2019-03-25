@@ -1,7 +1,7 @@
 //テクスチャスロットの割当の為に存在している
 let currentSlot = 0;
 const assignSlot = (texture)=>{
-  if(currentSlot > gl.getParameter(gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS)){
+  if(currentSlot => gl.getParameter(gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS)){
     currentSlot = 0;
     cl("over slot");
     //return;

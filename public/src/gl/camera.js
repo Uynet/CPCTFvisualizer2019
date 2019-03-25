@@ -29,7 +29,7 @@ class Camera{
     this.pos = copy(this.focusedUser.pos);
     let v = normalize(copy(this.pos));
     let s = this.focusedUser.cube.size;
-    s *= 3.0+Math.sin(globalTime*0.01)*0.5;
+    s *= 6.0+Math.sin(globalTime*0.01)*0.5;
 
     this.pos.x += v.x*s;
     this.pos.y += v.y*s;
