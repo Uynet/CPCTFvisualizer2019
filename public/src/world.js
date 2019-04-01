@@ -22,6 +22,8 @@ class World{
     this.Add(new Ring(vec3(0), 24, 0.3, 128));
     this.Add(new TextBox("CPCTF",vec3(0,0,0)));
 
+    this.Add(new Ripple(vec3(0,-1.5,-4)));
+
     for(let i=0;i<30;i++){
       const u = {
         name : "Test"+i,
