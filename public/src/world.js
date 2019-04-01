@@ -22,8 +22,6 @@ class World{
     this.Add(new Ring(vec3(0), 24, 0.3, 128));
     this.Add(new TextBox("CPCTF",vec3(0,0,0)));
 
-    this.Add(new Ripple(vec3(0,-1.5,-4)));
-
     for(let i=0;i<30;i++){
       const u = {
         name : "Test"+i,
@@ -42,6 +40,13 @@ class World{
     }
   };
   Update(){
+    // rippleテスト用
+    if (K.justPressed("Enter")) {
+      this.Add(new Ripple(vec3(Rand(4), Rand(1), Rand(4))));
+    }
+    K.step();
+
+
     gl.clearColor(0.999,0.98,1.00,1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     this.entities.forEach(e=>{

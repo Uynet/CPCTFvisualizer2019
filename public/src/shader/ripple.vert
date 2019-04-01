@@ -10,5 +10,5 @@ void main() {
     projMatrix *
     viewMatrix * 
     transformMatrix * 
-    vec4(position, 1);
+    vec4(position * size, 1);
 }
