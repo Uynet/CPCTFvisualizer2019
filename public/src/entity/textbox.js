@@ -13,13 +13,7 @@ class TextBox{
     this.textTexture = await Material.CreateTextureByString(this.text);
 
     const vertices = SquareArray(1.0);
-    //const uv = SquareUVArray();
-    const uv = [
-      0.0 , 0.0 ,
-      1.0 , 0.0 ,
-      0.0 , 1.0 ,
-      1.0 , 1.0 ,
-    ];
+    const uv = SquareUVArray();
 
     this.buffers = [
       this.VBO = new Buffer(vertices,"position",3),
@@ -38,11 +32,11 @@ class TextBox{
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
     this.drawObject.AddUniform("rotMatrix", "mat4", ()=>{
       //ビュー変換行列の回転成分の逆行列(交代行列なので転置)を渡す。
-      //(ほんとに正しいのかこれ？)
+      //が、なんか上下が反転してしまうのでそれも修正する
       const v = world.mainCamera.GetViewMatrix();
       return [
         v[0], v[4], v[8], 0,
-        v[1], v[5], v[9], 0,
+        -v[1], -v[5], -v[9], 0,
         v[2], v[6], v[10], 0,
         0, 0, 0, 1
       ];
