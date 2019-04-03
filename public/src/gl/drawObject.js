@@ -35,7 +35,10 @@ class DrawObject{
   }
   Draw(){
     this.program.Use();
-    this.VBO.Bind();
+    //this.VBO.Bind();
+    this.buffers.forEach(buffer=>{
+      buffer.Bind();
+    });
 
     this.SendUniform();
 
