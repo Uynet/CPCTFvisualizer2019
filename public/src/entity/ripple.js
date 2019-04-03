@@ -1,9 +1,10 @@
 class Ripple {
-  // 場所, 向き(回転行列), 最大サイズ, 拡大時間, 拡大後生存時間
-  constructor(pos, rot, maxSize = 1, expandFrame = 10, lastFrame = 5) {
+  // 場所, 向き(回転行列), 開始サイズ, 終了サイズ, 拡大時間, 拡大後生存時間
+  constructor(pos, rot, startSize = 0.5, endSize = 1.0, expandFrame = 10, lastFrame = 5) {
     this.pos = pos;
     this.rot = rot;
-    this.maxSize = maxSize;
+    this.startSize = startSize;
+    this.endSize = endSize;
     this.expandFrame = expandFrame;
     this.lastFrame = lastFrame;
 
@@ -42,7 +43,7 @@ class Ripple {
     this.drawObject.AddUniform("trap", "texture", ()=>{return Material.GetTexture("trap")});
   }
   getSize() {
-    return Math.min(1, Math.pow(this.frameCount / this.expandFrame, 2)) * this.maxSize;
+    return this.startSize + Math.min(1, Math.pow(this.frameCount / this.expandFrame, 2)) * (this.endSize - this.startSize);
   }
   Update() {
     this.frameCount++;
