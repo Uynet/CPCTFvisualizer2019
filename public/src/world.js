@@ -46,7 +46,7 @@ class World{
       const v = world.mainCamera.GetViewMatrix();
       const rot = [
         v[0], v[4], v[8], 0,
-        v[1], v[5], v[9], 0,
+        -v[1], -v[5], -v[9], 0,
         v[2], v[6], v[10], 0,
         0, 0, 0, 1
       ];
