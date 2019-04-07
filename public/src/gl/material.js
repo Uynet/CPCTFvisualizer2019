@@ -3,7 +3,7 @@ let currentSlot = 0;
 const assignSlot = (texture)=>{
   if(currentSlot => gl.getParameter(gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS)){
     currentSlot = 0;
-    cl("over slot");
+    //cl("over slot");
     //return;
   }
   texture.SetSlot(currentSlot);
