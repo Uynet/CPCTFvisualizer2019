@@ -10,7 +10,7 @@ class TextBox{
     this.Init();
   }
   async Init(){
-    this.textTexture = await Material.CreateTextureByString(this.text);
+    await this.SetTextTexture(this.text);
 
     const vertices = SquareArray(1.0);
     const uv = SquareUVArray();
@@ -44,6 +44,10 @@ class TextBox{
     this.drawObject.AddUniform("trap","texture",()=>{return self.textTexture});
     this.onReady = true;
   };
+  async SetTextTexture(text){
+    this.text = text;
+    this.textTexture = await Material.CreateTextureByString(this.text);
+  }
   getLocalTime(){
     if(this.parent!==undefined)return this.parent.localTime;
     else return globalTime;
