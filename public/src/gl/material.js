@@ -36,6 +36,7 @@ class Material{
         this.CreateProgram("ico","ico.vert","ico.frag"),
         this.CreateProgram("character","character.vert","character.frag"),
         this.CreateProgram("text","text.vert","text.frag"),
+        this.CreateProgram("ripple","ripple.vert","ripple.frag"),
         this.CreateTexture("trap","resource/img/000.png"), 
       ]
     )

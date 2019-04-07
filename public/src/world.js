@@ -37,6 +37,22 @@ class World{
     }
   };
   Update(){
+    // rippleテスト用です
+    if (K.justPressed("Enter")) {
+      //とりあえず初期状態はカメラ方向を向くようにしてみる(ビルボードではありません)
+      const v = world.mainCamera.GetViewMatrix();
+      const rot = [
+        v[0], v[4], v[8], 0,
+        -v[1], -v[5], -v[9], 0,
+        v[2], v[6], v[10], 0,
+        0, 0, 0, 1
+      ];
+      //波紋エフェクト追加
+      this.Add(new Ripple(vec3(Rand(4), Rand(1), Rand(4)), rot));
+    }
+    K.step();
+
+
     gl.clearColor(0.999,0.98,1.00,1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
       //たまに得点イベントを発生させる(debug)
