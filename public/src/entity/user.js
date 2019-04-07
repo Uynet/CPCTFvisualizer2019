@@ -29,17 +29,6 @@ class User{
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
     this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture("trap")});
-    /*
-    this.drawObject.AddUniform("billMatrix","mat4",()=>{
-      const po = 
-      LockAt(
-        self.pos,//eye
-        sub(world.mainCamera.pos , self.pos),//for
-        vec3(0,1,0)//up
-      )
-      return po;
-    });
-    */
   }
   Init(){
     const uv = SquareUVArray();
@@ -58,9 +47,9 @@ class User{
   }
 
   GetScore(score){
-    cl(this.score);
     this.score += score;
     this.cube.SetSize(Math.sqrt(this.score)/40.0);
+    this.scoreText.SetTextTexture(this.score+"");
   }
   Update(){
     this.localTime++;
