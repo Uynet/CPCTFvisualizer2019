@@ -6,8 +6,8 @@ class User{
     this.localTime = 0 + Rand(16000);
     let p = copy(this.pos);
     this.name = userdata.name;
-    this.score= userdata.score+"";
-    this.scoreText = new TextBox(this.score,p);
+    this.score= userdata.score;
+    this.scoreText = new TextBox(this.score+"",p);
     this.nameText = new TextBox(this.name,p);
     this.scoreText.SetParent(this);
     this.nameText.SetParent(this);
@@ -58,6 +58,8 @@ class User{
   }
 
   GetScore(score){
+    cl(this.score);
+    this.score += score;
     this.cube.SetSize(Math.sqrt(this.score)/40.0);
   }
   Update(){

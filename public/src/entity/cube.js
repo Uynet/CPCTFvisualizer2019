@@ -18,8 +18,7 @@ class Cube{
     this.drawObject.AddUniform("size","1f",()=>{return self.size});
   }
   SetSize(size){
-    this.size= 0.25;
-    //this.size = size
+    this.size = size
   }
   SetPos(pos){
     this.pos = copy(pos);
