@@ -43,6 +43,7 @@ class User{
 
     this.Texture = await Material.CreateTextureByURL(this.icon_url);
     this.cube.Init();
+    this.cube.SetSize(Math.sqrt(this.score)/40.0);
 
     const self = this;
     this.drawObject.AddUniform("time","1f",()=>{return globalTime});
