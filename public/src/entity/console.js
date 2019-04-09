@@ -1,9 +1,9 @@
-class TextBox{
-  constructor(text,pos){
-    this.pos = pos;
+class Console{
+  constructor(text){
+    //this.pos = pos;
     this.text = text
     this.buffers;
-    this.program = Material.GetProgram("text");
+    this.program = Material.GetProgram("console");
     this.onReady = false;
     this.primitiveType = "ELEMENTS";
     this.Init();
