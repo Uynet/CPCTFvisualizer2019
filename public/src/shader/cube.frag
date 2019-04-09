@@ -17,9 +17,7 @@ void main(){
   vec3 col = black;
   vec4 tex = texture2D(trap,uv);
   float alpha = 1.0-depth/90.0;
-
   gl_FragColor = tex;
-  return;
-  if(tex.w<0.01)gl_FragColor = vec4(0.58,0.08,1.08,alpha);
-  else gl_FragColor = vec4(1);
+  //if(max(abs(uv.x-0.5),abs(uv.y-0.5))>0.45)discard;//gl_FragColor = vec4(0.58,0.08,1.08,alpha);
+  //else gl_FragColor = tex;
 }

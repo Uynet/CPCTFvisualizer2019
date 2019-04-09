@@ -14,11 +14,12 @@ class World{
     this.Add(new Ico(vec3(0),36));//正二十面体
     this.Add(new Ico(vec3(0),2));//正二十面体
     this.Add(new Ring(vec3(0), 12, 0.3, 64));
-    this.Add(new Ring(vec3(0,4,0), 18, 0.3, 64));
-    this.Add(new Ring(vec3(0,-4,0), 18, 0.3, 64));
+    //this.Add(new Ring(vec3(0,4,0), 18, 0.3, 64));
+    //this.Add(new Ring(vec3(0,-4,0), 18, 0.3, 64));
     this.Add(new Ring(vec3(0), 24, 0.3, 128));
     this.Add(new TextBox("CPCTF",vec3(0,0,0)));
 
+    /*
     for(let i=0;i<1;i++){
       const u = {
         name : "Test"+i,
@@ -28,6 +29,7 @@ class World{
       }
       this.Add(new User(u));
     }
+    */
 
   }
   Add(entity){
@@ -61,7 +63,7 @@ class World{
       let l = this.userList.length;
       let user = this.userList[Dice(l)];
       Event.GetScore(user,77);
-      //this.mainCamera.SetFocus(this.userList[0]);
+      //this.mainCamera.SetFocus(user);
     }
     this.entities.forEach(e=>{
       e.Update();

@@ -8,6 +8,7 @@ class Cube{
     this.program = Material.GetProgram("cube");
     this.parent;
     this.primitiveType = "ELEMENTS";
+    //this.primitiveType = "TRIANGLES";
     this.OnReady = false;
     //this.Init();
   }
@@ -21,51 +22,66 @@ class Cube{
     this.parent = parent;
   }
   Init(){
-    function ring(radius, width, segments) {
+    function cube() {
       let pos = [];
-      let idx = [];
       pos = [
+        //1
         0,0,0,//0
         1,0,0,//1
         0,1,0,//2
         1,1,0,//3
-        0,0,1,//4
-        1,0,1,//5
-        0,1,1,//6
-        1,1,1,//7
+        //2
+        0,0,1,
+        1,0,1,
+        0,1,1,
+        1,1,1,
+        //3
+        0,0,0,
+        1,0,0,
+        0,0,1,
+        1,0,1,
+        //4
+        0,1,0,
+        1,1,0,
+        0,1,1,
+        1,1,1,
+        //5
+        0,0,0,
+        0,1,0,
+        0,0,1,
+        0,1,1,
+        //6
+        1,0,0,
+        1,1,0,
+        1,0,1,
+        1,1,1,
       ];
       for(let i=0;i<pos.length;i++){
         pos[i]-=0.5;
       }
-      idx=[
-        0,1,2, 1,2,3,
-        4,5,6, 5,6,7,
-        0,1,4, 1,4,5,
-        2,3,6, 3,6,7,
-        0,2,4, 2,4,6,
-        1,3,5, 3,5,7,
-      ]
-
-      return [pos, idx];
+      return pos;
     }
-    const [vertices, index] = ring(this.radius, this.width, this.segments);
-
-    // const vertices = SquareArray(1.0);//★頂点データ
-    // const index = [0,1,2,1,2,3];      //★index
+    const vertices = cube();
+    const index = [
+      0,1,2, 1,2,3,
+      4,5,6, 5,6,7,
+      8,9,10, 9,10,11,
+      12,13,14, 13,14,15,
+      16,17,18, 17,18,19,
+      20,21,22, 21,22,23,
+    ];      //★index
     const uv = [ 
-      /*
       0,0 ,1,0 , 0,1, 1,1 ,
       0,0 ,1,0 , 0,1, 1,1 ,
-      0,0 ,1,0 ,
-      0,1, 1,1 ,
-      0,0 ,1,0 ,
-      0,1, 1,1 ,
-      */
+      0,0 ,1,0 , 0,1, 1,1 ,
+      0,0 ,1,0 , 0,1, 1,1 ,
+      0,0 ,1,0 , 0,1, 1,1 ,
+      0,0 ,1,0 , 0,1, 1,1 ,
     ]
 
     this.buffers = [
       this.VBO = new Buffer(vertices,"position",3),
-      //this.UVAttr = new Buffer(uv,"uv",2),
+      this.UVAttr = new Buffer(uv,"uv",2),
     ]
     const self = this;
     this.drawObject = new DrawObject(this.buffers,this.program);

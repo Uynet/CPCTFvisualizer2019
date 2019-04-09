@@ -24,7 +24,7 @@ varying vec3 pos;
 
 void main(){
   pos = position;
-  vUV = pos.xy+0.5;//uv;
+  vUV = uv;
   pos *= size;
   //pos.xz*= size/1.6;
 
