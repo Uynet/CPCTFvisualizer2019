@@ -3,8 +3,8 @@ class Socket{
     this.socket = io.connect();
   }
   listen(){
-    this.socket.on("addUser", user => {
-      Event.onAddUser(user);
+    this.socket.on("addUser", userdata => {
+      Event.onAddUser(userdata);
     });
   }
   Emit(eventName,data){

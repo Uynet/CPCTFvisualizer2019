@@ -6,22 +6,19 @@ class Cube{
     this.size= 0.75;
     this.buffers;
     this.program = Material.GetProgram("cube");
-    const self = this;
+    this.parent;
     this.primitiveType = "ELEMENTS";
-    this.Init();
-    //uniform変数名、型、代入する値を返す関数
-    this.drawObject.AddUniform("time","1f",()=>{return globalTime});
-    this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
-    this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
-    this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture("trap")});
-    this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
-    this.drawObject.AddUniform("size","1f",()=>{return self.size});
+    this.OnReady = false;
+    //this.Init();
   }
   SetSize(size){
     this.size = size
   }
   SetPos(pos){
     this.pos = copy(pos);
+  }
+  SetParent(parent){
+    this.parent = parent;
   }
   Init(){
     function ring(radius, width, segments) {
@@ -70,14 +67,23 @@ class Cube{
       this.VBO = new Buffer(vertices,"position",3),
       //this.UVAttr = new Buffer(uv,"uv",2),
     ]
-
+    const self = this;
     this.drawObject = new DrawObject(this.buffers,this.program);
     this.drawObject.SetIBO(index);
+    //uniform変数名、型、代入する値を返す関数
+    this.drawObject.AddUniform("time","1f",()=>{return globalTime});
+    this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
+    this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
+    this.drawObject.AddUniform("trap","texture",()=>{return self.parent.Texture});
+    this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
+    this.drawObject.AddUniform("size","1f",()=>{return self.size});
+
     this.drawObject.Init(this);
+    this.OnReady = true;
   };
   Update(){
   }
   Draw(){
-    this.drawObject.Draw();
+    if(this.OnReady)this.drawObject.Draw();
   }
 }

@@ -324,3 +324,12 @@ const ico = ()=>{
   ];
   return [vertices,index];
 }
+//球面座標を入れると直交座標を返す
+const SphericalCoordToPosition = (r,theta,phi)=>{
+  let pos = vec3(
+    r * Math.sin(phi)*Math.sin(theta),
+    r * Math.cos(phi),
+    r * Math.sin(phi)*Math.cos(theta)
+  );
+  return pos;
+};

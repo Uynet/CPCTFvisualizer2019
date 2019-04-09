@@ -24,6 +24,7 @@ class World{
         name : "Test"+i,
         id : i,
         score: 100,
+        icon_url:"https://pbs.twimg.com/profile_images/992202907389853698/Fwpldgoq.jpg"
       }
       this.Add(new User(u));
     }
@@ -58,7 +59,8 @@ class World{
       //たまに得点イベントを発生させる(debug)
     if(globalTime%100 == 99){
       let l = this.userList.length;
-      this.userList[Dice(l)].GetScore(77);
+      let user = this.userList[Dice(l)];
+      Event.GetScore(user,77);
       //this.mainCamera.SetFocus(this.userList[0]);
     }
     this.entities.forEach(e=>{

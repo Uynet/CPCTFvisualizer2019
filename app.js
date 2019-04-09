@@ -33,7 +33,9 @@ const fetcher = new class{
   getUserInfo(){
     //多分新しく追加されたユーザーを取得するAPI?
     //const url = 'https://cpctf.site/api/1.0/users';
-    const url = "http://localhost:3000/api/users"
+    //これはユーザー一覧を取得するAPI
+    const url = "https://server.problem.cpctf.space/api/1.0/users" 
+    //const url = "http://localhost:3000/api/users"
     request(url, (error, response, body) => {
       if(!error && response.statusCode === 200){
         /*なんやかんやあってユーザーリストを手に入れる*/
@@ -43,7 +45,8 @@ const fetcher = new class{
           io.emit("addUser",{
             name:newUsers[user].name,
             id:newUsers[user].id,
-            score:newUsers[user].score
+            score:newUsers[user].score,
+            icon_url:newUsers[user].icon_url
           });
         };
       }else{
