@@ -43,7 +43,7 @@ class User{
 
     this.Texture = await Material.CreateTextureByURL(this.icon_url);
     this.cube.Init();
-    this.cube.SetSize(Math.sqrt(this.score)/40.0);
+    this.cube.SetSize(Math.sqrt(this.score)/20.0);
 
     const self = this;
     this.drawObject.AddUniform("time","1f",()=>{return globalTime});
@@ -55,7 +55,7 @@ class User{
   }
   GetScore(score){
     this.score += score;
-    this.cube.SetSize(Math.sqrt(this.score)/40.0);
+    this.cube.SetSize(Math.sqrt(this.score)/20.0);
     this.scoreText.SetTextTexture(this.score+"");
   }
   Update(){
@@ -64,10 +64,7 @@ class User{
     this.phi += speed*0.36 * Math.sin(this.r);
     this.theta += speed * Math.sin(this.r);
     //適当に飛び回っとく
-    this.pos.x = this.r * Math.sin(this.phi)*Math.sin(this.theta);
-    this.pos.y = this.r * Math.cos(this.phi);
-    this.pos.z = this.r * Math.sin(this.phi)*Math.cos(this.theta);
-
+    this.pos = SphericalCoordToPosition(this.r,this.theta,this.phi);
     let pos = copy(this.pos);
     this.cube.SetPos(pos);
     pos.y -= this.cube.size*0.5;
