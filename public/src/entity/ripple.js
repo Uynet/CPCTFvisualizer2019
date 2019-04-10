@@ -43,13 +43,13 @@ class Ripple {
     this.drawObject.AddUniform("trap", "texture", ()=>{return Material.GetTexture("trap")});
   }
   getSize() {
-    return this.startSize + Math.min(1, Math.pow(this.frameCount / this.expandFrame, 2)) * (this.endSize - this.startSize);
+    return this.startSize + Math.min(1, Math.pow(this.frameCount / this.expandFrame, 1)) * (this.endSize - this.startSize);
   }
   Update() {
     this.frameCount++;
     if (this.frameCount === this.expandFrame + this.lastFrame) {
       //消滅させる処理
-      console.log("消滅");
+      world.Remove(this);
     }
   }
   Draw() {
