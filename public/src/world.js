@@ -1,6 +1,7 @@
 class World{
   constructor(){
     this.entities = [];
+    this.entityRemoveSet = new Set();
     this.userList = [];
     this.mainCamera;
   };
@@ -39,6 +40,9 @@ class World{
       default : break;
     }
   };
+  Remove(entity) {
+    this.entityRemoveSet.add(entity);
+  }
   Update(){
     // rippleテスト用です
     if (K.justPressed("Enter")) {
@@ -69,6 +73,19 @@ class World{
       e.Update();
       e.Draw()
     });
+
+    if(this.entityRemoveSet.size > 0){
+      this.entities = this.entities.filter(e=>{
+        for(let re of this.entityRemoveSet){
+          if(e === re){
+            this.entityRemoveSet.delete(re);
+            return false;
+          }
+        }
+        return true;
+      });
+      this.entityRemoveSet.clear();
+    }
     //this.Draw();
     gl.flush();
   }
