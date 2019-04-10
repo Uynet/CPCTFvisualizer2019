@@ -62,7 +62,7 @@ class World{
     if(globalTime%100 == 99){
       let l = this.userList.length;
       let user = this.userList[Dice(l)];
-      Event.GetScore(user,77);
+      Event.GetScore(user,Math.floor(Math.random()*777));
       //this.mainCamera.SetFocus(user);
     }
     this.entities.forEach(e=>{
