@@ -47,7 +47,7 @@ class World{
     if (globalTime % 100 == 99) {
       let l = this.userList.length;
       let user = this.userList[Dice(l)];
-      Event.GetScore(user, Math.floor(Math.random() * 777));
+      EventManager.GetScore(user, Math.floor(Math.random() * 777));
       //this.mainCamera.SetFocus(user);
     }
     // rippleテスト用です
@@ -76,6 +76,8 @@ class World{
       e.Update();
       e.Draw()
     });
+
+    EventManager.ConsumeEvent();
 
     if(this.entityRemoveSet.size > 0){
       this.entities = this.entities.filter(e=>{
