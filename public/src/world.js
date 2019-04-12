@@ -44,11 +44,10 @@ class World{
   }
   Debug() {
     //たまに得点イベントを発生させる(debug)
-    if (globalTime % 100 == 99) {
+    if (globalTime % 300 == 299) {
       let l = this.userList.length;
       let user = this.userList[Dice(l)];
       EventManager.GetScore(user, Math.floor(Math.random() * 777));
-      //this.mainCamera.SetFocus(user);
     }
     // rippleテスト用です
     /*

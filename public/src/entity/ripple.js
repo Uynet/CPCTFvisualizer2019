@@ -1,6 +1,8 @@
 class Ripple {
   // 場所, 向き(回転行列), 開始サイズ, 終了サイズ, 拡大時間, 拡大後生存時間
-  constructor(pos, rot, startSize = 0.5, endSize = 1.0, expandFrame = 20, lastFrame = 5) {
+  constructor(pos, rot, startSize, endSize, expandFrame, lastFrame) {
+    if(expandFrame===undefined)expandFrame = 40;
+    if(lastFrame===undefined)lastFrame = 20;
     this.pos = pos;
     this.rot = rot;
     this.startSize = startSize;
@@ -45,9 +47,8 @@ class Ripple {
   }
   getSize() {
     //return this.startSize + Math.min(1, Math.pow(this.frameCount / this.expandFrame, 4)) * (this.endSize - this.startSize);
-    let x = this.frameCount/this.expandFrame;//maybe 0-1
     //let sizeWidth = (this.endSize - this.startSize);
-    return this.startSize * easeOut(x);
+    return this.endSize;
     //return this.startSize + sizeWidth * easeOut(x);
   }
   Update() {
