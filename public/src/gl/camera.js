@@ -22,18 +22,26 @@ class Camera{
   }
   //あるuserを追跡
   SetFocus(user){
-    cl("focut:"+user.name);
     this.focusedUser = user;
   }
   FocusOn(){
-    this.pos = copy(this.focusedUser.pos);
+    let p = copy(this.focusedUser.pos);
     let v = normalize(copy(this.pos));
     let s = this.focusedUser.cube.size;
     s *= 6.0+Math.sin(globalTime*0.01)*0.5;
 
-    this.pos.x += v.x*s;
-    this.pos.y += v.y*s;
-    this.pos.z += v.z*s;
+    p.x += v.x*s;
+    p.y += v.y*s;
+    p.z += v.z*s;
+    this.SetPos(p);
+  }
+  SetPos(pos){
+    let p = copy(pos);
+    let dist = copy(p); 
+    let a = 0.10;
+    this.pos.x += a*(dist.x - this.pos.x);  
+    this.pos.y += a*(dist.y - this.pos.y);  
+    this.pos.z += a*(dist.z - this.pos.z);  
   }
   Input(){
     if(K.s() ) this.r *= 1.05;
@@ -45,14 +53,14 @@ class Camera{
   }
   Update(){
     this.Input();
-    this.phi = Math.max(this.phi,0.0001);
-    this.phi = Math.min(this.phi,Math.PI);
-    this.theta += 0.002;
-    this.pos.x = this.r * Math.sin(this.phi)*Math.sin(this.theta);
-    this.pos.y = this.r * Math.cos(this.phi);
-    this.pos.z = this.r * Math.sin(this.phi)*Math.cos(this.theta);
     if(this.focusedUser!==undefined)this.FocusOn();
-
+    else {
+      this.phi = Math.max(this.phi, 0.0001);
+      this.phi = Math.min(this.phi, Math.PI);
+      this.theta += 0.002;
+      let p = SphericalCoordToPosition(this.r, this.theta, this.phi);
+      this.SetPos(p);
+    }
     this.forward.x = this.pos.x;
     this.forward.y = this.pos.y;
     this.forward.z = this.pos.z;
