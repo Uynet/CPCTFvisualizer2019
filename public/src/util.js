@@ -333,3 +333,10 @@ const SphericalCoordToPosition = (r,theta,phi)=>{
   );
   return pos;
 };
+const easeOut = (x)=>{
+  x = Math.min(Math.max(x,0),1);
+  let x_inv = 1-x;
+  let intence = 6;//収縮のはやさ
+  let y = 1-Math.pow(x_inv,intence);
+  return y; 
+}

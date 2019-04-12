@@ -16,6 +16,7 @@ const fetcher = new class{
     //デバッグ用なので後で消す
     const po = ()=>{
       this.getUserInfo();
+      //this.getProblemInfo();
     }
     function* gen(){
       let cnt = 0;
@@ -34,8 +35,8 @@ const fetcher = new class{
     //多分新しく追加されたユーザーを取得するAPI?
     //const url = 'https://cpctf.site/api/1.0/users';
     //これはユーザー一覧を取得するAPI
-    const url = "https://server.problem.cpctf.space/api/1.0/users" 
-    //const url = "http://localhost:3000/api/users"
+    //const url = "https://server.problem.cpctf.space/api/1.0/users" 
+    const url = "http://localhost:3000/api/users"
     request(url, (error, response, body) => {
       if(!error && response.statusCode === 200){
         /*なんやかんやあってユーザーリストを手に入れる*/
@@ -54,6 +55,16 @@ const fetcher = new class{
       }
     });
   }
+  getProblemInfo(){
+    const url = 'https://server.problem.cpctf.space/api/1.0/challenges';
+    request(url, (error, response, body) => {
+      if(!error && response.statusCode === 200){
+        console.log(response);
+      }else{
+        console.log(error);
+      };
+    });
+  };
 }
 fetcher.listen();
 
