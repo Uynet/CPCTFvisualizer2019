@@ -4,7 +4,7 @@ class Socket{
   }
   listen(){
     this.socket.on("addUser", userdata => {
-      Event.onAddUser(userdata);
+      EventManager.onAddUser(userdata);
     });
   }
   Emit(eventName,data){
