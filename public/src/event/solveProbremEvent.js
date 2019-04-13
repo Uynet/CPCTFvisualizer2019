@@ -14,7 +14,8 @@ class SolveProbremEvent extends Event {
       //波紋エフェクト追加
       //Ripple(pos,size,startsize,endsize,expandFlame,lastFrame)
       while(t++<8){
-      //  Audio.PlaySE("poyo",1,0.3 + t/8);
+        user.speed += 1.1;
+        Audio.PlaySE("poyo1",0.7,0.3 + t/8);
         rot = self.getRotMatrix();
         p = copy(user.pos);
         let amp = usersize * 2;
@@ -26,12 +27,13 @@ class SolveProbremEvent extends Event {
         yield;
         while (i++ < 5) yield; i=0;
       }
+      EventManager.Add(new CameraEffect(world.mainCamera));
+      while (i++ < 10) yield; i=0;
       EventManager.Add(new ConsoleEvent(user, score));
       user.GetScore(score);
       //デカイ
       Audio.PlaySE("bomb",1,0.7);
       rot = self.getRotMatrix();
-      EventManager.Add(new CameraEffect(world.mainCamera));
       p = copy(user.pos);
       world.Add(new Ripple(p, rot, 0, usersize * 10 ,120,3));
 
