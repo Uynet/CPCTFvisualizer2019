@@ -1,6 +1,7 @@
 class TextBox{
   constructor(text,pos){
     this.pos = pos;
+    this.type = "text";
     this.text = text
     this.buffers;
     this.program = Material.GetProgram("text");

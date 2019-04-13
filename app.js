@@ -32,11 +32,9 @@ const fetcher = new class{
     }, 1000*3);
   }
   getUserInfo(){
-    //多分新しく追加されたユーザーを取得するAPI?
-    //const url = 'https://cpctf.site/api/1.0/users';
     //これはユーザー一覧を取得するAPI
-    //const url = "https://server.problem.cpctf.space/api/1.0/users" 
-    const url = "http://localhost:3000/api/users"
+    //const url = "http://localhost:3000/api/users"
+    const url = "https://server.problem.cpctf.space/api/1.0/users" 
     request(url, (error, response, body) => {
       if(!error && response.statusCode === 200){
         /*なんやかんやあってユーザーリストを手に入れる*/

@@ -38,7 +38,8 @@ class Material{
         this.CreateProgram("text","text.vert","text.frag"),
         this.CreateProgram("console","console.vert","console.frag"),
         this.CreateProgram("ripple","ripple.vert","ripple.frag"),
-        this.CreateTexture("trap","resource/img/000.png"), 
+        //this.CreateTexture("trap","resource/img/000.png"), 
+        this.CreateTexture("trap","resource/img/trap.png"), 
       ]
     )
   }
