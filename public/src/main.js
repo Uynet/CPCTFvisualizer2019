@@ -11,17 +11,19 @@ let frame = [
 ];
 /* ☆Entrypoint☆ */
 (()=>{
-  Init();
-  Run();
+  Init().then(Run);
 })()
 
-function Init(){
-  gl = CreateGL();
-  websocket = new Socket();
-  websocket.listen(); 
-  Audio.Init();
-  world = new World();
-  world.Init();
+async function Init(){
+  return new Promise(resolve=>{
+    gl = CreateGL();
+    websocket = new Socket();
+    websocket.listen();
+    world = new World();
+    world.Init();
+    Audio.Init();
+    Audio.Load().then(resolve)
+  });
 }
 function CreateGL(){
   canvas = document.getElementById("canvas");

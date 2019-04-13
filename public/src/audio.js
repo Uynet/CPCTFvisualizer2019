@@ -19,25 +19,28 @@ class Audio{
       name : null,
       source : null,
     }
-    this.Load();
   };
   static LoadSE(name){
-    let url = "../resource/SE/" + name + ".wav";
-    let req = new XMLHttpRequest();
-    // array buffer を指定
-    req.responseType = 'arraybuffer';
-    req.onreadystatechange = ()=>{
-      if (req.readyState === 4) {
-        if (req.status === 0 || req.status === 200) {
-          // array buffer を audio buffer に変換
-          this.context.decodeAudioData(req.response,
-            (buffer)=>{this.SE[name] = buffer
-            });
-        }
-      }
-    }
-    req.open('GET', url, true);
-    req.send('');
+      return new Promise(resolve => {
+          let url = "../resource/SE/" + name + ".wav";
+          let req = new XMLHttpRequest();
+          // array buffer を指定
+          req.responseType = 'arraybuffer';
+          req.onreadystatechange = () => {
+              if (req.readyState === 4) {
+                  if (req.status === 0 || req.status === 200) {
+                      // array buffer を audio buffer に変換
+                      this.context.decodeAudioData(req.response,
+                          (buffer) => {
+                          this.SE[name] = buffer
+                          });
+                          resolve();
+                  }
+              }
+          }
+          req.open('GET', url, true);
+          req.send('');
+      })
   }
   // サウンドを再生
   static LowPassFadeOutBGM(){
@@ -81,9 +84,13 @@ class Audio{
       this.LowPassFadeOutBGM();
     }
   };
-  static Load() {
-      this.LoadSE('bomb');
-      this.LoadSE('poyo');
-      this.LoadSE('solve');
+  static async Load() {
+      console.info("★Loading..(>~<。)");
+      await this.LoadSE('bomb');
+      await this.LoadSE('poyo1');
+      await this.LoadSE('poyo2');
+      await this.LoadSE('solve');
+      console.info("★Complete!(c>▽<つ)");
+      return;
   };
 };
