@@ -55,8 +55,9 @@ class User{
   }
   GetScore(score){
     this.score += score;
+    score = Math.floor(this.score);
     this.cube.SetSize(Math.sqrt(this.score)/20.0);
-    this.scoreText.SetTextTexture(this.score+"");
+    this.scoreText.SetTextTexture(score + "");
   }
   Update(){
     this.localTime++;

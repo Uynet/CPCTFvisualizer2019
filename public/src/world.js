@@ -16,7 +16,7 @@ class World{
     this.Add(new Floor(vec3(0,0,0)));//ceil
     this.Add(new Ico(vec3(0),36));//正二十面体
     this.Add(new Ico(vec3(0),2));//正二十面体
-    this.Add(new Ring(vec3(0), 3, 0.3, 64));
+    this.Add(new Ring(vec3(0), 3, 0.4, 64));
     //this.Add(new Ring(vec3(0,4,0), 18, 0.3, 64));
     //this.Add(new Ring(vec3(0,-4,0), 18, 0.3, 64));
     this.Add(new Ring(vec3(0), 36, 0.3, 128));
