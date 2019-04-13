@@ -84,5 +84,6 @@ class Audio{
   static Load() {
       this.LoadSE('bomb');
       this.LoadSE('poyo');
+      this.LoadSE('solve');
   };
 };

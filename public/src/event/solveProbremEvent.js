@@ -10,10 +10,11 @@ class SolveProbremEvent extends Event {
       let usersize = user.cube.size;
       let rot;
       while (i++ < 50) yield; i = 0;
+      Audio.PlaySE("solve",1,1.0);
       //波紋エフェクト追加
       //Ripple(pos,size,startsize,endsize,expandFlame,lastFrame)
       while(t++<8){
-        Audio.PlaySE("poyo",1,0.3 + t/8);
+      //  Audio.PlaySE("poyo",1,0.3 + t/8);
         rot = self.getRotMatrix();
         p = copy(user.pos);
         let amp = usersize * 2;
@@ -25,7 +26,6 @@ class SolveProbremEvent extends Event {
         yield;
         while (i++ < 5) yield; i=0;
       }
-      while (i++ < 5) yield; i=0;
       EventManager.Add(new ConsoleEvent(user, score));
       user.GetScore(score);
       //デカイ
