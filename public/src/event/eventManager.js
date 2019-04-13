@@ -16,6 +16,5 @@ class EventManager{
     let text = user.name + " won " + score + " points!";
     cl(text);
     this.Add(new SolveProbremEvent(user,score));
-    //world.Add(new Console(text));
   }
 }
