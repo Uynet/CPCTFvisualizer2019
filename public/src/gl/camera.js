@@ -68,9 +68,7 @@ class Camera{
 
     this.pos = add(this.pos,this.quakeOffset);
 
-    this.forward.x = this.pos.x;
-    this.forward.y = this.pos.y;
-    this.forward.z = this.pos.z;
+    this.forward = copy(this.pos);
     this.forward = normalize(this.forward);
     this.up = vec3(0,1,0);
   }
