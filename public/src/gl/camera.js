@@ -2,6 +2,7 @@
 class Camera{
   constructor(){
     this.pos = vec3(0);
+    this.quakeOffset = vec3(0);
     //view
     this.forward = vec3(0,0,-1);
     this.up = vec3(0,1,0);
@@ -36,12 +37,10 @@ class Camera{
     this.SetPos(p);
   }
   SetPos(pos){
-    let p = copy(pos);
-    let dist = copy(p); 
-    let a = 0.10;
-    this.pos.x += a*(dist.x - this.pos.x);  
-    this.pos.y += a*(dist.y - this.pos.y);  
-    this.pos.z += a*(dist.z - this.pos.z);  
+    this.distPos = copy(pos);
+  }
+  Shake(){
+    cl("po")
   }
   Input(){
     if(K.s() ) this.r *= 1.05;
@@ -57,10 +56,18 @@ class Camera{
     else {
       this.phi = Math.max(this.phi, 0.0001);
       this.phi = Math.min(this.phi, Math.PI);
-      this.theta += 0.002;
+      //this.theta += 0.002;
       let p = SphericalCoordToPosition(this.r, this.theta, this.phi);
       this.SetPos(p);
     }
+
+    let a = 0.10;
+    this.pos.x += a*(this.distPos.x - this.pos.x);  
+    this.pos.y += a*(this.distPos.y - this.pos.y);  
+    this.pos.z += a*(this.distPos.z - this.pos.z);  
+
+    this.pos = add(this.pos,this.quakeOffset);
+
     this.forward.x = this.pos.x;
     this.forward.y = this.pos.y;
     this.forward.z = this.pos.z;
