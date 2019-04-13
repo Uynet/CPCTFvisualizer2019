@@ -33,7 +33,10 @@ void grid(){
 
 void main(){
   vec2 uv = vUV;
-  vec3 grad = vec3((1.0-uv.y)*2.,1.0-uv.x*4.,1.0-(1.0-uv.y)*0.9);
+  float r =  1.0-uv.x*4.0;
+  float g =  1.0-(1.0-uv.y)*0.3;
+  float b =  (1.0-uv.y)*2.0;
+  vec3 grad = vec3(r,g,b);
   grad *= 0.8;
   uv -= 0.5;
 

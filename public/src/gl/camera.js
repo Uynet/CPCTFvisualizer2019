@@ -66,7 +66,6 @@ class Camera{
     this.pos.y += a*(this.distPos.y - this.pos.y);  
     this.pos.z += a*(this.distPos.z - this.pos.z);  
 
-    this.pos = add(this.pos,this.quakeOffset);
 
     this.forward = copy(this.pos);
     this.forward = normalize(this.forward);
@@ -77,7 +76,7 @@ class Camera{
     const side = normalize(cross(this.forward,this.up));
     let up = normalize(cross(this.forward, side));
     let forward = normalize(this.forward);
-    let eye = this.pos;
+    let eye = add(this.pos,this.quakeOffset);
     //return GetTransformMatrix(this.pos);  
     return [
       side.x, up.x, forward.x, 0,

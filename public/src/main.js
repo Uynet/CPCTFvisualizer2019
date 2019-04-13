@@ -19,6 +19,7 @@ function Init(){
   gl = CreateGL();
   websocket = new Socket();
   websocket.listen(); 
+  Audio.Init();
   world = new World();
   world.Init();
 }

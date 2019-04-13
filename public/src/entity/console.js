@@ -1,6 +1,7 @@
 class Console{
   constructor(text){
     //this.pos = pos;
+    this.pos = vec3(0,0,0);
     this.text = text
     this.buffers;
     this.program = Material.GetProgram("console");
@@ -59,6 +60,9 @@ class Console{
   }
   Update(){
     /*Nothing to do*/
+  }
+  Remove(){
+    world.Remove(this);
   }
   Draw(){
    if(this.onReady) this.drawObject.Draw();

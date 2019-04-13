@@ -33,8 +33,8 @@ const fetcher = new class{
   }
   getUserInfo(){
     //これはユーザー一覧を取得するAPI
-    //const url = "http://localhost:3000/api/users"
-    const url = "https://server.problem.cpctf.space/api/1.0/users" 
+    const url = "http://localhost:3000/api/users"
+    //const url = "https://server.problem.cpctf.space/api/1.0/users" 
     request(url, (error, response, body) => {
       if(!error && response.statusCode === 200){
         /*なんやかんやあってユーザーリストを手に入れる*/

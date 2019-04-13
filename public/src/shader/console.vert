@@ -17,20 +17,18 @@ uniform mat4 rotMatrix;
 void main(){
   vUV = uv;
   //float a = time*0.004;
-  vec4 pos = vec4(position,1);
+  //なんか反転しててやばい
+  vec4 pos = vec4(-position,1);
+  pos.x *=-1.0;
+  pos.y -=0.8;
+  pos *= 0.01;
   fPos = gl_Position.xyz;
   fTime = time;
-  // mat4 rot = mat4(
-  //     cos(a), 0 , -sin(a) , 0. ,
-  //     0. , 1. , 0. , 0. ,
-  //     sin(a),0 , cos(a) , 0. ,
-  //     0. , 0. , 0. , 1. 
-  //   );
   gl_Position = 
-    projMatrix *
-    viewMatrix * 
-    transformMatrix * 
-    rotMatrix *
+    //projMatrix *
+    //viewMatrix * 
+    //transformMatrix * 
+    //rotMatrix *
     pos;
   depth = gl_Position.z;
 }
