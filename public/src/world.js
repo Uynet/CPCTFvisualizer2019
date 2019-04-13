@@ -18,7 +18,7 @@ class World{
     this.Add(new Ring(vec3(0), 3, 0.3, 64));
     //this.Add(new Ring(vec3(0,4,0), 18, 0.3, 64));
     //this.Add(new Ring(vec3(0,-4,0), 18, 0.3, 64));
-    this.Add(new Ring(vec3(0), 24, 0.3, 128));
+    this.Add(new Ring(vec3(0), 36, 0.3, 128));
     this.Add(new TextBox("CPCTF",vec3(0,0,0)));
 
     for(let i=0;i<5;i++){
@@ -44,7 +44,7 @@ class World{
   }
   Debug() {
     //たまに得点イベントを発生させる(debug)
-    if (globalTime % 300 == 299) {
+    if (globalTime % 300 == 99) {
       let l = this.userList.length;
       let user = this.userList[Dice(l)];
       EventManager.GetScore(user, Math.floor(Math.random() * 777));

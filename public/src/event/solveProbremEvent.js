@@ -26,14 +26,15 @@ class SolveProbremEvent extends Event {
         yield;
         while (i++ < 5) yield; i=0;
       }
+      while (i++ < 10) yield; i=0;
       user.GetScore(score);
-      while (i++ < 20) yield; i=0;
       //デカイ
+      EventManager.Add(new CameraEffect(world.mainCamera));
       p = copy(user.pos);
-      world.Add(new Ripple(p, rot, 0, 15 ,30,3));
+      world.Add(new Ripple(p, rot, 0, 8 ,120,3));
 
       while (i++ < 90) yield; i=0;
-      world.mainCamera.SetFocus(undefined);
+      //world.mainCamera.SetFocus(undefined);
       return;
     }
     let itt = gen();

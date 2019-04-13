@@ -3,6 +3,7 @@ class Ripple {
   constructor(pos, rot, startSize, endSize, expandFrame, lastFrame) {
     if(expandFrame===undefined)expandFrame = 40;
     if(lastFrame===undefined)lastFrame = 20;
+    this.type = "ripple";
     this.pos = pos;
     this.rot = rot;
     this.startSize = startSize;

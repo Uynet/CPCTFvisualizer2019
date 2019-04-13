@@ -13,7 +13,6 @@ class EventManager{
   }
   //ユーザと手に入れた得点
   static GetScore(user,score){
-    world.mainCamera.SetFocus(user);
     let text = user.name + " won " + score + " points!";
     cl(text);
     this.Add(new SolveProbremEvent(user,score));
