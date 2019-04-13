@@ -43,6 +43,7 @@ class DrawObject{
     this.SendUniform();
 
     if(this.parent.type == "ripple")gl.disable(gl.DEPTH_TEST);
+    else if(this.parent.type == "text")gl.disable(gl.DEPTH_TEST);
     else gl.enable(gl.DEPTH_TEST);
 
     switch(this.primitiveType){

@@ -9,7 +9,7 @@ class User{
     this.type = "user";
     this.pos = vec3(0,1,0);
     this.icon_url = userdata.icon_url;
-    this.r = Math.random()*16+1;
+    this.r = Math.random()*16+5;
     this.localTime = 0 + Rand(16000);
     let p = copy(this.pos);
     this.name = userdata.name;
@@ -67,10 +67,12 @@ class User{
     this.pos = SphericalCoordToPosition(this.r,this.theta,this.phi);
     let pos = copy(this.pos);
     this.cube.SetPos(pos);
-    pos.y -= this.cube.size*0.5;
-    pos.y -= 0.7
-    this.nameText.SetPos(pos);
-    pos.y -= 0.7;
+    //this.nameText.SetPos(pos);
+    const side = normalize(cross(world.mainCamera.forward,world.mainCamera.up));
+    let up = normalize(cross(world.mainCamera.forward, side));
+
+    up = scala(this.cube.size,up);
+    pos = add(pos,up);
     this.scoreText.SetPos(pos);
 
     this.cube.Update();
@@ -79,8 +81,8 @@ class User{
   }
   Draw(){
     //this.drawObject.Draw();dnt need to draw myself
-    this.nameText.Draw();
-    this.scoreText.Draw();
+    //this.nameText.Draw();
     this.cube.Draw();
+    this.scoreText.Draw();
   };
 }

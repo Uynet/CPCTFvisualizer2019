@@ -4,8 +4,7 @@ Array.prototype.Last = function(){
   if(this.length == 0){
     return undefined;
   }
-  else{
-    return this[this.length-1];
+  else{ return this[this.length-1];
   }
 }
 //配列から要素を削除
@@ -137,8 +136,22 @@ const sub = (v1,v2)=>{ return {
   y:v1.y - v2.y ,
   z:v1.z - v2.z
   }
+};
+//スカラー倍
+const scala = (a, v) => {
+  return {
+    x: a * v.x,
+    y: a * v.y,
+    z: a * v.z
+  }
 };//ベクトル加算
-const mul = (v1,v2)=>{ return {x:v1.x * v2.x ,y:v1.y * v2.y}};//ベクトル乗算
+const mul = (v1, v2) => {
+  return {
+    x: v1.x * v2.x,
+    y: v1.y * v2.y,
+    z: v1.z * v2.z,
+  }
+};//ベクトル乗算
 const fromPolar =  (arg,vi)=>{return {x:vi*Math.cos(arg),y:vi*Math.sin(arg)}}//極表示のベクトルを直交座標に変換
 const normalize = v=>{
   let a = Math.sqrt(v.x * v.x + v.y * v.y + v.z*v.z);

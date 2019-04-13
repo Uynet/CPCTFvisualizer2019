@@ -42,4 +42,5 @@ void main(){
   vec3 col = grad;
   float alpha = 1.0-depth/50.0;
   gl_FragColor = vec4(col,alpha);
+  if(texColor.w < 0.60)gl_FragColor = vec4(1);
 }

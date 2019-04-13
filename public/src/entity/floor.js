@@ -17,7 +17,7 @@ class Floor{// extends Entity{
     this.drawObject.AddUniform("trap","texture",()=>{return Material.GetTexture("trap")});
   }
   Init(){
-    const vertices = SquareArray(10.0);
+    const vertices = SquareArray(25.0);
     const uv = SquareUVArray();
 
     this.buffers = [

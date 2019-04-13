@@ -6,6 +6,7 @@ uniform mat4 transformMatrix;
 uniform mat4 projMatrix;
 uniform mat4 viewMatrix;
 varying float depth;
+varying float t;
 varying vec3 pos;
 
 #define PI 3.1415965
@@ -25,7 +26,7 @@ void main(){
 
   float a = time * 0.00;// * pos.z * 0.1 * pos.y;
   float f = 20.0;
-  float t = atan2(pos.xz)/2.0;
+  t = atan2(pos.xz)/2.0;
   float p = time/100.0+t;
   float amp = func(p);
   amp *= exp(amp);

@@ -7,7 +7,7 @@ class CameraEffect extends Event {
         let forward = normalize(camera.forward);
         */
         function* gen() {
-            let t = 0;
+            let t = 5;
             let timeRange = 150;
             while (t++ < timeRange) {
                 let p = vec3(0);
@@ -18,6 +18,7 @@ class CameraEffect extends Event {
                 camera.quakeOffset = p;
                 yield;
             }
+            camera.quakeOffset = vec3(0);
             return;
         };
 

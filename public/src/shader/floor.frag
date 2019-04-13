@@ -47,7 +47,9 @@ void main(){
   vec3 black= vec3(0);
   uv -= 0.5;
   vec4 texColor = texture2D(trap, clamp(uv*1.2+0.5,vec2(0),vec2(1)));
-  if(texColor.w < 0.01)discard;
+  //if(texColor.w < 0.01)discard;
+  if(texColor.x > 0.25)discard;
+  if(texColor.x < 0.24)discard;
   /*debug
   gl_FragColor = texColor;
   return;
