@@ -31,7 +31,7 @@ class SolveProbremEvent extends Event {
           user.cube.accel++;
           user.localTime += (t * 10 +i) * 0.2;
           let camera = world.mainCamera;
-          let d = Math.PI * 0.8 - camera.FOV;
+          let d = Math.PI * 0.2 - camera.FOV;
           camera.FOV += d * 0.02;
           yield;
         } i=0;

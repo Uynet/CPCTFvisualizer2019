@@ -7,6 +7,7 @@ class User{
    */
   constructor(userdata){
     this.type = "user";
+    this.id = userdata.id;
     this.pos = vec3(0,1,0);
     this.icon_url = userdata.icon_url;
     if(this.icon_url === undefined)this.icon_url = "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
