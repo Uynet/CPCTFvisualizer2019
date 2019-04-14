@@ -10,14 +10,19 @@ class CameraEffect extends Event {
             let t = 0;
             let timeRange = 150;
             while (t++ < 10) {
+                /*
                 let p = vec3(0);
                 let f = normalize(camera.forward);
                 let amp = Math.exp(-t/4)*15.0;
                 f = scala(amp,f);
                 p = add(p,f);
                 camera.quakeOffset = p;
+                */
+                let d = Math.PI * 0.9 - camera.FOV;
+                camera.FOV += d * 0.1;
                 yield;
             }
+            camera.FOV = Math.PI * 1 / 2.5;
             while (t++ < timeRange) {
                 let p = vec3(0);
                 let amp = Math.exp(-t/10)*5.0;

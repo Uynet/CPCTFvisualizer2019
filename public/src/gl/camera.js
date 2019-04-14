@@ -61,7 +61,7 @@ class Camera{
       this.SetPos(p);
     }
 
-    let a = 0.10;
+    let a = 0.15;
     this.pos.x += a*(this.distPos.x - this.pos.x);  
     this.pos.y += a*(this.distPos.y - this.pos.y);  
     this.pos.z += a*(this.distPos.z - this.pos.z);  

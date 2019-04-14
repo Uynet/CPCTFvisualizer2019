@@ -56,7 +56,7 @@ class World{
   }
   Debug() {
     //たまに得点イベントを発生させる(debug)
-    if (globalTime % 300 == 9) {
+    if (globalTime % 900 == 9) {
       let l = this.userList.length;
       let user = this.userList[Dice(l)];
       EventManager.GetScore(user, Math.floor(Math.random() * 777));
