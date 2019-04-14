@@ -11,6 +11,7 @@ class Cube{
     //this.primitiveType = "TRIANGLES";
     this.OnReady = false;
     //this.Init();
+    this.accel = 0;//エフェクト中
   }
   SetSize(size){
     this.size = size
@@ -87,7 +88,8 @@ class Cube{
     this.drawObject = new DrawObject(this.buffers,this.program);
     this.drawObject.SetIBO(index);
     //uniform変数名、型、代入する値を返す関数
-    this.drawObject.AddUniform("time","1f",()=>{return globalTime});
+    this.drawObject.AddUniform("time","1f",()=>{return self.parent.localTime});
+    this.drawObject.AddUniform("accel","1f",()=>{return self.accel});
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("trap","texture",()=>{return self.parent.Texture});

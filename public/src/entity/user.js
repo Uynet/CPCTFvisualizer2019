@@ -47,7 +47,7 @@ class User{
     this.cube.SetSize(Math.sqrt(this.score)/20.0);
 
     const self = this;
-    this.drawObject.AddUniform("time","1f",()=>{return globalTime});
+    this.drawObject.AddUniform("time","1f",()=>{return self.localTime});
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
