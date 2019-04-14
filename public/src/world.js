@@ -4,11 +4,18 @@ class World{
     this.entityRemoveSet = new Set();
     this.userList = [];
     this.mainCamera;
+    this.fbo;
   };
   async Init(){
     await Material.Init();
     this.mainCamera = new Camera();
     this.Add(this.mainCamera);
+
+    //FBOのテスト
+    this.fbo = new FrameBuffer(512, 512);
+    Material.PushTexture("fbo", this.fbo);
+
+    this.Add(new FboTest(vec3(0, -4, 0)));
 
     //this.Add(new Floor(vec3(0,-6,0)));//floor
     //this.Add(new Floor(vec3(0,3,0)));//ceil
@@ -21,6 +28,7 @@ class World{
     //this.Add(new Ring(vec3(0,-4,0), 18, 0.3, 64));
     this.Add(new Ring(vec3(0), 36, 0.3, 128));
     //:this.Add(new TextBox("CPCTF",vec3(0,0,0)));
+
 
     for(let i=0;i<5;i++){
       const u = {
@@ -53,12 +61,15 @@ class World{
   }
   Update(){
     //gl.clearColor(0.999,0.98,1.00,1.0);
-    gl.clearColor(1,1,1,1);
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    //gl.clearColor(1,1,1,1);
+    //gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+    this.fbo.Draw(this);
+
     this.Debug();
     this.entities.forEach(e=>{
       e.Update();
-      e.Draw()
+      //e.Draw()
     });
 
     EventManager.ConsumeEvent();
@@ -75,9 +86,15 @@ class World{
       });
       this.entityRemoveSet.clear();
     }
-    //this.Draw();
-    gl.flush();
+    this.Draw();
+    //gl.flush();
   }
   Draw(){
+    gl.clearColor(1,1,1,1);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    this.entities.forEach(e=>{
+      e.Draw();
+    })
+    gl.flush();
   }
 }
