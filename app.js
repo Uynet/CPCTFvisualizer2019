@@ -9,28 +9,40 @@ const fs = require("fs");
 const request = require("request");
 app.use(express.static("public"));
 
+let userPrevJson = [];
+
 
 const fetcher = new class{
   listen(){
-    //この辺やばい
-    //デバッグ用なので後で消す
-    const po = ()=>{
+    this.getUserInfo();
+    //this.getProblemInfo();
+    //60秒に一度、情報を取得
+    setInterval(() => {
+      console.log(Math.random());
       this.getUserInfo();
       //this.getProblemInfo();
-    }
-    function* gen(){
-      let cnt = 0;
-      while(cnt++<1){
-        po();
-        yield;
-      }
-      return;
-    }
-    const ite = gen();
-    setInterval(() => {
-      ite.next();
     }, 1000*3);
   }
+  updateUserList(body) {
+    /*ユーザーリストが更新されていれば追加*/
+    let userNextJson = JSON.parse(body);
+    const curLen = userPrevJson.length;
+    const nextLen = userNextJson.length;
+    if (curLen < nextLen) {
+      const newUsers = userNextJson.slice(curLen);
+      newUsers.forEach(user => {
+        console.log(user);
+        io.emit('addUser', {
+          name: user.name,
+          id: user.id,
+          score: user.score,
+          icon_url: user.icon_url
+        });
+      });
+    }
+    userPrevJson = userNextJson;
+  }
+
   getUserInfo(){
     //これはユーザー一覧を取得するAPI
     const url = "http://localhost:3000/api/users"
@@ -38,6 +50,7 @@ const fetcher = new class{
     request(url, (error, response, body) => {
       if(!error && response.statusCode === 200){
         /*なんやかんやあってユーザーリストを手に入れる*/
+        /*
         let newUsers = JSON.parse(body);
         for(let user in newUsers){
           console.log(newUsers[user]);
@@ -48,6 +61,8 @@ const fetcher = new class{
             icon_url:newUsers[user].icon_url
           });
         };
+        */
+        this.updateUserList(body);
       }else{
         console.log(error);
       }

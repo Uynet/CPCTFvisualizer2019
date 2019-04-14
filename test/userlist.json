@@ -1,32 +1,44 @@
-{
-  "user0":{
+[
+  {
     "name": "新曲作った&Bootleg作る",
     "id": 0,
-    "score": 3800
+    "score": 3800,
+    "icon_url":"https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
   },
-  "user1":{
+  {
     "name": "東工大素数サークル Grothendiech",
     "id": 1,
-    "score": 2367
+    "score": 2367,
+    "icon_url":"https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
   },
-  "user2":{
+  {
     "name": "Arthur⊿",
     "id": 2,
-    "score": 4000
+    "score": 4000,
+    "icon_url":"https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
   },
-  "user3":{
+  {
     "name": "ながてち",
     "id": 3,
-    "score": 2923
+    "score": 2923,
+    "icon_url":"https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
   },
-  "user4":{
+  {
     "name": "ようそつ",
     "id": 3,
-    "score": 3178
+    "score": 3178,
+    "icon_url":"https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
   },
-  "user5":{
+  {
+    "name": "うんこ",
+    "id": 6,
+    "score": 10,
+    "icon_url":"https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+  },
+  {
     "name": "乾 ぱん",
     "id": 4,
-    "score": 2889
+    "score": 2889,
+    "icon_url":"https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
   }
-}
+]

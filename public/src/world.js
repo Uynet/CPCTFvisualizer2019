@@ -22,7 +22,6 @@ class World{
     this.Add(new Ring(vec3(0), 36, 0.3, 128));
     //:this.Add(new TextBox("CPCTF",vec3(0,0,0)));
 
-    /*
     for(let i=0;i<5;i++){
       const u = {
         name : "Test"+i,
@@ -32,7 +31,6 @@ class World{
       }
       this.Add(new User(u));
     }
-    */
 
   }
   Add(entity){
