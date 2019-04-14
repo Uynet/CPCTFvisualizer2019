@@ -4,6 +4,7 @@ class Socket{
   }
   listen(){
     this.socket.on("addUser", userdata => {
+      cl("Added User:"+userdata)
       EventManager.onAddUser(userdata);
     });
     this.socket.on('sendFlag', sendInfo => {

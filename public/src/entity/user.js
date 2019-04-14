@@ -16,7 +16,7 @@ class User{
     let p = copy(this.pos);
     this.name = userdata.name;
     this.score= userdata.score;
-    this.scoreText = new TextBox(this.score+"",p);
+    this.scoreText = new TextBox(this.score+"点",p);
     this.nameText = new TextBox(this.name,p);
     this.cube = new Cube(p);
     this.scoreText.SetParent(this);
@@ -59,11 +59,11 @@ class User{
     this.score += score;
     score = Math.floor(this.score);
     this.cube.SetSize(Math.sqrt(this.score)/20.0);
-    this.scoreText.SetTextTexture(score + "");
+    this.scoreText.SetTextTexture(score + "点");
   }
   Update(){
     this.localTime++;
-    let speed = 0.005/this.cube.size;
+    let speed = 0.005;//this.cube.size;
     this.phi += speed*0.36 * Math.sin(this.r);
     this.theta += speed * Math.sin(this.r);
     //適当に飛び回っとく
