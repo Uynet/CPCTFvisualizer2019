@@ -35,7 +35,7 @@ class World{
     for(let i=0;i<5;i++){
       const u = {
         name : "Test"+i,
-        id : i,
+        id : "test"+i,
         score: 100,
         //icon_url:"https://pbs.twimg.com/profile_images/992202907389853698/Fwpldgoq.jpg"
         icon_url:"https://pbs.twimg.com/profile_images/1098287140859871232/5NqQLk1-_400x400.jpg"
@@ -47,7 +47,9 @@ class World{
   Add(entity){
     this.entities.push(entity);
     switch(entity.type){
-      case  "user" : this.userList.push(entity); break;
+      case  "user" : 
+        this.userList[entity.id] = entity;
+        break;
       default : break;
     }
   };
@@ -56,10 +58,17 @@ class World{
   }
   Debug() {
     //たまに得点イベントを発生させる(debug)
-    if (globalTime % 900 == 9) {
-      let l = this.userList.length;
-      let user = this.userList[Dice(l)];
-      EventManager.GetScore(user, Math.floor(Math.random() * 777));
+    for (let username in this.userList) {
+      //メタプロの弊害 怪奇現象
+      if(username == "remove")continue;
+      if(username == "minIndex")continue;
+      if(username == "maxIndex")continue;
+      if(username == "Last")continue;
+      if (Dice(999) == 1){
+        let user = this.userList[username] ;
+        cl(username)
+        EventManager.GetScore(this.userList[username], Math.floor(Math.random() * 777));
+      }
     }
   }
   Update(){
