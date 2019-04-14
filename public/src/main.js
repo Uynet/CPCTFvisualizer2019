@@ -9,6 +9,7 @@ let isPause = false;
 let frame = [
   "[*ˊ-ˋ*]",
 ];
+const po = ()=>{cl("HELLO CPCTF")}
 /* ☆Entrypoint☆ */
 (()=>{
   Init().then(Run);

@@ -18,7 +18,7 @@ const fetcher = new class{
     //this.getProblemInfo();
     //60秒に一度、情報を取得
     setInterval(() => {
-      console.log(Math.random());
+      console.log("Getting UserInfo..."+Math.random());
       this.getUserInfo();
       //this.getProblemInfo();
     }, 1000*3);
@@ -29,7 +29,7 @@ const fetcher = new class{
     const curLen = userPrevJson.length;
     const nextLen = userNextJson.length;
     if (curLen < nextLen) {
-      const newUsers = userNextJson.slice(curLen);
+      const newUsers = userNextJson.slice(0);
       newUsers.forEach(user => {
         console.log(user);
         io.emit('addUser', {

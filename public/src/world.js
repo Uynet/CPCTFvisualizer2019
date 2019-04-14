@@ -36,7 +36,7 @@ class World{
       const u = {
         name : "Test"+i,
         id : "test"+i,
-        score: 100,
+        score: 5,
         //icon_url:"https://pbs.twimg.com/profile_images/992202907389853698/Fwpldgoq.jpg"
         icon_url:"https://pbs.twimg.com/profile_images/1098287140859871232/5NqQLk1-_400x400.jpg"
       }
@@ -66,8 +66,7 @@ class World{
       if(username == "Last")continue;
       if (Dice(999) == 1){
         let user = this.userList[username] ;
-        cl(username)
-        EventManager.GetScore(this.userList[username], Math.floor(Math.random() * 777));
+        EventManager.GetScore(this.userList[username], Math.floor(Math.random() * 100));
       }
     }
   }
