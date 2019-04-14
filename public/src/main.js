@@ -54,8 +54,8 @@ function Pause(){
 function Clock(){
   //CPCTF終了19:30?
   let today = new Date();
-  //today.setHours(19,30,0,0);
-  today.setHours(23,59,59,99);
+  today.setHours(19,30,0,0);
+  //today.setHours(23,59,59,99);
   let limit = today.getTime();
   let now = new Date().getTime();
   let ms= limit-now;
