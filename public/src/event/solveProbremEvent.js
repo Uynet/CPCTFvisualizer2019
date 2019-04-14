@@ -8,13 +8,15 @@ class SolveProbremEvent extends Event {
       let i = 0;
       let p;
       let usersize = user.cube.size;
+      let usersize_shrinking = usersize;
       let rot;
+      //回転が加速
       while (i++ < 50) yield; i = 0;
       Audio.PlaySE("solve",1,1.0);
       //波紋エフェクト追加
       //Ripple(pos,size,startsize,endsize,expandFlame,lastFrame)
-      while(t++<8){
-        user.speed += 1.1;
+      while(t++<10){
+        user.cube.accel++;
         Audio.PlaySE("poyo1",0.7,0.3 + t/8);
         rot = self.getRotMatrix();
         p = copy(user.pos);
@@ -25,13 +27,23 @@ class SolveProbremEvent extends Event {
         let size = (Math.random()+t*0.1)*usersize;
         world.Add(new Ripple(p, rot,0,size));
         yield;
-        while (i++ < 5) yield; i=0;
+        while (i++ < 5){
+          user.cube.accel++;
+          user.localTime += (t * 10 +i) * 0.2;
+          yield;
+        } i=0;
       }
+      //収縮
+      user.cube.accel=0;
       EventManager.Add(new CameraEffect(world.mainCamera));
-      while (i++ < 10) yield; i=0;
-      EventManager.Add(new ConsoleEvent(user, score));
+      while (i++ < 10){
+          usersize_shrinking *= 0.90;
+          user.cube.SetSize(usersize_shrinking);
+          yield;
+      } i=0;
       user.GetScore(score);
-      //デカイ
+      EventManager.Add(new ConsoleEvent(user, score));
+      //デカい爆発
       Audio.PlaySE("bomb",1,0.7);
       rot = self.getRotMatrix();
       p = copy(user.pos);

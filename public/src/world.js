@@ -11,11 +11,13 @@ class World{
     this.mainCamera = new Camera();
     this.Add(this.mainCamera);
 
+    /*
     //FBOのテスト
     this.fbo = new FrameBuffer(512, 512);
     Material.PushTexture("fbo", this.fbo);
 
     this.Add(new FboTest(vec3(0, -4, 0)));
+    */
 
     //this.Add(new Floor(vec3(0,-6,0)));//floor
     //this.Add(new Floor(vec3(0,3,0)));//ceil
@@ -35,7 +37,8 @@ class World{
         name : "Test"+i,
         id : i,
         score: 100,
-        icon_url:"https://pbs.twimg.com/profile_images/992202907389853698/Fwpldgoq.jpg"
+        //icon_url:"https://pbs.twimg.com/profile_images/992202907389853698/Fwpldgoq.jpg"
+        icon_url:"https://pbs.twimg.com/profile_images/1098287140859871232/5NqQLk1-_400x400.jpg"
       }
       this.Add(new User(u));
     }
@@ -60,11 +63,8 @@ class World{
     }
   }
   Update(){
-    //gl.clearColor(0.999,0.98,1.00,1.0);
-    //gl.clearColor(1,1,1,1);
-    //gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    this.fbo.Draw(this);
+    //this.fbo.Draw(this);
 
     this.Debug();
     this.entities.forEach(e=>{
@@ -87,7 +87,6 @@ class World{
       this.entityRemoveSet.clear();
     }
     this.Draw();
-    //gl.flush();
   }
   Draw(){
     gl.clearColor(1,1,1,1);
