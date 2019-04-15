@@ -97,7 +97,7 @@ class World{
 
     //this.fbo.Draw(this);
 
-    this.Debug();
+    //this.Debug();
     this.entities.forEach(e=>{
       e.Update();
       //e.Draw()
