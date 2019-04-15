@@ -57,6 +57,28 @@ const fetcher = new class{
       }
     });
   }
+  getUserInfoAll(){
+    //これはユーザー一覧を取得するAPI
+    //const url = "http://localhost:3000/api/users"//これはテスト用
+    //const url = "https://server.problem.cpctf.space/api/1.0/users" //こっちが正しい
+    const url = "https://cpctf.space/api/1.0/users"; 
+    request(url, (error, response, body) => {
+      if(!error && response.statusCode === 200){
+        let userJson = JSON.parse(body);
+          userJson.forEach(user => {
+            console.log(user);
+            io.emit('addUser', {
+              name: user.name,
+              id: user.id,
+              score: user.score,
+              icon_url: user.icon_url
+            });
+          });
+      }else{
+        console.log(error);
+      }
+    });
+  }
   getProblemInfo(){
     const url = 'https://server.problem.cpctf.space/api/1.0/challenges';
     request(url, (error, response, body) => {
@@ -76,4 +98,8 @@ app.get("/api/users",(req,res)=>{
   res.writeHead(200, {'Content-Type': 'text/html'});
   res.write(data);
   res.end();
+});
+io.on('connection', socket => {
+   console.log("connect");
+   fetcher.getUserInfoAll();
 });
