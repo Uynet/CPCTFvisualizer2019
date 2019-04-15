@@ -12,7 +12,7 @@ class Socket{
       let user = world.userList[userID];
       cl(user.name + "opened");
 
-      EventManager.GetScore(user,100);
+      //EventManager.GetScore(user,100);
     });
     this.socket.on('sendFlag', sendInfo => {
       const userID = sendInfo.userID;
