@@ -146,15 +146,12 @@ client.on('connect', connection => {
 
 client.connect('wss://cpctf.space/api/1.0/ws');
 
-//応急処置
-let first = true;
 io.on('connection', socket => {
+   console.log("connect♡")
    const po = ()=>{
-     if(first){
-       fetcher.getUserInfoAll();
-       console.log("connect♡")
-       first = false;
-     }
+     //ユーザーリストがからのときのみ
+     //if(userPrevJson.length == 0){
+     fetcher.getUserInfoAll();
    }
-   setTimeout(po,5000);
+   setTimeout(po,2000);
 });
