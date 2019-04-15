@@ -7,6 +7,13 @@ class Socket{
       cl("Added User:"+userdata)
       EventManager.onAddUser(userdata);
     });
+    this.socket.on('openProblem', problemInfo => {
+      let userID = problemInfo.userID; 
+      let user = world.userList[userID];
+      cl(user.name + "opened");
+
+      EventManager.GetScore(user,100);
+    });
     this.socket.on('sendFlag', sendInfo => {
       const userID = sendInfo.userID;
       const problemID = sendInfo.problemID;
@@ -15,7 +22,7 @@ class Socket{
 
       const user = wolrd.userList[userID];
 
-      EventManager.GetScore(sendInfd);
+      EventManager.GetScore(user,score);
     });
   }
   Emit(eventName,data){
