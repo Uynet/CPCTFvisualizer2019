@@ -15,8 +15,8 @@ class Camera{
     this.viewMat = this.GetViewMatrix();
     this.projMat = this.GetProjMatrix();
 
-    this.r = 8;
-    this.phi = Math.PI/2.0;
+    this.r = 16;
+    this.phi = Math.PI/2.0+0.4;
     this.theta = Math.PI;
 
     this.focusedUser;
@@ -56,7 +56,7 @@ class Camera{
     else {
       this.phi = Math.max(this.phi, 0.0001);
       this.phi = Math.min(this.phi, Math.PI);
-      //this.theta += 0.002;
+      this.theta += 0.002;
       let p = SphericalCoordToPosition(this.r, this.theta, this.phi);
       this.SetPos(p);
     }
