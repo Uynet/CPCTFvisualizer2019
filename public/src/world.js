@@ -32,6 +32,7 @@ class World{
     //:this.Add(new TextBox("CPCTF",vec3(0,0,0)));
 
 
+    /*debug
     for(let i=0;i<5;i++){
       const u = {
         name : "Test"+i,
@@ -42,6 +43,7 @@ class World{
       }
       this.Add(new User(u));
     }
+    */
 
   }
   Add(entity){
@@ -75,7 +77,6 @@ class World{
      userArray.forEach(user=>{
         sortedUserNameArray.push(user.name);
      })
-     cl(sortedUserNameArray);
      return sortedUserNameArray;
   }
   Debug() {
