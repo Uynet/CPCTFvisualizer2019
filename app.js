@@ -74,6 +74,7 @@ const fetcher = new class{
               icon_url: user.icon_url
             });
           });
+        userPrevJson = userJson;
       }else{
         console.log(error);
       }
@@ -101,5 +102,5 @@ app.get("/api/users",(req,res)=>{
 });
 io.on('connection', socket => {
    console.log("connect");
-   fetcher.getUserInfoAll();
+   fetcher.getUserInfo();
 });
