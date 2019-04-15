@@ -52,10 +52,32 @@ function Pause(){
     }
   }
 }
+//1st,2nd,3rd,4th,...
+function Order(n){
+   switch(n%10){
+     case 1 : return n+"st";
+     case 2 : return n+"nd";
+     case 3 : return n+"rd";
+     default :return  n +"th";
+    }
+}
+
+function Ranking(){
+  let rankingDOM = document.getElementById("ranking");
+  let userList = world.GetSortedUserList();
+  let rank = 1;//
+  if(globalTime == 9){
+    userList.forEach(username => {
+      let usernameDOM = document.createElement("div");
+      usernameDOM.innerText = Order(rank++)+ ":" + username;
+      rankingDOM.appendChild(usernameDOM);  
+    })
+  }
+}
 function Clock(){
-  //CPCTF終了19:30?
+  //CPCTF終了19:00?
   let today = new Date();
-  today.setHours(19,30,0,0);
+  today.setHours(19,00,0,0);
   //today.setHours(23,59,59,99);
   let limit = today.getTime();
   let now = new Date().getTime();
@@ -64,8 +86,8 @@ function Clock(){
   let mm = String(Math.floor((ms - hh * 3600000)/60000)+ 100).substring(1);
   let ss = String(Math.floor((ms - hh * 3600000 - mm * 60000)/1000)+ 100).substring(1);
   let sss= String(ms%1000+1000).substring(1,3);
-  //if(sss>95)ss=ss[0]+"i";
-  //if(sss>97)ss=ss[0]+"l";
+  if(sss>95){document.getElementById("main").innerHTML = "" ;return;}
+  if(sss>97){document.getElementById("main").innerHTML = "" ;return;}
   if(ms<0){
     document.getElementById("main").style.color = "#fd107a";
     hh = mm = ss = sss = "00";
@@ -88,11 +110,12 @@ function TitileAnimation(){
 function Run(){
   requestAnimationFrame(Run);
   Clock();
-  TitileAnimation();
+  Ranking();
+  //TitileAnimation();
   if(!isPause){
     world.Update();
     globalTime++;
-    if(K.s()&& K.w()) isPause = true;
+    //if(K.s()&& K.w()) isPause = true;
   }else{
     Pause();
   }

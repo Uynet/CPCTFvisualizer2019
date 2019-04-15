@@ -20,6 +20,22 @@
           color: #5810a9;
           font-family: "SAO","Ronde";
         }
+        #ranking {
+          position:absolute;
+          padding-top:8px;
+          padding-left:16px;
+          padding-right:16px;
+          padding-bottom:32px;
+          top:0px;
+          right:0px;
+          height:100%;
+          z-index:1;
+          font-size: 40px;
+          background-color: #ff3361;
+
+          color: #FFF;
+          font-family: "SAO","Ronde";
+        }
         canvas {
           visibility: visible;
           z-index:0;
@@ -28,6 +44,12 @@
         }
   </style>
   <div id ="main">[TimeLimit]</div>
+  <div id ="ranking">
+    [Ranking]
+  <div id="username">
+   ~準備中~ 
+  </div>
+  </div>
   <canvas id="canvas"></canvas>
   <canvas id="hiddenCanvas" style="visibility:hidden;" height="1024px" width="1024px"></canvas>
 
