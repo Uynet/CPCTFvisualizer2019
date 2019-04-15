@@ -126,6 +126,7 @@ client.on('connect', connection => {
               problemID: problemID,
           });
       }else if(res.eventName === "sendFlag"){
+        console.log("★★★★send★★★★");
           const userID = res.userID;
           const problemID = res.problemID;
           const username = res.username;
