@@ -33,6 +33,7 @@ class SolveProbremEvent extends Event {
           let camera = world.mainCamera;
           let d = Math.PI * 0.2 - camera.FOV;
           camera.FOV += d * 0.02;
+          //user.GetScore(score/50);
           yield;
         } i=0;
       }

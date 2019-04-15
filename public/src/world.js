@@ -56,6 +56,28 @@ class World{
   Remove(entity) {
     this.entityRemoveSet.add(entity);
   }
+  //ランキング表示用
+  GetSortedUserList(){
+     let userArray = [];
+    for (let username in this.userList) {
+      //メタプロの弊害 怪奇現象
+      if(username == "remove")continue;
+      if(username == "minIndex")continue;
+      if(username == "maxIndex")continue;
+      if(username == "Last")continue;
+        let user = this.userList[username] ;
+        userArray.push(user);
+    }
+     userArray.sort((a,b)=> {
+       return -(a.score - b.score);//昇順ソート
+     });
+     let sortedUserNameArray = [];
+     userArray.forEach(user=>{
+        sortedUserNameArray.push(user.name);
+     })
+     cl(sortedUserNameArray);
+     return sortedUserNameArray;
+  }
   Debug() {
     //たまに得点イベントを発生させる(debug)
     for (let username in this.userList) {
