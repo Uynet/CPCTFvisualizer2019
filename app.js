@@ -14,8 +14,6 @@ let userPrevJson = [];
 
 const fetcher = new class{
   listen(){
-    this.getUserInfo();
-    //this.getProblemInfo();
     //t秒に一度、情報を取得
     let t = 5;
     setInterval(() => {
@@ -57,6 +55,7 @@ const fetcher = new class{
       }
     });
   }
+  /*
   getUserInfoAll(){
     //これはユーザー一覧を取得するAPI
     //const url = "http://localhost:3000/api/users"//これはテスト用
@@ -80,6 +79,7 @@ const fetcher = new class{
       }
     });
   }
+  */
   getProblemInfo(){
     const url = 'https://server.problem.cpctf.space/api/1.0/challenges';
     request(url, (error, response, body) => {
