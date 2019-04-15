@@ -24,8 +24,13 @@ class Socket{
 
       EventManager.GetScore(user,score);
     });
+    this.fetch();
   }
   Emit(eventName,data){
     this.socket.emit(eventName,data);
   }
+  fetch(){
+    this.socket.emit('requestFromVisualizer', '');
+  }
+
 }
