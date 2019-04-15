@@ -55,6 +55,31 @@ const fetcher = new class{
       }
     });
   }
+  getUserInfoAll(){
+    //これはユーザー一覧を取得するAPI
+    //const url = "http://localhost:3000/api/users"//これはテスト用
+    //const url = "https://server.problem.cpctf.space/api/1.0/users" //こっちが正しい
+    const url = "https://cpctf.space/api/1.0/users" //こっちが正しい
+    request(url, (error, response, body) => {
+      if(!error && response.statusCode === 200){
+        /*ユーザーリストが更新されていれば追加*/
+        let userNextJson = JSON.parse(body);
+        const newUsers = userNextJson;
+          newUsers.forEach(user => {
+            console.log(user);
+            io.emit('addUser', {
+              name: user.name,
+              id: user.id,
+              score: user.score,
+              icon_url: user.icon_url
+            });
+          });
+        userPrevJson = userNextJson;
+      }else{
+        console.log(error);
+      }
+    });
+  }
   getProblemInfo(){
     const url = 'https://server.problem.cpctf.space/api/1.0/challenges';
     request(url, (error, response, body) => {
@@ -75,10 +100,6 @@ app.get("/api/users",(req,res)=>{
   res.write(data);
   res.end();
 });
-io.on('connection', socket => {
-   console.log("connect");
-   fetcher.getUserInfo();
-});
 
 client.on('connectFalied', () => {
   console.log("po");
@@ -89,12 +110,10 @@ client.on('connect', connection => {
       console.log(error); 
       client.connect('wss://cpctf.site/api/1.0/ws');
   });
-  /*
   connection.on('close', () => { 
       console.log('closed');
       client.connect('wss://cpctf.space/api/1.0/ws');
   });
-  */
   connection.on('message', data => {
       const res = JSON.parse(data.utf8Data); 
       console.log(res);
@@ -125,3 +144,8 @@ client.on('connect', connection => {
 });
 
 client.connect('wss://cpctf.space/api/1.0/ws');
+
+io.on('connection', socket => {
+   console.log("connect");
+   fetcher.getUserInfoAll();
+});
