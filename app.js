@@ -16,12 +16,13 @@ const fetcher = new class{
   listen(){
     this.getUserInfo();
     //this.getProblemInfo();
-    //60秒に一度、情報を取得
+    //t秒に一度、情報を取得
+    let t = 5;
     setInterval(() => {
       console.log("Getting UserInfo..."+Math.random());
       this.getUserInfo();
       //this.getProblemInfo();
-    }, 1000*3);
+    }, 1000*t);
   }
   updateUserList(body) {
     /*ユーザーリストが更新されていれば追加*/
