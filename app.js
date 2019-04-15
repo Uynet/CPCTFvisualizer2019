@@ -47,7 +47,8 @@ const fetcher = new class{
   getUserInfo(){
     //これはユーザー一覧を取得するAPI
     //const url = "http://localhost:3000/api/users"//これはテスト用
-    const url = "https://server.problem.cpctf.space/api/1.0/users" //こっちが正しい
+    //const url = "https://server.problem.cpctf.space/api/1.0/users" //こっちが正しい
+    const url = "https://cpctf.space/api/1.0/users"; 
     request(url, (error, response, body) => {
       if(!error && response.statusCode === 200){
         this.updateUserList(body);
