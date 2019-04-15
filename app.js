@@ -46,7 +46,7 @@ const fetcher = new class{
     //これはユーザー一覧を取得するAPI
     //const url = "http://localhost:3000/api/users"//これはテスト用
     //const url = "https://server.problem.cpctf.space/api/1.0/users" //こっちが正しい
-    const url = "https://cpctf.space/api/1.0/users"; 
+    const url = "https://cpctf.space/api/1.0/users" //こっちが正しい
     request(url, (error, response, body) => {
       if(!error && response.statusCode === 200){
         this.updateUserList(body);
@@ -55,31 +55,6 @@ const fetcher = new class{
       }
     });
   }
-  /*
-  getUserInfoAll(){
-    //これはユーザー一覧を取得するAPI
-    //const url = "http://localhost:3000/api/users"//これはテスト用
-    //const url = "https://server.problem.cpctf.space/api/1.0/users" //こっちが正しい
-    const url = "https://cpctf.space/api/1.0/users"; 
-    request(url, (error, response, body) => {
-      if(!error && response.statusCode === 200){
-        let userJson = JSON.parse(body);
-          userJson.forEach(user => {
-            console.log(user);
-            io.emit('addUser', {
-              name: user.name,
-              id: user.id,
-              score: user.score,
-              icon_url: user.icon_url
-            });
-          });
-        userPrevJson = userJson;
-      }else{
-        console.log(error);
-      }
-    });
-  }
-  */
   getProblemInfo(){
     const url = 'https://server.problem.cpctf.space/api/1.0/challenges';
     request(url, (error, response, body) => {
@@ -104,3 +79,49 @@ io.on('connection', socket => {
    console.log("connect");
    fetcher.getUserInfo();
 });
+
+client.on('connectFalied', () => {
+  console.log("po");
+});
+client.on('connect', connection => {
+  console.log("connection started.");
+  connection.on('error', error => {
+      console.log(error); 
+      client.connect('wss://cpctf.site/api/1.0/ws');
+  });
+  /*
+  connection.on('close', () => { 
+      console.log('closed');
+      client.connect('wss://cpctf.space/api/1.0/ws');
+  });
+  */
+  connection.on('message', data => {
+      const res = JSON.parse(data.utf8Data); 
+      console.log(res);
+      if(res.eventName === "openProblem"){
+          const userID = res.userID;
+          const problemID = res.problemID;
+
+          io.emit('openProblem', {
+              userID: userID,
+              problemID: problemID,
+          });
+      }else if(res.eventName === "sendFlag"){
+          const userID = res.userID;
+          const problemID = res.problemID;
+          const username = res.username;
+          const isSolved = res.isSolved;
+          const score = res.score;
+
+          io.emit('sendFlag', {
+              userID: userID,
+              username: username,
+              problemID: problemID,
+              isSolved: isSolved,
+              score: score,
+          });
+      }
+  });
+});
+
+client.connect('wss://cpctf.space/api/1.0/ws');
