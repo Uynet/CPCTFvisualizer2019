@@ -151,7 +151,7 @@ io.on('connection', socket => {
    const po = ()=>{
      //ユーザーリストがからのときのみ
      //if(userPrevJson.length == 0){
-     fetcher.getUserInfoAll();
+     fetcher.getUserInfo();
    }
    setTimeout(po,2000);
 });
