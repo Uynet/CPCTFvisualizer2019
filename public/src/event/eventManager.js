@@ -9,7 +9,8 @@ class EventManager{
     }
   }
   static onAddUser(userdata){
-    if(world.userList[userdata.id]===undefined){
+    //既に追加されていない && 作文者でない
+    if(world.userList[userdata.id]===undefined && userdata.is_author == false){
       cl("Added User:" + userdata)
       world.Add(new User(userdata)); 
     }else{
