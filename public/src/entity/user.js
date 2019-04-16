@@ -65,6 +65,9 @@ class User{
     this.SetCubeSize();
     this.scoreText.SetTextTexture(score + "点");
   }
+  SetScore(score){
+
+  }
   Update(){
     this.localTime++;
     let speed = 0.005;//this.cube.size;
@@ -74,12 +77,15 @@ class User{
     this.pos = SphericalCoordToPosition(this.r,this.theta,this.phi);
     let pos = copy(this.pos);
     this.cube.SetPos(pos);
+
     const side = normalize(cross(world.mainCamera.forward,world.mainCamera.up));
     let up = normalize(cross(world.mainCamera.forward, side));
 
     up = scala(this.cube.size,up);
+    const forward = scala(0.001,world.mainCamera.forward);
     this.scoreText.SetPos(add(pos,up));
     this.nameText.SetPos(sub(pos,up));
+    this.scoreText.pos = sub(this.scoreText.pos,forward);//Z-fighting防止
 
     this.cube.Update();
     this.nameText.Update();
