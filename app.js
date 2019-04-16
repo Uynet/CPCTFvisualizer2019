@@ -35,7 +35,8 @@ const fetcher = new class{
           name: user.name,
           id: user.id,
           score: user.score,
-          icon_url: user.icon_url
+          icon_url: user.icon_url,
+          is_author: user.is_author 
         });
       });
     }
@@ -71,7 +72,8 @@ const fetcher = new class{
               name: user.name,
               id: user.id,
               score: user.score,
-              icon_url: user.icon_url
+              icon_url: user.icon_url,
+              is_author: user.is_author 
             });
           });
         userPrevJson = userNextJson;
