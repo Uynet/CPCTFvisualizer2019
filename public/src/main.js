@@ -63,6 +63,7 @@ function Pause(){
 }
 //1st,2nd,3rd,4th,...
 function Order(n){
+  return "#" + n;
    switch(n%10){
      case 1 : return n+"st";
      case 2 : return n+"nd";
@@ -78,7 +79,6 @@ function Ranking(){
   if(globalTime %500 == 10){
     //DOM全消し
     let usernameDOMList = rankingDOM.children; 
-    cl(usernameDOMList[0])
     for(let i = 0;i<usernameDOMList.length;){
       rankingDOM.removeChild(usernameDOMList[i]);
     }
