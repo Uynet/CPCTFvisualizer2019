@@ -18,7 +18,7 @@ const fetcher = new class{
     let t = 5;
     setInterval(() => {
       console.log("Getting UserInfo..."+Math.random());
-      this.getUserInfo();
+      this.getUserInfoAll();
       //this.getProblemInfo();
     }, 1000*t);
   }

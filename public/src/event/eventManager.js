@@ -9,7 +9,12 @@ class EventManager{
     }
   }
   static onAddUser(userdata){
-    world.Add(new User(userdata)); 
+    if(world.userList[userdata.id]===undefined){
+      cl("Added User:" + userdata)
+      world.Add(new User(userdata)); 
+    }else{
+      cl("Alleady Added user:"+userdata.name);
+    }
   }
   //ユーザと手に入れた得点
   static GetScore(user,score){

@@ -74,7 +74,7 @@ function Ranking(){
   let rankingDOM = document.getElementById("ranking");
   let userList = world.GetSortedUserList();
   let rank = 1;//
-  if(globalTime %500 == 9){
+  if(globalTime %500 == 10){
     //DOM全消し
     let usernameDOMList = rankingDOM.children; 
     cl(usernameDOMList[0])
@@ -83,11 +83,9 @@ function Ranking(){
     }
     //更新
     userList.forEach(username => {
-      if (rank <= 10) {
-        let usernameDOM = document.createElement("div");
-        usernameDOM.innerText = Order(rank++) + ":" + username;
-        rankingDOM.appendChild(usernameDOM);
-      }
+      let usernameDOM = document.createElement("div");
+      usernameDOM.innerText = Order(rank++) + "     :    " + username;
+      rankingDOM.appendChild(usernameDOM);
     })
   }
 }

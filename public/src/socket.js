@@ -4,7 +4,6 @@ class Socket{
   }
   listen(){
     this.socket.on("addUser", userdata => {
-      cl("Added User:"+userdata)
       EventManager.onAddUser(userdata);
     });
     this.socket.on('openProblem', problemInfo => {
@@ -32,5 +31,4 @@ class Socket{
   fetch(){
     this.socket.emit('requestFromVisualizer', '');
   }
-
 }
