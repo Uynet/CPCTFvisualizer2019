@@ -89,27 +89,42 @@ function Ranking(){
     })
   }
 }
-function Clock(){
-  //CPCTF終了19:00?
-  let today = new Date();
-  today.setHours(19,00,0,0);
-  //today.setHours(23,59,59,99);
-  let limit = today.getTime();
-  let now = new Date().getTime();
-  let ms= limit-now;
+//ミリセカンド秒をいい感じのタイマーにする
+function ParceMsToTimmer(ms){
   let hh = String(Math.floor(ms / 3600000) + 100).substring(1);
   let mm = String(Math.floor((ms - hh * 3600000)/60000)+ 100).substring(1);
   let ss = String(Math.floor((ms - hh * 3600000 - mm * 60000)/1000)+ 100).substring(1);
   let sss= String(ms%1000+1000).substring(1,3);
+  let text =  hh+":"+mm+":"+ss + ":" + sss;
   //if(sss==95){document.getElementById("main").innerHTML = "" ;return;}
   //if(sss==97){document.getElementById("main").innerHTML = "" ;return;}
-  if(ms<0){
+  return text;
+}
+function Clock(){
+  //CPCTF終了19:30?
+  let LimitDate= new Date();
+  let StartDate= new Date();
+  LimitDate.setHours(19,30,0,0);
+  StartDate.setHours(13,30,0,0);
+  //today.setHours(23,59,59,99);
+  let limit = LimitDate.getTime();
+  let start = StartDate.getTime();
+  let now = new Date().getTime();
+
+  let limit_ms = limit-now;//終了まで
+  let start_ms = start-now;//開始まで
+  let text = "[TimeLimit]";
+  if(start_ms>0)
+    //開始前
+    text = "開始まで:[" + ParceMsToTimmer(start_ms) + "]";
+  else if(limit_ms>0){
+    //競技中
+    text = "[" + ParceMsToTimmer(limit_ms) + "]";
+  }else{
+    //終了後
     document.getElementById("main").style.color = "#fd107a";
-    hh = mm = ss = sss = "00";
+    text = "CTF is Over!";
   }
-  let text =  "["
-    +hh+":"+mm+":"+ss + ":" + sss
-   +"]";
   document.getElementById("main").innerHTML = text;
 }
 function TitileAnimation(){
