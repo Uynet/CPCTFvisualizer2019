@@ -14,7 +14,7 @@ class EventManager{
       cl("Added User:" + userdata)
       world.Add(new User(userdata)); 
     }else{
-      cl("Alleady Added user:"+userdata.name);
+      //cl("Alleady Added user:"+userdata.name);
     }
   }
   //ユーザと手に入れた得点

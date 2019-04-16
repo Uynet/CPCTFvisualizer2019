@@ -4,7 +4,7 @@ class Socket{
   }
   listen(){
     this.socket.on("addUser", userdata => {
-      EventManager.onAddUser(userdata);
+      if(isVisualizerReady)EventManager.onAddUser(userdata);
     });
     this.socket.on('openProblem', problemInfo => {
       let userID = problemInfo.userID; 

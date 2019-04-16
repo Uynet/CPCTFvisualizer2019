@@ -5,6 +5,7 @@ let world;
 let canvas;
 let globalTime = 0;
 let isPause = false;
+let isVisualizerReady = false;
 
 let frame = [
   "[*ˊ-ˋ*]",
@@ -138,6 +139,7 @@ function TitileAnimation(){
 
 //main loop
 function Run(){
+  isVisualizerReady = true;
   requestAnimationFrame(Run);
   Clock();
   Ranking();
