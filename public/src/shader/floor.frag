@@ -43,19 +43,11 @@ vec3 gradient(vec2 uv){
 }
 
 void main(){
-  vec2 uv = vUV;
-  vec3 black= vec3(0);
-  uv -= 0.5;
-  vec4 texColor = texture2D(trap, clamp(uv*1.2+0.5,vec2(0),vec2(1)));
-  //if(texColor.w < 0.01)discard;
-  if(texColor.x > 0.25)discard;
-  if(texColor.x < 0.24)discard;
-  /*debug
-  gl_FragColor = texColor;
-  return;
-  */
-  //vec4 texColor = texture2D(trap, clamp(uv*(depth/4.)+0.5,vec2(0),vec2(1)));
-  //vec4 texColor = texture2D(trap, clamp(uv*(tan(depth*0.1))+0.5,vec2(0),vec2(1)));
+  vec2 uv=vUV;
+  //vec3 black=vec3(0);
+  uv-=.5;
+  vec4 texColor = texture2D(trap,clamp(uv*1.2+.5,vec2(0),vec2(1)));
+  if(texColor.w < 0.01)discard;
   uv = rot2(uv,-2.5);
   vec2 puv = polar(uv);
   vec3 grad = gradient(uv+0.5);
@@ -64,7 +56,7 @@ void main(){
       );
   float po=depth/100.;
   grad = mix(grad,vec3(1),po);
-  vec3 gray = vec3((grad.x + grad.y + grad.z)/3.0);
+  //vec3 gray = vec3((grad.x + grad.y + grad.z)/3.0);
   //grad = mix(gray,grad,(pow(sin(fTime*0.03),8.0)));
   gl_FragColor = vec4(grad,1.0);
   return;
