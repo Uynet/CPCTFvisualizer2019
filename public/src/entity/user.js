@@ -28,6 +28,9 @@ class User{
     this.primitiveType = "POINTS";
     this.Init();
   }
+  SetCubeSize(){
+    this.cube.SetSize(Math.sqrt(this.score+10)/20.0);
+  }
   async Init(){
     const uv = SquareUVArray();
     this.VBO = new Buffer([0,0,0],"position",3);
@@ -45,7 +48,7 @@ class User{
 
     this.Texture = await Material.CreateTextureByURL(this.icon_url);
     this.cube.Init();
-    this.cube.SetSize(Math.sqrt(this.score)/20.0);
+    this.SetCubeSize();
 
     const self = this;
     this.drawObject.AddUniform("time","1f",()=>{return self.localTime});
@@ -58,7 +61,7 @@ class User{
   GetScore(score){
     this.score += score;
     score = Math.floor(this.score);
-    this.cube.SetSize(Math.sqrt(this.score)/20.0);
+    this.SetCubeSize();
     this.scoreText.SetTextTexture(score + "点");
   }
   Update(){
