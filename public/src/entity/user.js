@@ -86,6 +86,7 @@ class User{
     let up = normalize(cross(world.mainCamera.forward, side));
 
     //up = scala(this.cube.size,up);
+    up = scala(0.3,up);
     const forward = scala(0.001,world.mainCamera.forward);
     this.scoreText.SetPos(add(pos,up));
     this.nameText.SetPos(sub(pos,up));
