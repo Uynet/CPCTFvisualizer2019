@@ -94,7 +94,7 @@ class User{
     this.scoreText.Update();
   }
   Draw(){
-    //this.drawObject.Draw();dnt need to draw myself
+    this.drawObject.Draw();//dnt need to draw myself
     if(this.score>=1){
     this.nameText.Draw();
     //this.cube.Draw();
