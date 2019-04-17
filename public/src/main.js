@@ -31,14 +31,14 @@ function CreateGL(){
   canvas = document.getElementById("canvas");
   canvas.width = 800;
   canvas.height= 600;
-  const w = window.innerWidth;
+  const w = window.innerWidth*0.75;
   const h = window.innerHeight;
   const rate = 1.0;
   canvas.width = w / rate;
   canvas.height = h / rate;
   gl = canvas.getContext("webgl");
   canvas.style.width = w;
-  canvas.style.height = h;
+  canvas.style.height = h; 
   //gl.viewport(0,0,canvas.width, canvas.height);
 
   //αblending
