@@ -52,11 +52,13 @@ class User{
     this.SetCubeSize();
 
     const self = this;
+    /*
     this.drawObject.AddUniform("time","1f",()=>{return self.localTime});
     this.drawObject.AddUniform("viewMatrix","mat4",()=>{return world.mainCamera.GetViewMatrix()});
     this.drawObject.AddUniform("projMatrix","mat4",()=>{return world.mainCamera.GetProjMatrix()});
     this.drawObject.AddUniform("transformMatrix","mat4",()=>{return GetTransformMatrix(self.pos)});
     this.drawObject.AddUniform("trap","texture",()=>{return self.Texture});
+    */
 
   }
   GetScore(score){
@@ -83,7 +85,7 @@ class User{
     const side = normalize(cross(world.mainCamera.forward,world.mainCamera.up));
     let up = normalize(cross(world.mainCamera.forward, side));
 
-    up = scala(this.cube.size,up);
+    //up = scala(this.cube.size,up);
     const forward = scala(0.001,world.mainCamera.forward);
     this.scoreText.SetPos(add(pos,up));
     this.nameText.SetPos(sub(pos,up));
