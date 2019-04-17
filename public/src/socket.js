@@ -19,7 +19,7 @@ class Socket{
       const isSolved = sendInfo.isSolved;
       const score = sendInfo.score;
 
-      const user = wolrd.userList[userID];
+      const user = world.userList[userID];
       console.log("sendaFlag:"+user.name +":"+score);
 
       EventManager.GetScore(user,score);
