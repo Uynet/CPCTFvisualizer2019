@@ -20,6 +20,7 @@ class Socket{
       const score = sendInfo.score;
 
       const user = wolrd.userList[userID];
+      console.log("sendaFlag:"+user.name +":"+score);
 
       EventManager.GetScore(user,score);
     });
