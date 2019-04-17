@@ -23,6 +23,7 @@ void main(){
   col = mix(col,invert,accel/30.0);//accle:0-40
   float alpha = 1.0-depth/90.0;
   if(max(abs(uv.x-0.5),abs(uv.y-0.5))>0.45)col = mix(blue,red,size_f/3.0);
+  else discard;//テクスチャ描画切ります
   //if(max(abs(uv.x-0.5),abs(uv.y-0.5))>0.45)gl_FragColor = vec4(invert,1.0);
   gl_FragColor = vec4(col,1.0);
 }
