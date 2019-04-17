@@ -101,11 +101,7 @@ function Ranking(){
       userDOM.appendChild(usernameDOM);
       userDOM.appendChild(ptsDOM);
       rankingDOM.appendChild(userDOM);
-      if(rank<=6){
-        userDOM.style.fontSize = 38; 
-      }else{
         //userDOM.style.color = "#ffdfca";
-      }
       //if(rank>=5)userDOM.style.fontSize = 20; 
       //if(rank>=12)userDOM.style.fontSize = 16; 
     })
