@@ -76,7 +76,7 @@ function Ranking(){
   let rankingDOM = document.getElementById("ranking");
   let userList = world.GetSortedUserList();
   let rank = 1;//
-  if(globalTime %500 == 10){
+  if(globalTime %500 ==10){
     //DOM全消し
     let usernameDOMList = rankingDOM.children; 
     for(let i = 0;i<usernameDOMList.length;){
@@ -84,11 +84,17 @@ function Ranking(){
     }
     //更新
     userList.forEach(username => {
-      let usernameDOM = document.createElement("div");
+      let userDOM = document.createElement("div");
+      let usernameDOM = document.createElement("span");
+      let ptsDOM = document.createElement("span");
       usernameDOM.innerText = Order(rank++) + "     :    " + username;
-      rankingDOM.appendChild(usernameDOM);
-      if(rank>=5)usernameDOM.style.fontSize = 20; 
-      if(rank>=12)usernameDOM.style.fontSize = 16; 
+      ptsDOM.innerText = "";
+      ptsDOM.style.align = "right"
+      userDOM.appendChild(usernameDOM);
+      userDOM.appendChild(ptsDOM);
+      rankingDOM.appendChild(userDOM);
+      //if(rank>=5)userDOM.style.fontSize = 20; 
+      //if(rank>=12)userDOM.style.fontSize = 16; 
     })
   }
 }
@@ -122,7 +128,7 @@ function Clock(){
     text = "開始まで:[" + ParceMsToTimmer(start_ms) + "]";
   else if(limit_ms>0){
     //競技中
-    text = "[" + ParceMsToTimmer(limit_ms) + "]";
+    text = "のこりじかん:[" + ParceMsToTimmer(limit_ms) + "]";
   }else{
     //終了後
     document.getElementById("main").style.color = "#fd107a";

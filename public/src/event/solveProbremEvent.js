@@ -53,8 +53,8 @@ class SolveProbremEvent extends Event {
       p = copy(user.pos);
       world.Add(new Ripple(p, rot, 0, usersize * 10 ,120,3));
 
-      while (i++ < 90) yield; i=0;
-      //world.mainCamera.SetFocus(undefined);
+      while (i++ < 500) yield; i=0;
+      world.mainCamera.SetFocus(undefined);
       return;
     }
     let itt = gen();
