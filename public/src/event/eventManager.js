@@ -16,10 +16,12 @@ class EventManager{
       world.Add(new User(userdata)); 
     }else{
       //cl("Alleady Added user:"+userdata.name);
+      /*
       if(userdata.score != user.score){
         user.SetScore(userdata.score);
         cl("score modified:"+user.name);
       }
+      */
     }
   }
   //ユーザと手に入れた得点
