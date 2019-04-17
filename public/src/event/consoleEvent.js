@@ -7,7 +7,7 @@ class ConsoleEvent extends Event {
             while (t++ < 0) yield;
             let prev = user.score - score;
             let next = user.score;
-            let text = user.name + " solved plobrem!";
+            let text = user.name + " solved problem!";
             text += "    " + prev + "pts >" + next + "pts";
             let cons = new Console(text);
             world.Add(cons);
