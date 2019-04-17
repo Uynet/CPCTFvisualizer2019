@@ -87,6 +87,8 @@ function Ranking(){
       let usernameDOM = document.createElement("div");
       usernameDOM.innerText = Order(rank++) + "     :    " + username;
       rankingDOM.appendChild(usernameDOM);
+      if(rank>=5)usernameDOM.style.fontSize = 20; 
+      if(rank>=12)usernameDOM.style.fontSize = 16; 
     })
   }
 }

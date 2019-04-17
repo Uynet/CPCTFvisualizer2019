@@ -10,11 +10,16 @@ class EventManager{
   }
   static onAddUser(userdata){
     //既に追加されていない && 作文者でない
-    if(world.userList[userdata.id]===undefined && userdata.is_author == false){
+    let user = world.userList[userdata.id];
+    if(user===undefined && userdata.is_author == false){
       cl("Added User:" + userdata)
       world.Add(new User(userdata)); 
     }else{
       //cl("Alleady Added user:"+userdata.name);
+      if(userdata.score != user.score){
+        user.SetScore(userdata.score);
+        cl("score modified:"+user.name);
+      }
     }
   }
   //ユーザと手に入れた得点

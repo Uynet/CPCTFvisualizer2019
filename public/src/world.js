@@ -81,7 +81,6 @@ class World{
   }
   Debug() {
     //たまに得点イベントを発生させる(debug)
-    /*
     for (let username in this.userList) {
       //メタプロの弊害 怪奇現象
       if(username == "remove")continue;
@@ -93,7 +92,6 @@ class World{
         EventManager.GetScore(this.userList[username], Math.floor(Math.random() * 100));
       }
     }
-    */
   }
   Update(){
 

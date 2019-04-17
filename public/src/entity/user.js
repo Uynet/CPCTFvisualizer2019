@@ -66,7 +66,9 @@ class User{
     this.scoreText.SetTextTexture(score + "点");
   }
   SetScore(score){
-
+    this.score = score;
+    this.SetCubeSize();
+    this.scoreText.SetTextTexture(score + "点");
   }
   Update(){
     this.localTime++;
