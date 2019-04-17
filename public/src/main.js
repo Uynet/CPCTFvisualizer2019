@@ -91,7 +91,7 @@ function Ranking(){
       let ptsDOM = document.createElement("div");
       usernameDOM.innerText = Order(rank++) + "     :    " + username;
       //usernameDOM.classList.add('float-left');
-      ptsDOM.innerText = user.score + "点";
+      ptsDOM.innerText = user.score + "";
       ptsDOM.classList.add('align-self-end');
       ptsDOM.classList.add('col-sm-3');
       usernameDOM.classList.add("col-sm-9");
@@ -101,6 +101,7 @@ function Ranking(){
       userDOM.appendChild(usernameDOM);
       userDOM.appendChild(ptsDOM);
       rankingDOM.appendChild(userDOM);
+      //userDOM.style.fontSize = 16; 
       //if(rank>=5)userDOM.style.fontSize = 20; 
       //if(rank>=12)userDOM.style.fontSize = 16; 
     })
