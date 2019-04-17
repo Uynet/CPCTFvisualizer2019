@@ -2,6 +2,7 @@
   <head><meta charset = "utf-8">
   <title id = "title">[*´ｰ`*]</title>
 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style type="text/css">
 @font-face {
   font-family:"Ronde";
@@ -21,7 +22,7 @@
           font-family: "SAO","Ronde";
         }
         #ranking {
-          max-width:300px;
+          /*max-width:300px;*/
           position:absolute;
           padding-top:8px;
           padding-left:16px;
@@ -45,12 +46,14 @@
         }
   </style>
   <div id ="main">[TimeLimit]</div>
-  <div id ="ranking">
+  <div class="container">
+  <div id ="ranking" class="floar-right col-4">
     LeaderBoard
-    <div id="user"></span>
-      <span id="username">po</span>
-      <span id="pts" align = "right">100pts</span>
+    <div id="user" width = 400>
+      <span id="username" class = "float-left">po</span>
+      <span id="pts" class="float-right">100pts</span>
     </div>
+  </div>
   </div>
   <canvas id="hiddenCanvas" style="visibility:hidden;" height="1024px" width="1024px"></canvas>
   <canvas id="canvas"></canvas>

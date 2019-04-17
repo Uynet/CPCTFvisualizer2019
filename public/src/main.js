@@ -74,6 +74,7 @@ function Order(n){
 
 function Ranking(){
   let rankingDOM = document.getElementById("ranking");
+  rankingDOM.classList.add("container");
   let userList = world.GetSortedUserList();
   let rank = 1;//
   if(globalTime %500 ==10){
@@ -83,13 +84,20 @@ function Ranking(){
       rankingDOM.removeChild(usernameDOMList[i]);
     }
     //更新
-    userList.forEach(username => {
+    userList.forEach(user => {
+      let username = user.name;
       let userDOM = document.createElement("div");
-      let usernameDOM = document.createElement("span");
-      let ptsDOM = document.createElement("span");
+      let usernameDOM = document.createElement("div");
+      let ptsDOM = document.createElement("div");
       usernameDOM.innerText = Order(rank++) + "     :    " + username;
-      ptsDOM.innerText = "";
-      ptsDOM.style.align = "right"
+      //usernameDOM.classList.add('float-left');
+      ptsDOM.innerText = user.score + "点";
+      ptsDOM.classList.add('align-self-end');
+      ptsDOM.classList.add('col-sm-3');
+      usernameDOM.classList.add("col-sm-9");
+      userDOM.classList.add("row");
+      //userDOM.classList.add("row");
+
       userDOM.appendChild(usernameDOM);
       userDOM.appendChild(ptsDOM);
       rankingDOM.appendChild(userDOM);
@@ -128,7 +136,7 @@ function Clock(){
     text = "開始まで:[" + ParceMsToTimmer(start_ms) + "]";
   else if(limit_ms>0){
     //競技中
-    text = "のこりじかん:[" + ParceMsToTimmer(limit_ms) + "]";
+    text = "のこり[" + ParceMsToTimmer(limit_ms) + "]";
   }else{
     //終了後
     document.getElementById("main").style.color = "#fd107a";
