@@ -11,7 +11,7 @@ class ConsoleEvent extends Event {
             text += "    " + prev + "pts >" + next + "pts";
             let cons = new Console(text);
             world.Add(cons);
-            while (t++ < 250) yield;
+            while (t++ < 150) yield;
             cons.Remove();
             return;
         };
