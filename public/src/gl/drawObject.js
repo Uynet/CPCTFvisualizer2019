@@ -46,6 +46,12 @@ class DrawObject{
     //if(this.parent.type == "text")gl.disable(gl.DEPTH_TEST);
     //else gl.enable(gl.DEPTH_TEST);
 
+    if(this.parent.type == "cube"){
+      gl.enable(gl.CULL_FACE);
+    }else{
+      gl.disable(gl.CULL_FACE);
+    }
+
     switch(this.primitiveType){
       case "ELEMENTS" :
         this.IBO.Bind();
