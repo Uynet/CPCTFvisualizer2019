@@ -73,11 +73,11 @@ class World{
      userArray.sort((a,b)=> {
        return -(a.score - b.score);//昇順ソート
      });
-     let sortedUserNameArray = [];
+     let sortedUserArray = [];
      userArray.forEach(user=>{
-        sortedUserNameArray.push(user.name);
+        sortedUserArray.push(user);
      })
-     return sortedUserNameArray;
+     return sortedUserArray;
   }
   Debug() {
     //たまに得点イベントを発生させる(debug)
