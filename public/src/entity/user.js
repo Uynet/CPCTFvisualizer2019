@@ -30,7 +30,7 @@ class User{
     this.Init();
   }
   SetCubeSize(){
-    this.cube.SetSize(Math.sqrt(this.score+10)/30.0);
+    this.cube.SetSize((this.score)/3000.0);
   }
   async Init(){
     const uv = SquareUVArray();
