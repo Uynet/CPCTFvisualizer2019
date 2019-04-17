@@ -9,6 +9,7 @@ uniform float size;
 varying float fSize;
 varying float depth;
 varying vec3 pos;
+varying float size_f;
 
 #define PI 3.1415965
 
@@ -26,6 +27,7 @@ void main(){
   pos = position;
   vUV = uv;
   pos *= size;
+  size_f = size;
   //pos.xz*= size/1.6;
 
   
