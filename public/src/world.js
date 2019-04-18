@@ -3,6 +3,7 @@ class World{
     this.entities = [];
     this.entityRemoveSet = new Set();
     this.userList = [];
+    this.userLen = 0;//
     this.mainCamera;
     this.fbo;
   };
@@ -50,6 +51,7 @@ class World{
     switch(entity.type){
       case  "user" : 
         this.userList[entity.id] = entity;
+        this.userLen++;
         break;
       default : break;
     }
