@@ -6,10 +6,7 @@ varying vec3 fPos;
 varying float fTime;
 
 uniform float time;
-uniform mat4 transformMatrix;
-uniform mat4 projMatrix;
-uniform mat4 viewMatrix;
-uniform mat4 rotMatrix;
+uniform float collumn;
 
 #define PI 3.1415965
 
@@ -21,14 +18,11 @@ void main(){
   vec4 pos = vec4(-position,1);
   pos.x *=-1.0;
   pos.y -=0.8;
+  pos.y -= collumn * 0.1;
   pos *= 0.01;
   fPos = gl_Position.xyz;
   fTime = time;
   gl_Position = 
-    //projMatrix *
-    //viewMatrix * 
-    //transformMatrix * 
-    //rotMatrix *
     pos;
   depth = gl_Position.z;
 }

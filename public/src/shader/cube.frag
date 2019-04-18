@@ -1,14 +1,11 @@
 precision mediump float;
 varying vec2 vUV;
+//varying float size_f;
 uniform sampler2D trap;
 uniform float accel;
 
 #define PI 3.14159265
 
-vec3 gradient(vec2 uv){
-  vec3 f = vec3(uv.x*2.0,1.0-uv.y*4.0,1.0-uv.x*0.9)*0.9;
-  return f;
-}
 void main(){
   vec2 uv = vUV;
 

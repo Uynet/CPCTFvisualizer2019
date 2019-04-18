@@ -25,6 +25,10 @@ class Camera{
   SetFocus(user){
     this.focusedUser = user;
   }
+  //追跡やめ
+  DeFocus(user){
+    if(this.focusedUser == user)this.focusedUser = undefined;
+  }
   FocusOn(){
     let p = copy(this.focusedUser.pos);
     let v = normalize(copy(this.pos));
