@@ -12,7 +12,7 @@ class EventManager{
     //既に追加されていない && 作文者でない
     let user = world.userList[userdata.id];
     if(user===undefined && userdata.is_author == false){
-      if(Dice(12)==1 && world.userList.length<50){
+      if(Dice(12)==1 && world.userLen<50){
         cl("Added User:");
         world.Add(new User(userdata)); 
         RankingUpdate();
