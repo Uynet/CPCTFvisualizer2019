@@ -15,7 +15,7 @@ let userPrevJson = [];
 const fetcher = new class{
   listen(){
     //t秒に一度、情報を取得
-    let t = 5;
+    let t = 20;
     setInterval(() => {
       console.log("Getting UserInfo..."+Math.random());
       this.getUserInfoAll();
@@ -43,6 +43,7 @@ const fetcher = new class{
     userPrevJson = userNextJson;
   }
 
+  /*
   getUserInfo(){
     //これはユーザー一覧を取得するAPI
     //const url = "http://localhost:3000/api/users"//これはテスト用
@@ -56,14 +57,13 @@ const fetcher = new class{
       }
     });
   }
+  */
   getUserInfoAll(){
     //これはユーザー一覧を取得するAPI
-    //const url = "http://localhost:3000/api/users"//これはテスト用
-    //const url = "https://server.problem.cpctf.space/api/1.0/users" //こっちが正しい
-    const url = "https://cpctf.space/api/1.0/users" //こっちが正しい
+    const url = "http://localhost:3000/api/users"//これはテスト用
+    //const url = "https://cpctf.space/api/1.0/users" //こっちが正しい
     request(url, (error, response, body) => {
       if(!error && response.statusCode === 200){
-        /*ユーザーリストが更新されていれば追加*/
         let userNextJson = JSON.parse(body);
         const newUsers = userNextJson;
           newUsers.forEach(user => {

@@ -6,6 +6,7 @@ let canvas;
 let globalTime = 0;
 let isPause = false;
 let isVisualizerReady = false;
+let isRankingInitialized = false;
 
 let frame = [
   "[*ˊ-ˋ*]",
@@ -42,8 +43,8 @@ function CreateGL(){
   //gl.viewport(0,0,canvas.width, canvas.height);
 
   //αblending
-  gl.enable(gl.BLEND);
-  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+  //gl.enable(gl.BLEND);
+  //gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
   gl.enable(gl.DEPTH_TEST);
 
 
@@ -72,12 +73,16 @@ function Order(n){
     }
 }
 
-function Ranking(){
+function RankingInit(){
+  if(!isRankingInitialized)RankingUpdate();
+  isRankingInitialized = true;
+}
+function RankingUpdate(){
   let rankingDOM = document.getElementById("ranking");
+  rankingDOM.innerText = "LeaderBoard";
   rankingDOM.classList.add("container");
   let userList = world.GetSortedUserList();
   let rank = 1;//
-  if(globalTime %500 ==10){
     //DOM全消し
     let usernameDOMList = rankingDOM.children; 
     for(let i = 0;i<usernameDOMList.length;){
@@ -85,27 +90,28 @@ function Ranking(){
     }
     //更新
     userList.forEach(user => {
-      let username = user.name;
-      let userDOM = document.createElement("div");
-      let usernameDOM = document.createElement("div");
-      let ptsDOM = document.createElement("div");
-      usernameDOM.innerText = Order(rank++) + "     :    " + username;
-      //usernameDOM.classList.add('float-left');
-      ptsDOM.innerText = user.score + "";
-      ptsDOM.classList.add('align-self-end');
-      ptsDOM.classList.add('col-sm-3');
-      usernameDOM.classList.add("col-sm-9");
-      userDOM.classList.add("row");
-      //userDOM.classList.add("row");
+      if (rank < 30) {
+        let username = user.name;
+        let userDOM = document.createElement("div");
+        let usernameDOM = document.createElement("div");
+        let ptsDOM = document.createElement("div");
+        usernameDOM.innerText = Order(rank++) + "     :    " + username;
+        //usernameDOM.classList.add('float-left');
+        ptsDOM.innerText = user.score + "";
+        ptsDOM.classList.add('align-self-end');
+        ptsDOM.classList.add('col-sm-3');
+        usernameDOM.classList.add("col-sm-9");
+        userDOM.classList.add("row");
+        //userDOM.classList.add("row");
 
-      userDOM.appendChild(usernameDOM);
-      userDOM.appendChild(ptsDOM);
-      rankingDOM.appendChild(userDOM);
+        userDOM.appendChild(usernameDOM);
+        userDOM.appendChild(ptsDOM);
+        rankingDOM.appendChild(userDOM);
         //userDOM.style.color = "#ffdfca";
-      //if(rank>=5)userDOM.style.fontSize = 20; 
-      //if(rank>=12)userDOM.style.fontSize = 16; 
+        //if(rank>=5)userDOM.style.fontSize = 20; 
+        //if(rank>=12)userDOM.style.fontSize = 16; 
+      }
     })
-  }
 }
 //ミリセカンド秒をいい感じのタイマーにする
 function ParceMsToTimmer(ms){
@@ -122,9 +128,10 @@ function Clock(){
   //CPCTF終了19:30?
   let LimitDate= new Date();
   let StartDate= new Date();
-  LimitDate.setHours(19,30,0,0);
+  //LimitDate.setHours(19,30,0,0);
+  LimitDate.setHours(23,59,59,99);
   StartDate.setHours(13,30,0,0);
-  //today.setHours(23,59,59,99);
+  StartDate.setHours(0,0,0,0);
   let limit = LimitDate.getTime();
   let start = StartDate.getTime();
   let now = new Date().getTime();
@@ -159,13 +166,6 @@ function Run(){
   isVisualizerReady = true;
   requestAnimationFrame(Run);
   Clock();
-  Ranking();
-  //TitileAnimation();
-  if(!isPause){
-    world.Update();
-    globalTime++;
-    //if(K.s()&& K.w()) isPause = true;
-  }else{
-    Pause();
-  }
+  world.Update();
+  globalTime++;
 }

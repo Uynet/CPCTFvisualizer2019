@@ -23,17 +23,13 @@ float cLength(vec2 p){
 void main() {
   vec2 uv = vUV;
   uv-=0.5;
-  //vec4 texColor = texture2D(trap, uv);
-  //if (texColor.w > 0.03) {
   float dist = cLength(uv);
+  float size = getSize(time);
+  float width = 0.06 *(1.0-time*time);
+  if(abs(dist-size*0.3)>width)discard;
   float r = 0.1*time*1.0;
   float g = 0.3 + time*0.6;
   float b = 0.9 - time*0.2;
   vec3 col = vec3(r,g,b);
-  float size = getSize(time);
-  //float alpha = 1.0-time;
-  //col = mix(vec3(1),col,alpha);
-  float width = 0.06 *(1.0-time*time);
-  if(abs(dist-size*0.3)<width)gl_FragColor = vec4(col,1.0);
-  else discard;
+  gl_FragColor=vec4(col,1.);
 }

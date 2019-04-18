@@ -6,10 +6,7 @@ uniform mat4 transformMatrix;
 uniform mat4 projMatrix;
 uniform mat4 viewMatrix;
 uniform float size;
-varying float fSize;
-varying float depth;
-varying vec3 pos;
-varying float size_f;
+//varying float size_f;
 
 #define PI 3.1415965
 
@@ -24,10 +21,10 @@ varying float size_f;
 // }
 
 void main(){
-  pos = position;
+  vec3 pos = position;
   vUV = uv;
   pos *= size;
-  size_f = size;
+  //size_f = size;
   //pos.xz*= size/1.6;
 
   
@@ -47,32 +44,49 @@ void main(){
   //   );
   float a = PI/4.0;
   float b = time*0.03;
-  mat4 rotX = mat4(
-      1. , 0. , 0. , 0. ,
-      0, cos(a) , -sin(a) , 0. ,
-      0, sin(a) , cos(a) , 0. ,
+  float x = cos(a);
+  float y = sin(a);
+  float u = cos(b);
+  float v = sin(b);
+  mat4 rotY = mat4(
+      u, 0 , -v , 0. ,
+      0. , 1. , 0. , 0. ,
+      v,0. , u , 0. ,
       0. , 0. , 0. , 1. 
   );
-  mat4 rotY = mat4(
-      cos(b), 0 , -sin(b) , 0. ,
-      0. , 1. , 0. , 0. ,
-      sin(b),0. , cos(b) , 0. ,
+  /*
+  mat4 rotX = mat4(
+      1. , 0. , 0. , 0. ,
+      0, x , -y , 0. ,
+      0, y , x , 0. ,
       0. , 0. , 0. , 1. 
   );
   mat4 rotZ = mat4(
-      cos(a), -sin(a),0. , 0. ,
-      sin(a), cos(a),0. , 0. ,
+      x, -y,0. , 0. ,
+      y, x,0. , 0. ,
       0. , 0. , 1. , 0. ,
       0. , 0. , 0. , 1. 
   );
-  mat4 rot = rotY * rotX *rotZ;
+  */
+  ///mat4 rot = rotY * rotX *rotZ;
+  mat4 rot = rotY * mat4(
+     x  , -y , 0. , 0.,
+     x*y, x*x, -y , 0.,
+     y*y, x*y, x,  0.,
+     0. ,0.  , 0. , 1.
+  );
+  /*
+  mat4 rot = mat4(
+     u*x -v*y*y , -u*y-v*x*y , -v*x , 0., x * y      ,  x*x       , -y   , 0.,
+     u*y*y + v*x,u*x*y-v*y   ,u*x   , 0.,
+     0.         ,  0.        ,  0.  , 1.
+  );
+  */
   gl_Position = 
     projMatrix *
     viewMatrix * 
     transformMatrix * 
     rot*
     vec4(pos,1);
-    
-
-  depth = gl_Position.z;
+  //size_f = size/gl_Position.z;
 }

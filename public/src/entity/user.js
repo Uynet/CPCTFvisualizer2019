@@ -66,6 +66,7 @@ class User{
     score = Math.floor(this.score);
     this.SetCubeSize();
     this.scoreText.SetTextTexture(score + "点");
+    RankingUpdate();
   }
   SetScore(score){
     this.score = score;
@@ -85,7 +86,7 @@ class User{
     const side = normalize(cross(world.mainCamera.forward,world.mainCamera.up));
     let up = normalize(cross(world.mainCamera.forward, side));
 
-    up = scala(this.cube.size,up);
+    up = scala(Math.max(0.3,this.cube.size),up);
     //up = scala(0.3,up);
     const forward = scala(0.001,world.mainCamera.forward);
     this.scoreText.SetPos(add(pos,up));
@@ -97,7 +98,7 @@ class User{
     this.scoreText.Update();
   }
   Draw(){
-    this.drawObject.Draw();//dnt need to draw myself
+    //this.drawObject.Draw();//dnt need to draw myself
     if(this.score>=1){
     this.nameText.Draw();
     this.cube.Draw();

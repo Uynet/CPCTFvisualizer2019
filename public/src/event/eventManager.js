@@ -12,8 +12,11 @@ class EventManager{
     //既に追加されていない && 作文者でない
     let user = world.userList[userdata.id];
     if(user===undefined && userdata.is_author == false){
-      cl("Added User:" + userdata)
-      world.Add(new User(userdata)); 
+      if(Dice(12)==1 && world.userList.length<50){
+        cl("Added User:");
+        world.Add(new User(userdata)); 
+        RankingUpdate();
+      }
     }else{
       //cl("Alleady Added user:"+userdata.name);
       /*

@@ -29,22 +29,21 @@ class World{
     //this.Add(new Ring(vec3(0,4,0), 18, 0.3, 64));
     //this.Add(new Ring(vec3(0,-4,0), 18, 0.3, 64));
     this.Add(new Ring(vec3(0), 36, 0.3, 128));
-    //:this.Add(new TextBox("CPCTF",vec3(0,0,0)));
+    //this.Add(new TextBox("CPCTF",vec3(0,0,0)));
+    //this.AddDebugUser();
 
-
-    /*debug
-    for(let i=0;i<5;i++){
+  }
+  AddDebugUser(){
+    for(let i=0;i<40;i++){
       const u = {
         name : "Test"+i,
         id : "test"+i,
-        score: 5,
-        //icon_url:"https://pbs.twimg.com/profile_images/992202907389853698/Fwpldgoq.jpg"
-        icon_url:"https://pbs.twimg.com/profile_images/1098287140859871232/5NqQLk1-_400x400.jpg"
+        score: Math.floor(Math.pow(Math.random(),4)*6000),
+        icon_url:"https://pbs.twimg.com/profile_images/1098287140859871232/5NqQLk1-_400x400.jpg",
+        is_author:false
       }
       this.Add(new User(u));
     }
-    */
-
   }
   Add(entity){
     this.entities.push(entity);
@@ -79,7 +78,7 @@ class World{
      })
      return sortedUserArray;
   }
-  Debug() {
+  DebugScoreEvent() {
     //たまに得点イベントを発生させる(debug)
     for (let username in this.userList) {
       //メタプロの弊害 怪奇現象
@@ -87,7 +86,7 @@ class World{
       if(username == "minIndex")continue;
       if(username == "maxIndex")continue;
       if(username == "Last")continue;
-      if (Dice(999) == 1){
+      if (Dice(12000) == 1){
         let user = this.userList[username] ;
         EventManager.GetScore(this.userList[username], Math.floor(Math.random() * 100));
       }
@@ -97,7 +96,7 @@ class World{
 
     //this.fbo.Draw(this);
 
-    //this.Debug();
+    this.DebugScoreEvent();
     this.entities.forEach(e=>{
       e.Update();
       //e.Draw()
