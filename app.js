@@ -150,3 +150,23 @@ io.on('connection', socket => {
    }
    setTimeout(po,2000);
 });
+
+client.connect('wss://cpctf.space/api/1.0/ws');
+
+io.on('connection', socket => {
+  socket.on('requestFromVisualizer', () => {
+    console.log("user requested user data");
+    //fetcher.getProblemInfoAll(socket);
+    fetcher.getUserInfoAll();
+    /*fetcher.sendUserIfNeeded({}, userPrevJson);
+    fetcher.sendProblemIfNeeded({}, probPrevJson);*/
+  });
+
+   console.log("connect♡")
+   const po = ()=>{
+     //ユーザーリストがからのときのみ
+     //if(userPrevJson.length == 0){
+     fetcher.getUserInfoAll();
+   }
+   setTimeout(po,2000);
+});
