@@ -17,7 +17,6 @@ const fetcher = new class{
     //t秒に一度、情報を取得
     let t = 20;
     setInterval(() => {
-      console.log("Getting UserInfo..."+Math.random());
       this.getUserInfoAll();
       //this.getProblemInfo();
     }, 1000*t);
@@ -30,7 +29,6 @@ const fetcher = new class{
     if (curLen < nextLen) {
       const newUsers = userNextJson.slice(0);
       newUsers.forEach(user => {
-        console.log(user);
         io.emit('addUser', {
           name: user.name,
           id: user.id,
@@ -53,7 +51,6 @@ const fetcher = new class{
       if(!error && response.statusCode === 200){
         this.updateUserList(body);
       }else{
-        console.log(error);
       }
     });
   }
@@ -67,7 +64,6 @@ const fetcher = new class{
         let userNextJson = JSON.parse(body);
         const newUsers = userNextJson;
           newUsers.forEach(user => {
-            console.log(user);
             io.emit('addUser', {
               name: user.name,
               id: user.id,
@@ -78,7 +74,6 @@ const fetcher = new class{
           });
         userPrevJson = userNextJson;
       }else{
-        console.log(error);
       }
     });
   }
@@ -86,9 +81,7 @@ const fetcher = new class{
     const url = 'https://server.problem.cpctf.space/api/1.0/challenges';
     request(url, (error, response, body) => {
       if(!error && response.statusCode === 200){
-        console.log(response);
       }else{
-        console.log(error);
       };
     });
   };
@@ -104,21 +97,16 @@ app.get("/api/users",(req,res)=>{
 });
 
 client.on('connectFalied', () => {
-  console.log("po");
 });
 client.on('connect', connection => {
-  console.log("connection started.");
   connection.on('error', error => {
-      console.log(error); 
       client.connect('wss://cpctf.site/api/1.0/ws');
   });
   connection.on('close', () => { 
-      console.log('closed');
       client.connect('wss://cpctf.space/api/1.0/ws');
   });
   connection.on('message', data => {
       const res = JSON.parse(data.utf8Data); 
-      console.log(res);
       if(res.eventName === "openProblem"){
           const userID = res.userID;
           const problemID = res.problemID;
@@ -149,14 +137,12 @@ client.connect('wss://cpctf.space/api/1.0/ws');
 
 io.on('connection', socket => {
   socket.on('requestFromVisualizer', () => {
-    console.log("user requested user data");
     //fetcher.getProblemInfoAll(socket);
     fetcher.getUserInfoAll();
     /*fetcher.sendUserIfNeeded({}, userPrevJson);
     fetcher.sendProblemIfNeeded({}, probPrevJson);*/
   });
 
-   console.log("connect♡")
    const po = ()=>{
      //ユーザーリストがからのときのみ
      //if(userPrevJson.length == 0){
